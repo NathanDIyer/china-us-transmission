@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Transmission Gap: China vs United States</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,9 +35,9 @@
       --v-1000ac: #EA580C;
       --v-1100dc: #CA8A04;
       --v-hvdc: #0D9488;
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans: 'Outfit', system-ui, sans-serif;
-      --mono: 'JetBrains Mono', 'Menlo', monospace;
+      --serif: 'Newsreader', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'IBM Plex Mono', 'Menlo', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -278,6 +278,88 @@
     }
     @media (max-width: 768px) {
       .chart-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Investment Breakdown ── */
+    .inv-breakdown {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .inv-country { margin-bottom: 0; }
+    .inv-country-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+    .inv-country-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .inv-country-total {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .inv-bar {
+      display: flex;
+      height: 38px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .inv-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      min-width: 2.5rem;
+    }
+    .inv-legend {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .inv-legend i {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 0.3rem;
+      vertical-align: -1px;
+    }
+    .inv-output {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-top: 0.35rem;
+    }
+    .inv-note {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+    .inv-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
     }
 
     /* ── Callout ── */
@@ -538,15 +620,16 @@
 <div class="container">
   <div class="metrics reveal">
     <div class="metric">
-      <span class="label">Net Build 2010–24 (230kV+)</span>
-      <span id="metric-cumulative-ratio" class="value">11.2×</span>
-      <span id="metric-cumulative-detail" class="detail">China +334,000 mi vs US +29,800 mi (net)</span>
-      <span id="metric-thermal-detail" class="detail" style="margin-top:4px; font-size:0.82em; opacity:0.75;">Thermal GW·mi: ~1,176K vs ~33K (~35×)</span>
+      <span class="label">New Build 2010–24</span>
+      <span id="metric-cumulative-ratio" class="value">12.4×</span>
+      <span id="metric-cumulative-detail" class="detail">China 220kV+: ~346,000 mi vs US 230kV+: ~27,900 mi</span>
+      <span id="metric-thermal-detail" class="detail" style="margin-top:4px; font-size:0.82em; opacity:0.75;">Thermal GW·mi: ~1,217K vs ~37K (~33×)</span>
+      <a href="#methodology" style="display:inline-block;margin-top:3px;font-size:0.72em;color:var(--text-dim);border-bottom:1px dotted var(--text-dim);opacity:0.6;text-decoration:none" title="GW·mi uses thermal ratings — see methodology">methodology</a>
     </div>
     <div class="metric">
       <span class="label">2023 Contrast</span>
-      <span id="metric-peak-ratio" class="value">−534 mi</span>
-      <span id="metric-peak-detail" class="detail">US 230kV+ shrank; China added ~23,600 mi</span>
+      <span id="metric-peak-ratio" class="value">18:1</span>
+      <span id="metric-peak-detail" class="detail">US +1,340 mi; China +23,600 mi</span>
     </div>
     <div class="metric">
       <span class="label">UHV Lines (China)</span>
@@ -555,8 +638,8 @@
     </div>
     <div class="metric">
       <span class="label">The Paradox (2023)</span>
-      <span id="metric-paradox-value" class="value">$100B → −534 mi</span>
-      <span id="metric-paradox-detail" class="detail">US spent more on grids than China, yet HV network shrank</span>
+      <span id="metric-paradox-value" class="value">$28B → 450 mi</span>
+      <span id="metric-paradox-detail" class="detail">Of ~$100B US grid spend (IEA), only $28B reached transmission — 90% for maintenance</span>
     </div>
   </div>
 </div>
@@ -584,15 +667,15 @@
     <div class="reveal">
       <h2>Annual Construction</h2>
       <p class="section-intro">
-        China's 220kV+ network grows by 20,000–35,000 miles per year. The US 230kV+ network grows by 1,000–5,000 miles in good years — and in three recent years (2011, 2018, 2023) it actually <em>shrank</em>, with more lines retired or reclassified than built. Both series are net change in installed base from annual utility filings (CEC for China, FERC Form 1 for US).
+        China's 220kV+ network grows by 20,000–25,000 miles per year. The US builds 1,100–2,200 miles of 230kV+ transmission annually — except for the 2012 Texas CREZ buildout (~4,800 mi including 230kV+), the only modern US construction surge. China data from CEC annual statistics; US 345kV+ from Grid Strategies / FERC, plus 230–344kV annual average from FERC Form 1.
       </p>
     </div>
     <div class="chart-wrap reveal reveal-delay-1">
       <canvas id="annualChart"></canvas>
-      <div class="chart-source">Source: US bars are new 345kV+ circuit-miles from <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank">Grid Strategies Figure 1</a> (visual estimates from FERC data, 2010–2022) and <a href="https://cms.ferc.gov/media/energy-infrastructure-update-april-2025" target="_blank">FERC Energy Infrastructure Update</a> (2023–2024 confirmed: 450 mi and 888 mi respectively). 2012 peak (~3,900 mi) reflects Texas CREZ 345kV completions. China bars are new 220kV+ circuit-km from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC official cumulative totals</a> (2013–2021) and <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" target="_blank">China Energy Big Data Report 2024</a> (Chart 5-14, 2014–2023); 2022–2024 estimated from CEC aggregates. Voltage thresholds matched (220kV ≈ 230kV); US series is 345kV+ only (higher threshold) making the gap conservative. For reference, <a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank">DOE Needs Study 2023</a> (p.iii): US averaged 3,300 circuit-mi/yr at ≥100kV (2011–2020).</div>
+      <div class="chart-source">Source: US bars are new 230kV+ circuit-miles. The 345kV+ component is from <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank">Grid Strategies Figure 1</a> (visual estimates from FERC data, 2010–2022) and <a href="https://cms.ferc.gov/media/energy-infrastructure-update-april-2025" target="_blank">FERC Energy Infrastructure Update</a> (2023–2024: 450 mi and 888 mi). The 230–344kV component (+891 mi/yr) is the annual average from FERC Form 1 via PUDL (13,364 mi net 2010–2024). 2012 peak reflects Texas CREZ 345kV completions. China bars are new 220kV+ circuit-km from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC official cumulative totals</a> (2013–2021) and <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" target="_blank">China Energy Big Data Report 2024</a> (Chart 5-14, 2014–2023); 2022–2024 estimated from CEC aggregates. Voltage thresholds are comparable: China 220kV+ vs US 230kV+. For reference, <a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank">DOE Needs Study 2023</a> (p.iii): US averaged 3,300 circuit-mi/yr at ≥100kV (2011–2020).</div>
     </div>
     <div class="callout reveal reveal-delay-2">
-      Over 2010–2024, China added <span class="num" id="construction-callout-china-total">~346,000</span> miles of 220kV+ transmission while the US added <span class="num" id="construction-callout-us-total">~14,500</span> miles at 345kV+ — a <span id="construction-callout-ratio" class="num">~24:1</span> gap. Even using a higher US voltage threshold (making the comparison conservative), the US best year (<span class="num">3,900 mi</span> in 2012, the Texas CREZ buildout) was still <span class="num">6×</span> less than China's worst. Permitting averages <span class="num">5–15 years</span> in the US vs <span class="num">2–3 years</span> in China.
+      Over 2010–2024, China added <span class="num" id="construction-callout-china-total">~346,000</span> miles of 220kV+ transmission while the US added <span class="num" id="construction-callout-us-total">~27,900</span> miles at 230kV+ — a <span id="construction-callout-ratio" class="num">~12:1</span> gap. The US best year (<span class="num">~4,800 mi</span> in 2012, the Texas CREZ buildout) was still <span class="num">4×</span> less than China's worst. Permitting averages <span class="num">5–15 years</span> in the US vs <span class="num">2–3 years</span> in China.
     </div>
   </div>
 </section>
@@ -792,14 +875,67 @@
     <div class="reveal">
       <h2>The Investment Paradox</h2>
       <p class="section-intro">
-        The United States spent <strong>$100 billion</strong> on grid infrastructure in 2023 — more than China's $80 billion.
-        Yet the US built just 450 miles of new high-voltage transmission (per FERC revised data, Jul 2025). China added ~23,600 miles (CEC official).
-        America's spending goes to maintaining and upgrading an aging system. Same money, radically different output.
+        In 2023, the US and China each spent roughly <strong>$80–100 billion</strong> on their electrical grids (IEA, same methodology for both).
+        Yet China built <strong>52× more</strong> new high-voltage transmission. The difference isn't total spending —
+        it's where the money goes. America's grid budget overwhelmingly maintains an aging distribution network,
+        leaving a fraction for new transmission construction.
       </p>
     </div>
-    <div class="chart-wrap reveal reveal-delay-1">
+
+    <div class="inv-breakdown reveal reveal-delay-1">
+      <h3 style="margin-bottom:1.5rem">2023 Grid Spending — Where the Money Goes</h3>
+
+      <div class="inv-country">
+        <div class="inv-country-header">
+          <span class="inv-country-name" style="color:var(--us)">United States</span>
+          <span class="inv-country-total">~$100B total (IEA "grids + storage")</span>
+        </div>
+        <div class="inv-bar">
+          <div class="inv-seg" style="flex:28;background:var(--us)">$28B</div>
+          <div class="inv-seg" style="flex:51;background:rgba(29,78,216,0.45)">$51B</div>
+          <div class="inv-seg" style="flex:21;background:rgba(29,78,216,0.18);color:var(--text-muted)">$21B</div>
+        </div>
+        <div class="inv-legend">
+          <span><i style="background:var(--us)"></i> Transmission ($28B)</span>
+          <span><i style="background:rgba(29,78,216,0.45)"></i> Distribution ($51B)</span>
+          <span><i style="background:rgba(29,78,216,0.18)"></i> Storage + Other ($21B)</span>
+        </div>
+        <div class="inv-output" style="color:var(--us)">
+          &rarr; <strong id="inv-us-miles">450</strong> mi new HV transmission
+          <span class="inv-note">Of $28B transmission spend, ~90% was reliability upgrades on aging lines — not new construction (Brattle Group via Grid Strategies)</span>
+        </div>
+      </div>
+
+      <div class="inv-divider"></div>
+
+      <div class="inv-country">
+        <div class="inv-country-header">
+          <span class="inv-country-name" style="color:var(--china)">China</span>
+          <span class="inv-country-total">~$80B total (IEA); NEA official: 528B CNY (~$74B)</span>
+        </div>
+        <div class="inv-bar">
+          <div class="inv-seg" style="flex:80;background:var(--china)">$80B total grid</div>
+          <div class="inv-seg" style="flex:20;background:transparent"></div>
+        </div>
+        <div class="inv-legend">
+          <span><i style="background:var(--china)"></i> Total grid investment (T&D breakdown not publicly reported by NEA/CEC)</span>
+        </div>
+        <div class="inv-output" style="color:var(--china)">
+          &rarr; <strong id="inv-cn-miles">23,600</strong> mi new HV transmission
+        </div>
+      </div>
+
+      <div class="chart-source" style="margin-top:1.25rem">
+        <strong>US breakdown:</strong> <a href="https://www.eia.gov/todayinenergy/detail.php?id=63724" target="_blank">EIA/FERC Form 1</a> — $27.7B transmission + $50.9B distribution = $78.6B (investor-owned utilities only). Storage: ~$11B derived from 7.9 GW deployed at ~$1,400/kW (<a href="https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage" target="_blank">NREL ATB 2024</a>). Balance (~$10B) covers munis, co-ops, and federal utilities not filing Form 1.
+        Top-line totals from <a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank">IEA WEI 2024</a> (p.78–80), which uses same "grids + storage" methodology for both countries.
+        <strong>China:</strong> <a href="https://www.nea.gov.cn/2024-01/26/c_1310762246.htm" target="_blank">NEA 2023 Statistics</a> (527.5B CNY). IEA rounds to ~$80B.
+        <strong>90% reliability:</strong> <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank">Grid Strategies</a> p.7 (citing Brattle Group).
+      </div>
+    </div>
+
+    <div class="chart-wrap reveal reveal-delay-2">
       <canvas id="investmentChart"></canvas>
-      <div class="chart-source">Source: 2023 figures from <a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank">IEA World Energy Investment 2024</a>, p.80: China $80B, US $100B (all T&D capital expenditure). Pre-2023 estimated from IEA chart (p.78). Of US total, only ~$25B is transmission-specific per <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank">Grid Strategies</a> (p.3, citing Brattle Group), with 90% going to reliability upgrades not new construction (p.7).</div>
+      <div class="chart-source">Historical trend: <a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank">IEA WEI 2024</a> "grids + storage" definition for both countries. 2023: China $80B, US $100B (p.78–80). Pre-2023 estimated from IEA chart. China 2024 reflects SGCC record investment of 608B CNY (~$85B).</div>
     </div>
   </div>
 </section>
@@ -1047,7 +1183,9 @@
     <div class="reveal">
       <h2>Sources</h2>
       <ul class="sources-list">
-        <li><a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank" rel="noopener">IEA World Energy Investment 2024</a> — <strong>p.78:</strong> grid investment by geography chart; <strong>p.80:</strong> China $80B, US $100B (CC BY 4.0)</li>
+        <li><a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank" rel="noopener">IEA World Energy Investment 2024</a> — <strong>p.78:</strong> grid investment by geography chart; <strong>p.80:</strong> China $80B, US $100B. Definition = "grids and storage" (T&D + battery storage + smart grid). (CC BY 4.0)</li>
+        <li><a href="https://www.eia.gov/todayinenergy/detail.php?id=63724" target="_blank" rel="noopener">EIA — Grid infrastructure investments drive increase in utility spending (Nov 2024)</a> — <strong>FERC Form 1:</strong> 2023 US transmission $27.7B, distribution $50.9B, distribution-booked storage $0.7B. Investor-owned utilities only (excludes munis, co-ops, federal).</li>
+        <li><a href="https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage" target="_blank" rel="noopener">NREL Annual Technology Baseline 2024 — Battery Storage</a> — Base year installed cost ~$1,336/kW (4-hr system). Used to derive US storage investment estimate ($11B from 7.9 GW deployed in 2023).</li>
         <li><a href="https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions" target="_blank" rel="noopener">IEA Electricity Grids and Secure Energy Transitions (2023)</a> — <strong>p.14:</strong> global grid 80M km; <strong>p.17:</strong> transmission by country chart; <strong>p.18:</strong> US 3% growth (CC BY 4.0)</li>
         <li><a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank" rel="noopener">DOE National Transmission Needs Study (Oct 2023)</a> — <strong>p.iii:</strong> US 3,300 circuit-mi/yr avg (≥100kV); <strong>p.iv:</strong> regional construction by year</li>
         <li><a href="https://www.energy.gov/gdo/grid-deployment-office" target="_blank" rel="noopener">DOE Grid Deployment Office Fact Sheet (Oct 2023)</a> — See Needs Study Table VI-3 (p.123) for definitive 85.6 TW-mi US existing system</li>
@@ -1076,17 +1214,15 @@
       </ul>
     </div>
 
-    <div class="methodology reveal reveal-delay-1">
-      <strong>Methodology & Data Quality Notes</strong><br><br>
+    <div id="methodology" class="methodology reveal reveal-delay-1">
+      <strong>Methodology & Data Quality Notes</strong> · <a href="transmission-sources/GW-MILES-METHODOLOGY.md" style="color:var(--text-dim);border-bottom:1px dotted var(--text-dim);font-weight:normal;font-size:0.9em" title="Full GW·miles derivation with source chain">Full GW·mi methodology →</a><br><br>
       <strong>Definitions:</strong> China "transmission" = 220kV and above (standard Chinese definition). US "transmission" = 230kV and above.
       These thresholds are comparable but not identical.<br><br>
       <strong>Cumulative totals:</strong> China 220kV+ network: <strong>Complete 2014–2023 annual time series</strong> from <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" style="color:var(--text-muted)">China Energy Big Data Report 2024</a> (中国能源大数据报告2024), Chart 5-14: 578k (2014) → 608k → 646k → 686k → 725k → 759k → 812k → 843k → 882k → 920.5k km (2023). These are CEC's published 220kV+ aggregate figures (万千米 units). Exact 2023: 92.05万千米 = 920,500 km (report text p.60). 2024 confirmed at 960,970 km per <a href="https://finance.sina.com.cn/stock/relnews/hk/2025-07-10/doc-infeytki3691600.shtml" style="color:var(--text-muted)">CEC Annual Development Report 2025</a> (中国电力行业年度发展报告2025, Jul 2025: "220千伏及以上输电线路长度960970千米，同比增长3.5%"). 35kV+ total: 2,477,000 km in 2024 (+1.7% YoY). Note: earlier dataset versions used computed sums of individual voltage classes from China Energy Portal, which undercounted by 5–8% vs CEC's published aggregates; the Ditan chart values are authoritative.
       IEA Grids 2023 (p.17) shows China total transmission at ~1.9M km including lower voltages; p.28 notes "710,000 km built in past decade."
       US total at 230kV+ (~185,000 miles) from EIA Electric Power Annual. IEA (p.18) confirms US saw ~3% transmission expansion over the past decade.<br><br>
-      <strong>Annual construction (net change):</strong> Both US and China bars show <em>net year-over-year change in installed circuit-miles/km</em> — i.e., new construction minus retirements and reclassifications. This is the only methodology that gives apples-to-apples comparison, since both countries report cumulative totals by voltage class in annual filings.<br><br>
-      <strong>US source:</strong> FERC Form 1 data from EIA's Electric Power Annual, covering investor-owned utilities (~80% of US transmission). Voltage classes 230–344 kV, 345–499 kV, 500–764 kV, and 765+ kV summed for each year (1994–2024). Year-over-year differences yield net change. The 230–344 kV class accounts for ~42% of all US 230kV+ mileage (51,708 mi of 121,870 mi in 2024) and was excluded from previous versions of this chart that used 345kV+ Grid Strategies data. Key features of the FERC data: 2012 spike (+2,300 mi) reflects CREZ build-out in Texas; 2017 spike (+7,586 mi) likely includes reporting reclassifications; three negative years (2011: −1,241, 2018: −492, 2023: −534) indicate net retirements exceeded new construction.<br><br>
+      <strong>Annual construction:</strong> US bars show new 230kV+ circuit-miles. The 345kV+ component comes from <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" style="color:var(--text-muted)">Grid Strategies</a> Figure 1 (visual estimates from FERC data, 2010–2022) and <a href="https://cms.ferc.gov/media/energy-infrastructure-update-april-2025" style="color:var(--text-muted)">FERC Energy Infrastructure Update</a> (2023: ~450 mi revised, 2024: 888 mi confirmed). The 230–344kV component is a flat +891 mi/yr annual average from FERC Form 1 via PUDL (13,364 mi net over 2010–2024 at 230–344kV). 2012 peak reflects Texas CREZ 345kV completions. Voltage thresholds are now comparable: China 220kV+ vs US 230kV+.<br><br>
       <strong>China source:</strong> CEC official 220kV+ cumulative totals. Year-by-year figures for 2013–2021 computed from voltage-class cumulative data via <a href="https://chinaenergyportal.org/" style="color:var(--text-muted)">China Energy Portal</a>; 2014–2023 cross-checked against <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" style="color:var(--text-muted)">China Energy Big Data Report 2024</a> (Chart 5-14). CEC 220kV+ aggregates confirm 35,029 km added in 2020 and 32,220 km in 2021. 2022–2024 estimated at ~35,000 km/year.<br><br>
-      <strong>Previous methodology:</strong> Earlier versions of this chart used US data at 345kV+ only (from Grid Strategies "Fewer New Miles" Jul 2024, approximate visual readings from Figure 1). This excluded the 230–344 kV class, understating US construction and overstating the gap. The 345kV+ series showed ratios of ~30–50:1; the matched 230kV+ series shows ~11:1 cumulative.
       DOE Needs Study (p.iii) reports US averaged 3,300 circuit-miles/year at ≥100kV (2011-2020), a broader category.<br><br>
       <strong>GW·miles:</strong> All GW·mile figures use thermal ratings for AC lines and design capacity for HVDC.
       Thermal rating reflects the physical infrastructure built (conductor, towers, right-of-way) — the maximum power the line can carry.
@@ -1097,13 +1233,14 @@
       <em>Voltage breakdown chart (total system):</em> US miles computed from <a href="https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1" style="color:var(--text-muted)">HIFLD</a> geospatial data — 52,244 transmission line features, haversine-computed from coordinates, totaling 186,623 miles at 230kV+ (includes both "In Service" and "Not Available" status features). China miles extrapolated from 2019 CEC voltage-class data to 2024 aggregates.<br>
       <em>Hero card (cumulative build 2010–24):</em> New-build GW·mi = cumulative new-build miles × weighted-average thermal GW/mi.
       China avg: 3.52 GW/mi (from CEC 2012–2019 voltage-class additions: 542,408 GW·km / 247,802 km = 2.19 GW/km × 1.609).
-      US avg: 1.12 GW/mi (from FERC Form 1 Sched 422 via PUDL, 2010–2024 net changes: 230–344kV +6,323mi×0.6 + 345–499kV +10,827mi×1.5 + 500–764kV +1,579mi×2.7 + 765kV+ −988mi×4.5 = 19,852 GW·mi / 17,741 mi).
+      US avg: 1.33 GW/mi (from td-voltage-aging.json / FERC Form 1 via PUDL, 2009→2024 net by voltage class: 230–344kV +13,364mi×0.6 + 345–499kV +11,568mi×1.5 + 500–764kV +4,272mi×2.7 + 765kV+ +605mi×4.5 = 39,628 GW·mi / 29,809 mi). US annual bars include all 230kV+ construction (345kV+ from Grid Strategies + 891 mi/yr average for 230–344kV from FERC Form 1).
       The GW·mi ratio exceeds the miles ratio because China's new build skews to higher-capacity voltages (500kV, UHV).<br><br>
-      <strong>Investment:</strong> 2023 figures from IEA World Energy Investment 2024 (p.80): China $80B, US $100B.
-      IEA definition includes all T&D capital expenditure (new construction, reliability upgrades, distribution modernization, smart grid).
-      Grid Strategies (p.3) clarifies US transmission-specific spending at ~$25B/yr (citing Brattle Group), with 90% driven by reliability upgrades (p.7).
-      The gap between $100B (IEA total T&D) and $25B (transmission only) reflects large distribution spending.
-      Pre-2023 figures estimated from IEA chart trends (p.78). China 2024 ($85B) reflects SGCC's announced record investment.
+      <strong>Investment:</strong> Top-line 2023 totals from IEA World Energy Investment 2024 (p.78–80): China ~$80B, US ~$100B. IEA definition = "grids and storage" — includes T&D capital expenditure, reliability upgrades, distribution modernization, smart grid, and battery storage.<br>
+      <strong>US breakdown:</strong> <a href="https://www.eia.gov/todayinenergy/detail.php?id=63724" style="color:var(--text-muted)">EIA/FERC Form 1</a> reports $27.7B transmission + $50.9B distribution = $78.6B for investor-owned utilities. FERC total is lower than IEA because it excludes municipal utilities, cooperatives, federal power agencies, and battery storage.
+      Battery storage: ~$11B estimated from 7.9 GW deployed at ~$1,400/kW midpoint (<a href="https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage" style="color:var(--text-muted)">NREL ATB 2024</a> base-year cost). Non-FERC utility spending: ~$10B (gap between FERC $79B and BNEF's $87B grid-only figure).
+      Reconciliation: FERC T&D ($79B) + storage ($11B) + non-FERC ($10B) ≈ $100B, consistent with IEA.
+      Grid Strategies (p.3) cites Brattle Group for ~$25B/yr in transmission-specific investment; (p.7) notes 90% driven by reliability upgrades.
+      Pre-2023 IEA figures estimated from chart trends (p.78). China 2024 ($85B) reflects SGCC's announced record investment of 608B CNY.
       <strong>China grid investment in CNY</strong> (complete 2014–2024 from <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" style="color:var(--text-muted)">Ditan report</a> Table 1-4, sourcing NBS; 2024 from CEC Report 2025): 412B (2014), 464B (2015), 543B (2016, peak), 534B (2017), 537B (2018), 486B (2019), 490B (2020), 495B (2021), 501B (2022), 528B (2023), 608B (2024, record). Generation investment first exceeded grid in 2020; by 2024 generation was 2× grid (1,209B vs 608B). SGCC plans 650B CNY (~$89B) for 2025.<br><br>
       <strong>Voltage breakdown:</strong> China voltage-class mileage 2012–2019 from official CEC data (<a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" style="color:var(--text-muted)">China Energy Portal</a>): e.g., 2019 = 454,585 km at 220kV, 32,314 km at 330kV, 195,636 km at 500kV, 23,256 km at 750kV, 10,872 km at 1000kV AC + DC totals.
       US breakdown estimated — NERC 2024 Supplemental (Table L) provides planned additions by voltage class but not existing inventory.<br><br>
@@ -1130,7 +1267,7 @@
 // ── Chart.js Defaults ──
 Chart.defaults.color = '#64748B';
 Chart.defaults.borderColor = 'rgba(15, 23, 42, 0.06)';
-Chart.defaults.font.family = "'Outfit', system-ui, sans-serif";
+Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
 Chart.defaults.font.size = 12;
 Chart.defaults.plugins.legend.labels.usePointStyle = true;
 Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
@@ -1142,7 +1279,7 @@ const US = '#1D4ED8';
 const US_BG = 'rgba(29, 78, 216, 0.12)';
 const ACCENT = '#B45309';
 
-const monoFont = "'JetBrains Mono', monospace";
+const monoFont = "'IBM Plex Mono', monospace";
 const fmtK = v => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v.toLocaleString();
 const fmtFull = v => v.toLocaleString();
 const KM_TO_MILES = 0.621371;
@@ -1228,7 +1365,7 @@ const cumulativeChart = new Chart(document.getElementById('cumulativeChart'), {
 // ── 2. Annual Construction ──
 let annualLabels = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
 let chinaAnnual = [23600,24900,23600,21850,22370,20510,21750,25480,22370,21750,19880,24230,24230,23610,25480];
-let usAnnual    = [1200,1300,3900,1000,800,700,600,1100,700,500,650,550,200,450,888];
+let usAnnual    = [2090,2190,4790,1890,1690,1590,1490,1990,1590,1390,1540,1440,1090,1340,1780];
 
 const annualChart = new Chart(document.getElementById('annualChart'), {
   type: 'bar',
@@ -1539,7 +1676,7 @@ const investmentChart = new Chart(document.getElementById('investmentChart'), {
         callbacks: {
           label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y + 'B',
           afterBody: (items) => {
-            if (items[0] && items[0].dataIndex === 8) return '  ← 2023: US $100B built ~450 mi new HV';
+            if (items[0] && items[0].dataIndex === 8) return '  ← 2023: Of US $100B, only $28B was transmission';
             return '';
           }
         }
@@ -1563,7 +1700,7 @@ function updateTransmissionMetricCards() {
     setTextById('metric-cumulative-ratio', (chinaBuild / usBuild).toFixed(1) + '×');
     setTextById(
       'metric-cumulative-detail',
-      'China +' + formatMiles(roundTo(chinaBuild, 1000)) + ' mi vs US +' + formatMiles(roundTo(usBuild, 100)) + ' mi (net)'
+      'China 220kV+: ~' + formatMiles(roundTo(chinaBuild, 1000)) + ' mi vs US 230kV+: ~' + formatMiles(roundTo(usBuild, 100)) + ' mi'
     );
     setTextById('construction-callout-ratio', '~' + Math.round(chinaBuild / usBuild) + ':1');
     setTextById('construction-callout-china-total', '~' + formatMiles(roundTo(chinaBuild, 1000)));
@@ -1574,29 +1711,25 @@ function updateTransmissionMetricCards() {
   if (y2023 >= 0) {
     const us2023 = usAnnual[y2023];
     const cn2023 = chinaAnnual[y2023];
-    if (us2023 <= 0) {
-      setTextById('metric-peak-ratio', formatMiles(us2023) + ' mi');
-      setTextById('metric-peak-detail', 'US 230kV+ shrank; China added ~' + formatMiles(roundTo(cn2023, 50)) + ' mi');
-      setTextById('metric-paradox-value', '$100B → ' + formatMiles(us2023) + ' mi');
-      setTextById('metric-paradox-detail', 'US spent more on grids than China, yet HV network shrank');
-    } else {
-      const peakRatio = cn2023 / us2023;
-      setTextById('metric-peak-ratio', Math.round(peakRatio) + ':1');
-      setTextById('metric-peak-detail', 'US +' + formatMiles(us2023) + ' mi; China +' + formatMiles(roundTo(cn2023, 50)) + ' mi');
-      setTextById('metric-paradox-value', '$100B → ' + formatMiles(us2023) + ' mi');
-      setTextById('metric-paradox-detail', 'US spent more on grids, built a fraction of China\'s output');
-    }
+    const peakRatio = cn2023 / us2023;
+    setTextById('metric-peak-ratio', Math.round(peakRatio) + ':1');
+    setTextById('metric-peak-detail', 'US +' + formatMiles(us2023) + ' mi; China +' + formatMiles(roundTo(cn2023, 50)) + ' mi');
+    setTextById('metric-paradox-value', '$28B → ' + formatMiles(us2023) + ' mi');
+    setTextById('metric-paradox-detail', 'Of ~$100B US grid spend (IEA), only $28B reached transmission — 90% for maintenance');
+    setTextById('inv-us-miles', formatMiles(us2023));
+    setTextById('inv-cn-miles', formatMiles(roundTo(cn2023, 50)));
   }
 
   // ── New-build thermal GW·mi for cumulative build card ──
   // China avg: 2.19 GW/km (3.52 GW/mi) from CEC 2012-2019 voltage-class net additions
   //   (220kV×0.6 + 330kV×1.0 + 500kV×2.7 + 750kV×4.5 + 1000kV×6.0 + ±800kV×8.0 + ±1100kV×12.0)
   //   weighted by km added each class → 542,408 GW·km / 247,802 km = 2.19 GW/km
-  // US avg: 1.12 GW/mi from FERC Form 1 Sched 422 (PUDL) 2010-2024 net changes by voltage class
-  //   230-344kV: +6,323mi×0.6 + 345-499kV: +10,827mi×1.5 + 500-764kV: +1,579mi×2.7 + 765kV+: -988mi×4.5
-  //   = 19,852 GW·mi / 17,741 mi = 1.119 GW/mi
+  // US avg: 1.33 GW/mi from td-voltage-aging.json (FERC Form 1 via PUDL), 2009→2024 net by voltage:
+  //   230-344kV: +13,364mi×0.6 + 345-499kV: +11,568mi×1.5 + 500-764kV: +4,272mi×2.7 + 765kV+: +605mi×4.5
+  //   = 39,628 GW·mi / 29,809 mi = 1.329 GW/mi
+  // US annual bars: 345kV+ from Grid Strategies + 891 mi/yr flat avg for 230-344kV (FERC Form 1)
   const CHINA_NEW_BUILD_GW_PER_MI = 3.52;
-  const US_NEW_BUILD_GW_PER_MI = 1.12;
+  const US_NEW_BUILD_GW_PER_MI = 1.33;
   if (usBuild > 0) {
     const chinaBuildGwMi = chinaBuild * CHINA_NEW_BUILD_GW_PER_MI;
     const usBuildGwMi = usBuild * US_NEW_BUILD_GW_PER_MI;
@@ -1713,8 +1846,7 @@ function applyTransmissionJsonData(jsonData) {
     }
   }
 
-  // US annual data: hardcoded FERC Form 1 230kV+ net change is authoritative.
-  // JSON file has 345kV+ Grid Strategies data — do NOT override US values from JSON.
+  // US annual data: hardcoded Grid Strategies 345kV+ values + 891 mi/yr 230-344kV (FERC Form 1 avg).
   // China annual data: CEC 220kV+ from JSON is fine to override.
   const chinaByYearKm = new Map();
   const chinaEarlyByYearKm = new Map();
@@ -1738,7 +1870,7 @@ function applyTransmissionJsonData(jsonData) {
     if (chinaEarlyByYearKm.has(year)) return Math.round(toMiles(chinaEarlyByYearKm.get(year)));
     return chinaAnnual[idx];
   });
-  // US values stay as hardcoded FERC Form 1 230kV+ data
+  // US values stay as hardcoded (Grid Strategies 345kV+ plus 891 mi/yr for 230-344kV)
   if (nextChinaAnnual.every(Number.isFinite)) {
     annualLabels = nextAnnualLabels;
     chinaAnnual = nextChinaAnnual;
