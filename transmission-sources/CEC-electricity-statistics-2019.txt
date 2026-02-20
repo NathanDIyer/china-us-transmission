@@ -1,0 +1,67 @@
+Source: China Electricity Council (CEC) - 2019 National Electric Power Industry Statistics Quick Report
+Original title: 2019年全国电力工业统计快报数据一览表
+English translation via: https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/
+Published: January 20, 2021
+
+=== Section 4: 35 kV and above transmission line length (cumulative, circuit-km) ===
+
+                                2018 (km)    2019 (km)    YoY (%)
+TOTAL                          1,892,018    1,975,312     4.40
+
+1. Alternating Current          1,850,631    1,932,947     4.45
+   1000 kV (UHV AC)               11,005       10,872    -1.21
+   750 kV                         20,543       23,256    13.20
+   500 kV                        187,158      195,636     4.53
+   330 kV                         30,477       32,314     6.03
+   220 kV                        434,493      454,585     4.62
+   110 kV                        652,891      684,406     4.83
+   35 kV                         514,066      531,880     3.47
+
+2. Direct Current                  41,995       42,364     0.88
+   ±1100 kV (UHV DC)                 608        3,295   441.88
+   ±800 kV                        21,723       21,907     0.85
+   ±660 kV                         1,334        1,334     0.00
+   ±500 kV                        15,428       13,733   -10.99
+   ±400 kV                         1,640        1,639    -0.04
+
+=== Section 10: New 110 kV and above AC transmission line length (annual additions) ===
+
+                                2018 (km)    2019 (km)    YoY (%)
+TOTAL                             56,973       57,935     1.69
+   1000 kV                           129        2,100  1528.27
+   750 kV                          1,573        4,406   180.10
+   500 kV                         14,540        5,595   -61.52
+   330 kV                            828        3,989   381.75
+   220 kV                         20,697       19,822    -4.23
+   110 kV (incl. 66 kV)           19,206       22,023    14.67
+
+=== Section 9: New DC transmission line length (annual additions) ===
+
+                                2018 (km)    2019 (km)
+   Line length                                  3,325
+   Of which: ±1100 kV                           3,325
+
+=== Section 11: Completed Investment (Million RMB) ===
+
+                                2018         2019        YoY (%)
+TOTAL                          816,100      829,500      1.64
+Power plant investment         278,700      328,300     17.80
+Electric grid investment       537,400      501,200     -6.74
+  T&D                          513,300      477,900     -6.89
+    DC                          52,000       24,900    -52.06
+    AC                         461,300      453,000     -1.80
+  Other                         24,100       23,200     -3.40
+
+=== Key Metrics for Dashboard Verification ===
+
+For "220 kV and above" (used in dashboard China cumulative):
+  AC 220kV+: 10,872 + 23,256 + 195,636 + 32,314 + 454,585 = 716,663 km (2019)
+  DC all:    42,364 km (2019)
+  Total 220kV+ (AC) + all DC: 759,027 km (2019)
+
+For "500 kV and above" (high-voltage, comparable to US 345kV+):
+  AC 500kV+: 10,872 + 195,636 = 206,508 km (2019)
+  DC ±500kV+: 3,295 + 21,907 + 13,733 = 38,935 km (2019)
+  Total 500kV+ (AC) + DC ±500kV+: 245,443 km = ~152,500 miles (2019)
+
+Note: 1 km = 0.621371 miles

@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Transmission Gap: China vs United States</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #080F1A;
+      --bg-elevated: #0F172A;
+      --bg-card: #131C2E;
+      --bg-card-hover: #1A2540;
+      --china: #DC2626;
+      --china-light: #FCA5A5;
+      --china-glow: rgba(220, 38, 38, 0.25);
+      --us: #3B82F6;
+      --us-light: #93C5FD;
+      --us-glow: rgba(59, 130, 246, 0.25);
+      --accent: #F59E0B;
+      --accent-light: #FCD34D;
+      --text: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-dim: #475569;
+      --border: rgba(148, 163, 184, 0.08);
+      --border-strong: rgba(148, 163, 184, 0.15);
+      --v-220: #64748B;
+      --v-330: #0EA5E9;
+      --v-500: #3B82F6;
+      --v-750: #8B5CF6;
+      --v-800dc: #EC4899;
+      --v-1000ac: #F97316;
+      --v-1100dc: #EAB308;
+      --v-hvdc: #14B8A6;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Outfit', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'Menlo', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── Typography ── */
+    h1 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    h3 {
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Reveal Animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, var(--china-glow) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, var(--us-glow) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-kicker {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 { margin-bottom: 1rem; }
+    .hero h1 .thin { font-weight: 400; font-style: italic; color: var(--text-muted); }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-stat .flag {
+      font-size: 0.85rem;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-stat .flag.china { color: var(--china-light); }
+    .hero-stat .flag.us { color: var(--us-light); }
+    .hero-stat .big-num {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1;
+    }
+    .hero-stat .big-num.china { color: var(--china); text-shadow: 0 0 40px var(--china-glow); }
+    .hero-stat .big-num.us { color: var(--us); text-shadow: 0 0 40px var(--us-glow); }
+    .hero-stat .unit {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 0.3rem;
+    }
+    .hero-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+    .hero-divider .ratio {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .hero-divider .ratio-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+
+    /* ── Metric Cards Strip ── */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border-strong);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: -3rem auto 5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .metric {
+      background: var(--bg-elevated);
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .metric .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+    .metric .value {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .metric .detail {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Section ── */
+    section.panel {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-intro {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    /* ── Chart Container ── */
+    .chart-wrap {
+      position: relative;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      padding: 2rem 1.5rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .chart-wrap canvas { max-height: 420px; }
+    .chart-source {
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .chart-source a {
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .chart-source a:hover { color: var(--us-light); border-color: var(--us-light); }
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .chart-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Callout ── */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: rgba(245, 158, 11, 0.06);
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 6px 6px 0;
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .callout .num {
+      color: var(--accent);
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    /* ── Legend ── */
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ── Table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-strong);
+    }
+    .data-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .data-table .mono { font-family: var(--mono); font-size: 0.8rem; }
+    .data-table .china-text { color: var(--china-light); }
+    .data-table .us-text { color: var(--us-light); }
+    .data-table .tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-family: var(--mono);
+    }
+    .tag-dc { background: rgba(236, 72, 153, 0.15); color: #F9A8D4; }
+    .tag-ac { background: rgba(139, 92, 246, 0.15); color: #C4B5FD; }
+    .tag-active { background: rgba(34, 197, 94, 0.12); color: #86EFAC; }
+    .tag-planned { background: rgba(245, 158, 11, 0.12); color: #FCD34D; }
+    .tag-cancelled { background: rgba(220, 38, 38, 0.12); color: #FCA5A5; }
+
+    /* ── Comparison Cards ── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-strong);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .compare-card {
+      background: var(--bg-elevated);
+      padding: 1.5rem;
+    }
+    .compare-card .compare-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+    }
+    .compare-card .compare-val {
+      font-family: var(--mono);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .compare-card .compare-val.china { color: var(--china-light); }
+    .compare-card .compare-val.us { color: var(--us-light); }
+    .compare-card p { font-size: 0.85rem; color: var(--text-muted); }
+    @media (max-width: 600px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Resource Selector ── */
+    .resource-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .resource-selector label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+    .resource-select {
+      appearance: none;
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      padding: 0.5rem 2.2rem 0.5rem 0.85rem;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+    }
+    .resource-select:hover { border-color: var(--accent); }
+    .resource-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15); }
+    .resource-select option { background: var(--bg-elevated); color: var(--text); }
+    .resource-ratio {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-left: 0.5rem;
+    }
+    .metric-toggle {
+      display: inline-flex;
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-left: 0.25rem;
+    }
+    .metric-toggle button {
+      background: transparent;
+      color: var(--text-dim);
+      border: none;
+      padding: 0.4rem 0.85rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .metric-toggle button:not(:last-child) { border-right: 1px solid var(--border-strong); }
+    .metric-toggle button.active {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent);
+    }
+    .metric-toggle button:hover:not(.active) { background: rgba(148, 163, 184, 0.06); color: var(--text-muted); }
+
+    /* ── Footer / Sources ── */
+    footer {
+      padding: 4rem 0 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .sources-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .sources-list li {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      position: relative;
+    }
+    .sources-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+    }
+    .sources-list a {
+      color: var(--us-light);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .sources-list a:hover { border-color: var(--us-light); }
+
+    .methodology {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .methodology strong { color: var(--text-muted); }
+
+    .built-with {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<header class="hero">
+  <div class="hero-content">
+    <p class="hero-kicker">Infrastructure Analysis · 2010–2024</p>
+    <h1>The Transmission<br><span class="thin">Gap</span></h1>
+    <p class="hero-subtitle">China added more high-voltage transmission in a single year than the United States built in the entire last decade</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="flag china">China · 220kV+</span>
+        <span id="hero-china-miles" class="big-num china">590,000</span>
+        <span class="unit">miles of HV transmission</span>
+      </div>
+      <div class="hero-divider">
+        <span id="hero-ratio" class="ratio">3.2×</span>
+        <span class="ratio-label">gap</span>
+      </div>
+      <div class="hero-stat">
+        <span class="flag us">United States · 230kV+</span>
+        <span id="hero-us-miles" class="big-num us">185,000</span>
+        <span class="unit">miles of HV transmission</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll to explore the data ↓</div>
+</header>
+
+<!-- ═══════════════════ KEY METRICS ═══════════════════ -->
+<div class="container">
+  <div class="metrics reveal">
+    <div class="metric">
+      <span class="label">Net Build 2010–24 (230kV+)</span>
+      <span id="metric-cumulative-ratio" class="value">11.2×</span>
+      <span id="metric-cumulative-detail" class="detail">China +334,000 mi vs US +29,800 mi (net)</span>
+      <span id="metric-thermal-detail" class="detail" style="margin-top:4px; font-size:0.82em; opacity:0.75;">Thermal GW·mi: ~1,176K vs ~39K (~30×)</span>
+    </div>
+    <div class="metric">
+      <span class="label">2023 Contrast</span>
+      <span id="metric-peak-ratio" class="value">−534 mi</span>
+      <span id="metric-peak-detail" class="detail">US 230kV+ shrank; China added ~21,750 mi</span>
+    </div>
+    <div class="metric">
+      <span class="label">UHV Lines (China)</span>
+      <span class="value">44</span>
+      <span class="detail">50,000+ km · per <a href="https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml" style="color:var(--accent-light);border-bottom:1px solid var(--accent-light)">CCTV Nov 2025</a> · US has zero</span>
+    </div>
+    <div class="metric">
+      <span class="label">The Paradox (2023)</span>
+      <span id="metric-paradox-value" class="value">$100B → −534 mi</span>
+      <span id="metric-paradox-detail" class="detail">US spent more on grids than China, yet HV network shrank</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CUMULATIVE GROWTH ═══════════════════ -->
+<section class="panel" id="growth">
+  <div class="container">
+    <div class="reveal">
+      <h2>The Growing Gap</h2>
+      <p class="section-intro">
+        In 2010, China's high-voltage network was 62% larger than America's.
+        By 2024, it was 220% larger — and accelerating.
+      </p>
+    </div>
+    <div class="chart-wrap reveal reveal-delay-1">
+      <canvas id="cumulativeChart"></canvas>
+      <div class="chart-source">Source: China 220kV+ 2012–2019 from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC Power Statistics (电力统计年快报)</a> via China Energy Portal (official); 2020–2021 from CEC 220kV+ aggregate; 2022–2024 extrapolated. US 230kV+ from <a href="https://www.eia.gov/electricity/data/eia411/" target="_blank">EIA Electric Power Annual</a>. Confirmed by <a href="https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions" target="_blank">IEA Grids 2023</a>, p.17–18 &amp; p.28: China built "710,000 km in past decade"; US saw "3% expansion."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ANNUAL CONSTRUCTION ═══════════════════ -->
+<section class="panel" id="construction">
+  <div class="container">
+    <div class="reveal">
+      <h2>Annual Construction</h2>
+      <p class="section-intro">
+        China's 220kV+ network grows by 20,000–35,000 miles per year. The US 230kV+ network grows by 1,000–5,000 miles in good years — and in three recent years (2011, 2018, 2023) it actually <em>shrank</em>, with more lines retired or reclassified than built. Both series are net change in installed base from annual utility filings (CEC for China, FERC Form 1 for US).
+      </p>
+    </div>
+    <div class="chart-wrap reveal reveal-delay-1">
+      <canvas id="annualChart"></canvas>
+      <div class="chart-source">Source: US bars are net year-over-year change in 230kV+ circuit-miles from <a href="https://www.eia.gov/electricity/data/eia411/" target="_blank">FERC Form 1</a> filings (investor-owned utilities, ~80% of US transmission), voltage classes 230–344 kV + 345–499 kV + 500–764 kV + 765+ kV summed annually (1994–2024). China bars are net change in 220kV+ circuit-km from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC official cumulative totals</a> (2013–2021) and <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" target="_blank">China Energy Big Data Report 2024</a> (Chart 5-14, 2014–2023); 2022–2024 estimated from CEC aggregates. Both series measure net change (new construction minus retirements/reclassifications) — same methodology, matched voltage thresholds (220kV ≈ 230kV). Negative US bars indicate years where retirements exceeded new construction. For reference, <a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank">DOE Needs Study 2023</a> (p.iii): US averaged 3,300 circuit-mi/yr at ≥100kV (2011–2020).</div>
+    </div>
+    <div class="callout reveal reveal-delay-2">
+      Over 2010–2024, China added <span class="num" id="construction-callout-china-total">~334,000</span> miles of 220kV+ transmission (net) while the US added <span class="num" id="construction-callout-us-total">~29,800</span> miles at 230kV+ — a <span id="construction-callout-ratio" class="num">~11:1</span> gap. In <span class="num">3 of 15 years</span> the US network actually shrank. Permitting averages <span class="num">5–15 years</span> in the US vs <span class="num">2–3 years</span> in China.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ VOLTAGE BREAKDOWN ═══════════════════ -->
+<section class="panel" id="voltage">
+  <div class="container">
+    <div class="reveal">
+      <h2>Voltage Class Breakdown</h2>
+      <p class="section-intro">
+        China dominates at every voltage level. Its 500kV backbone alone exceeds the entire US high-voltage network.
+        At ultra-high voltages (800kV+ DC, 1000kV AC), the US has zero operational lines.
+      </p>
+    </div>
+    <div class="legend reveal reveal-delay-1">
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-220)"></span>220/230 kV</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-330)"></span>330/345 kV</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-500)"></span>500 kV</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-750)"></span>750/765 kV</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-800dc)"></span>±800 kV DC</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-1000ac)"></span>1000 kV AC</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-1100dc)"></span>±1100 kV DC</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--v-hvdc)"></span>HVDC ≤500kV</div>
+    </div>
+    <div class="chart-grid reveal reveal-delay-2">
+      <div class="chart-wrap">
+        <h3>Circuit Miles (2024 est.)</h3>
+        <canvas id="voltageMilesChart"></canvas>
+        <div class="chart-source">Source: US from <a href="https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1" target="_blank">HIFLD</a> geospatial data (186,623 mi at 230kV+, haversine-computed from 52,244 line features). China extrapolated from official CEC data (2012–2019 via <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">China Energy Portal</a>) to 2024 total of 950,000 km (220kV+). China voltage-class split is approximate.</div>
+      </div>
+      <div class="chart-wrap">
+        <h3>GW · Miles, Thermal (2024)</h3>
+        <canvas id="voltageGwChart"></canvas>
+        <div class="chart-source">Source: GW·mi = circuit miles × thermal rating for AC; design capacity for HVDC. US miles from <a href="https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1" target="_blank">HIFLD</a> geospatial data (52,244 line segments, haversine-computed). China from CEC extrapolation. Thermal ratings: 220kV=0.6GW, 345kV=1.5GW, 500kV=2.7GW, 765kV=4.5GW, 1000kV AC=6.0GW, ±800kV DC=8.0GW.</div>
+      </div>
+    </div>
+    <div class="callout reveal reveal-delay-3">
+      In <span class="num">thermal GW·miles</span> — the metric that captures physical power-carrying capability — China leads the US by <span id="voltage-callout-ratio" class="num">4.0×</span> (<span id="voltage-callout-china" class="num">975K</span> vs <span id="voltage-callout-us" class="num">243K</span>). Its 500kV backbone alone accounts for <span id="voltage-callout-500kv" class="num">470,000</span> GW·miles — nearly double the entire US high-voltage network.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ UHV ═══════════════════ -->
+<section class="panel" id="uhv">
+  <div class="container">
+    <div class="reveal">
+      <h2>The UHV Revolution</h2>
+      <p class="section-intro">
+        China has deployed 44 ultra-high-voltage lines totaling 50,000+ km (31,000 miles) — with 8 more under construction — a technology class that doesn't exist in the United States.
+        The world-record Changji-Guquan line transmits 12 GW at ±1,100kV DC across 3,293 km (CEC: 3,295 circuit-km in 2019).
+      </p>
+    </div>
+    <div class="chart-wrap reveal reveal-delay-1">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:0.5rem;">
+        <div class="metric-toggle">
+          <button id="uhvToggleMi" class="active" onclick="setUhvMode('miles')">Miles</button>
+          <button id="uhvToggleGw" onclick="setUhvMode('gwmi')">GW·Miles</button>
+        </div>
+      </div>
+      <canvas id="uhvChart"></canvas>
+      <div class="chart-source">Source: China UHV inventory from <a href="https://en.wikipedia.org/wiki/Ultra-high-voltage_electricity_transmission_in_China" target="_blank">Wikipedia UHV article</a>. UHV km 2012–2019 from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC Power Statistics (电力统计年快报)</a> via China Energy Portal. 2025: 50,000+ km / 44 lines per <a href="https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml" target="_blank">CCTV (央视, Nov 2025)</a>. US 765kV (~2,600 mi) from <a href="https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1" target="_blank">HIFLD</a>; mostly 1960s–80s AEP system. <a href="https://en.wikipedia.org/wiki/Pacific_DC_Intertie" target="_blank">Pacific DC Intertie</a> (±500kV, 3.1 GW, 846 mi, LADWP/BPA, 1970) — America's longest HVDC line. GW·mi thermal: China UHV ≈7.5 GW avg (weighted ±800kV DC + 1000kV AC), US 765kV ≈4.5 GW, PDCI ≈3.1 GW.</div>
+    </div>
+
+    <h3 class="reveal reveal-delay-2" style="margin: 2.5rem 0 1rem;">Key UHV Corridors</h3>
+    <div class="chart-wrap reveal reveal-delay-2" style="padding:0; overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Corridor</th>
+            <th>Type</th>
+            <th>Voltage</th>
+            <th>Capacity</th>
+            <th>Miles</th>
+            <th>GW·mi</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="china-text">Changji–Guquan</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±1,100 kV</td>
+            <td class="mono">12.0 GW</td>
+            <td class="mono">2,065</td>
+            <td class="mono">24,780</td>
+            <td>2019</td>
+          </tr>
+          <tr>
+            <td class="china-text">Jiuquan–Hunan</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">8.0 GW</td>
+            <td class="mono">1,481</td>
+            <td class="mono">11,848</td>
+            <td>2017</td>
+          </tr>
+          <tr>
+            <td class="china-text">Hami–Zhengzhou</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">8.0 GW</td>
+            <td class="mono">1,362</td>
+            <td class="mono">10,896</td>
+            <td>2014</td>
+          </tr>
+          <tr>
+            <td class="china-text">Baihetan–Jiangsu</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">8.0 GW</td>
+            <td class="mono">1,297</td>
+            <td class="mono">10,376</td>
+            <td>2022</td>
+          </tr>
+          <tr>
+            <td class="china-text">Baihetan–Zhejiang</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">8.0 GW</td>
+            <td class="mono">1,318</td>
+            <td class="mono">10,544</td>
+            <td>2022</td>
+          </tr>
+          <tr>
+            <td class="china-text">Qinghai–Henan</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">8.0 GW</td>
+            <td class="mono">986</td>
+            <td class="mono">7,888</td>
+            <td>2020</td>
+          </tr>
+          <tr>
+            <td class="china-text">Shanghaimiao–Shandong</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">10.0 GW</td>
+            <td class="mono">769</td>
+            <td class="mono">7,690</td>
+            <td>2023</td>
+          </tr>
+          <tr>
+            <td class="china-text">Jinping–Sunan</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±800 kV</td>
+            <td class="mono">7.2 GW</td>
+            <td class="mono">1,299</td>
+            <td class="mono">9,353</td>
+            <td>2012</td>
+          </tr>
+          <tr>
+            <td class="china-text">Shanxi–Nanjing</td>
+            <td><span class="tag tag-ac">AC</span></td>
+            <td class="mono">1,000 kV</td>
+            <td class="mono">6.0 GW</td>
+            <td class="mono">745</td>
+            <td class="mono">4,470</td>
+            <td>2017</td>
+          </tr>
+          <tr style="border-top: 1px solid var(--border-strong);">
+            <td class="us-text">Pacific DC Intertie</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±500 kV</td>
+            <td class="mono">3.1 GW</td>
+            <td class="mono">846</td>
+            <td class="mono">2,623</td>
+            <td>1970</td>
+          </tr>
+          <tr>
+            <td class="us-text">Quebec–New England</td>
+            <td><span class="tag tag-dc">DC</span></td>
+            <td class="mono">±450 kV</td>
+            <td class="mono">2.0 GW</td>
+            <td class="mono">930</td>
+            <td class="mono">1,860</td>
+            <td>1990</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout reveal reveal-delay-3" style="margin-top: 2rem;">
+      <strong>SunZia</strong> — America's largest clean energy transmission project (±525kV HVDC, 3.0 GW, 550 mi) — took <span class="num">17 years</span> from proposal to completion (2008–2025) to deliver <span class="num">1,650 GW·mi</span> of capacity.
+      In roughly the same period (2010–2024), China commissioned <span class="num">12 UHVDC lines</span> totaling <span class="num">128,070 GW·mi</span> — the equivalent of <span class="num">78 SunZias</span>.
+      The largest single line, Changji–Guquan, carries <span class="num">15×</span> the GW·mi of SunZia alone.
+    </div>
+    <div class="chart-source reveal reveal-delay-3" style="margin-top: 0.5rem;">
+      SunZia: <a href="https://sunzia.net/" target="_blank">Pattern Energy</a>, ±525kV, 3.0 GW, 550 mi, proposed 2008, construction 2023, expected online 2025. China UHVDC inventory from <a href="https://en.wikipedia.org/wiki/Ultra-high-voltage_electricity_transmission_in_China" target="_blank">Wikipedia UHV article</a> — includes only ±800kV and ±1,100kV DC lines commissioned 2010–2024. GW·mi = thermal capacity × route miles.
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ INVESTMENT ═══════════════════ -->
+<section class="panel" id="investment">
+  <div class="container">
+    <div class="reveal">
+      <h2>The Investment Paradox</h2>
+      <p class="section-intro">
+        The United States spent <strong>$100 billion</strong> on grid infrastructure in 2023 — more than China's $80 billion.
+        Yet the US built just 450 miles of new high-voltage transmission (per FERC revised data, Jul 2025). China added ~21,750 miles (CEC official).
+        America's spending goes to maintaining and upgrading an aging system. Same money, radically different output.
+      </p>
+    </div>
+    <div class="chart-wrap reveal reveal-delay-1">
+      <canvas id="investmentChart"></canvas>
+      <div class="chart-source">Source: 2023 figures from <a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank">IEA World Energy Investment 2024</a>, p.80: China $80B, US $100B (all T&D capital expenditure). Pre-2023 estimated from IEA chart (p.78). Of US total, only ~$25B is transmission-specific per <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank">Grid Strategies</a> (p.3, citing Brattle Group), with 90% going to reliability upgrades not new construction (p.7).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ GENERATION BUILDOUT ═══════════════════ -->
+<section class="panel" id="buildout">
+  <div class="container">
+    <div class="reveal">
+      <h2>The Generation Buildout</h2>
+      <p class="section-intro">
+        Transmission lines don't exist in a vacuum — they connect generation to load.
+        China isn't just building more wires; it's building more of <em>everything</em>.
+        In 2024, China added <strong>400 GW</strong> of new generation capacity — seven times the US total of 57 GW.
+      </p>
+    </div>
+    <div class="legend reveal reveal-delay-1">
+      <div class="legend-item"><span class="legend-swatch" style="background:#64748B"></span>Coal</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#F97316"></span>Natural Gas</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#8B5CF6"></span>Nuclear</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#06B6D4"></span>Wind</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:#EAB308"></span>Solar</div>
+    </div>
+    <div class="chart-grid reveal reveal-delay-2">
+      <div class="chart-wrap">
+        <h3>China — Annual Capacity Additions (GW)</h3>
+        <canvas id="chinaCapacityChart"></canvas>
+      </div>
+      <div class="chart-wrap">
+        <h3>United States — Annual Capacity Additions (GW)</h3>
+        <canvas id="usCapacityChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-source reveal reveal-delay-2" style="margin-top:-0.5rem; margin-bottom:2rem;">
+      Source: China from NEA/CEC annual statistics, <a href="https://gwec.net/" target="_blank">GWEC</a>, <a href="https://globalenergymonitor.org/report/boom-and-bust-coal-2025/" target="_blank">Global Energy Monitor</a>, <a href="https://pris.iaea.org/" target="_blank">IAEA PRIS</a>. US from <a href="https://www.eia.gov/electricity/data/eia860/" target="_blank">EIA Form 860</a>, <a href="https://seia.org/" target="_blank">SEIA</a>, DOE Wind Technologies Market Report. Both charts share the same Y-axis scale.
+    </div>
+    <div class="callout reveal reveal-delay-3">
+      In <span class="num">2024</span>, China installed <span class="num">277 GW</span> of solar alone — more than the <em>entire</em> US generating fleet added across all fuel types over the last <span class="num">five years combined</span>. The US added zero new coal capacity in the entire decade.
+    </div>
+
+    <div class="chart-wrap reveal reveal-delay-3" style="margin-top:2.5rem;">
+      <div class="resource-selector">
+        <label for="resourceSelect">Compare by resource</label>
+        <select id="resourceSelect" class="resource-select">
+          <option value="solar">Solar</option>
+          <option value="wind">Wind</option>
+          <option value="nuclear">Nuclear</option>
+          <option value="coal">Coal</option>
+          <option value="gas">Natural Gas</option>
+          <option value="total">All Sources</option>
+        </select>
+        <div class="metric-toggle">
+          <button id="toggleGW" class="active" onclick="setMetricMode('gw')">GW Added</button>
+          <button id="toggleTWh" onclick="setMetricMode('twh')">TWh Added</button>
+        </div>
+        <span id="resourceRatio" class="resource-ratio"></span>
+      </div>
+      <canvas id="resourceCompareChart"></canvas>
+      <div id="resourceInsight" style="margin-top:0.75rem; font-size:0.85rem; color:var(--text-muted); font-style:italic;"></div>
+      <div class="chart-source">Source: GW from same sources as capacity additions above. TWh Added = GW × capacity factor × 8,760 hrs. Capacity factors: Solar 16% (CN) / 25% (US), Wind 24% / 35%, Nuclear 87% / 92%, Coal 52% / 50%, Gas 35% / 42%. "All Sources" shows stacked breakdown by fuel.</div>
+    </div>
+
+    <div class="chart-wrap reveal reveal-delay-3" style="margin-top:2.5rem;">
+      <h3>Total Electricity Generation</h3>
+      <canvas id="twhChart"></canvas>
+      <div class="chart-source">Source: China from NBS/CEC via <a href="https://chinaenergyportal.org/" target="_blank">China Energy Portal</a>. US from <a href="https://www.eia.gov/electricity/monthly/" target="_blank">EIA Electric Power Monthly</a>. China surpassed 2× US generation around 2020.</div>
+    </div>
+
+    <div class="compare-grid reveal reveal-delay-4" style="margin-top:2rem;">
+      <div class="compare-card">
+        <div class="compare-label">Total New Capacity 2015–2024 — China</div>
+        <div class="compare-val china" style="font-size:1.4rem;">~1,800 GW</div>
+        <p>Solar: 860 GW · Wind: 446 GW · Coal: 384 GW · Nuclear: 43 GW · Gas: 69 GW</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Total New Capacity 2015–2024 — US</div>
+        <div class="compare-val us" style="font-size:1.4rem;">~383 GW</div>
+        <p>Solar: 205 GW · Wind: 90 GW · Coal: 0 GW · Nuclear: 3.4 GW · Gas: 84 GW</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Generation Growth — China</div>
+        <div class="compare-val china" style="font-size:1.4rem;">+72%</div>
+        <p>5,740 TWh → 9,880 TWh. Added the equivalent of an entire US grid in new output.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Generation Growth — US</div>
+        <div class="compare-val us" style="font-size:1.4rem;">+6%</div>
+        <p>4,079 TWh → 4,309 TWh. Essentially flat — efficiency gains offset demand growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ US PROJECTS ═══════════════════ -->
+<section class="panel" id="us-projects">
+  <div class="container">
+    <div class="reveal">
+      <h2>America's Pipeline</h2>
+      <p class="section-intro">
+        A handful of major US projects are under construction or permitted.
+        If all were completed, they would add roughly 3,000 miles — what China builds in six weeks.
+      </p>
+    </div>
+    <div class="chart-wrap reveal reveal-delay-1" style="padding:0; overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Type</th>
+            <th>Voltage</th>
+            <th>Capacity</th>
+            <th>Miles</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="us-text">SunZia Southwest</td>
+            <td><span class="tag tag-dc">HVDC</span></td>
+            <td class="mono">525 kV</td>
+            <td class="mono">3.0 GW</td>
+            <td class="mono">550</td>
+            <td><span class="tag tag-active">Under construction</span></td>
+          </tr>
+          <tr>
+            <td class="us-text">Gateway West</td>
+            <td><span class="tag tag-ac">AC</span></td>
+            <td class="mono">500 kV</td>
+            <td class="mono">3.0 GW</td>
+            <td class="mono">1,000</td>
+            <td><span class="tag tag-active">Partial build</span></td>
+          </tr>
+          <tr>
+            <td class="us-text">TransWest Express</td>
+            <td><span class="tag tag-dc">HVDC</span></td>
+            <td class="mono">500 kV</td>
+            <td class="mono">3.0 GW</td>
+            <td class="mono">728</td>
+            <td><span class="tag tag-planned">Permitted</span></td>
+          </tr>
+          <tr>
+            <td class="us-text">Grain Belt Express</td>
+            <td><span class="tag tag-dc">HVDC</span></td>
+            <td class="mono">600 kV</td>
+            <td class="mono">5.0 GW</td>
+            <td class="mono">542</td>
+            <td><span class="tag tag-planned">Permitted</span></td>
+          </tr>
+          <tr>
+            <td class="us-text">Champlain Hudson (CHPE)</td>
+            <td><span class="tag tag-dc">HVDC</span></td>
+            <td class="mono">320 kV</td>
+            <td class="mono">1.25 GW</td>
+            <td class="mono">339</td>
+            <td><span class="tag tag-active">Under construction</span></td>
+          </tr>
+          <tr>
+            <td class="us-text">NECEC</td>
+            <td><span class="tag tag-dc">HVDC</span></td>
+            <td class="mono">320 kV</td>
+            <td class="mono">1.2 GW</td>
+            <td class="mono">145</td>
+            <td><span class="tag tag-active">Under construction</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-dim)">CREZ Lines (Texas)</td>
+            <td><span class="tag tag-ac">AC</span></td>
+            <td class="mono">345 kV</td>
+            <td class="mono">18.5 GW</td>
+            <td class="mono">3,600</td>
+            <td style="color:var(--text-dim)">Completed 2014</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-dim);text-decoration:line-through">Plains & Eastern</td>
+            <td><span class="tag tag-dc">HVDC</span></td>
+            <td class="mono">600 kV</td>
+            <td class="mono">4.0 GW</td>
+            <td class="mono">720</td>
+            <td><span class="tag tag-cancelled">Cancelled 2019</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ WHY THE GAP ═══════════════════ -->
+<section class="panel" id="why">
+  <div class="container">
+    <div class="reveal">
+      <h2>Why the Gap?</h2>
+      <p class="section-intro">
+        The divergence is structural, not just budgetary.
+        China's centralized grid operators build against binding five-year plan targets.
+        The US fragments authority across ~3,000 utilities and 50 state regulators.
+      </p>
+    </div>
+    <div class="compare-grid reveal reveal-delay-1">
+      <div class="compare-card">
+        <div class="compare-label">Governance — China</div>
+        <div class="compare-val china">2 state grid operators</div>
+        <p>SGCC (88% of territory) + China Southern Grid. National planning with binding provincial targets under 5-year plans.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Governance — US</div>
+        <div class="compare-val us">~3,000 utilities</div>
+        <p>7 RTOs/ISOs, 50 state regulatory commissions, FERC at federal level. No single national transmission plan.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Permitting — China</div>
+        <div class="compare-val china">2–3 years</div>
+        <p>Approval to operation for a major UHV line. State-directed land acquisition with minimal legal challenges.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Permitting — US</div>
+        <div class="compare-val us">5–15+ years</div>
+        <p>Average for an interstate line. Requires negotiation with thousands of private landowners. Many projects die in permitting.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Technology — China</div>
+        <div class="compare-val china">Global UHV leader</div>
+        <p>Developed and deployed 1,100kV DC (world record). Exports UHV technology to Brazil, Pakistan, and others.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Technology — US</div>
+        <div class="compare-val us">No domestic UHV</div>
+        <p>Highest operational: 765kV AC (1960s–80s). No 800kV DC or 1000kV AC lines. Limited HVDC deployment.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Grid Topology — China</div>
+        <div class="compare-val china">Long-distance UHV overlay</div>
+        <p>Point-to-point UHV corridors move power 1,000–2,000+ miles from western generation to eastern load centers.</p>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">Grid Topology — US</div>
+        <div class="compare-val us">Three weak interconnections</div>
+        <p>Meshed AC evolved organically. Limited long-distance capacity. Congestion at seams between RTOs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SOURCES ═══════════════════ -->
+<footer>
+  <div class="container">
+    <div class="reveal">
+      <h2>Sources</h2>
+      <ul class="sources-list">
+        <li><a href="https://www.iea.org/reports/world-energy-investment-2024" target="_blank" rel="noopener">IEA World Energy Investment 2024</a> — <strong>p.78:</strong> grid investment by geography chart; <strong>p.80:</strong> China $80B, US $100B (CC BY 4.0)</li>
+        <li><a href="https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions" target="_blank" rel="noopener">IEA Electricity Grids and Secure Energy Transitions (2023)</a> — <strong>p.14:</strong> global grid 80M km; <strong>p.17:</strong> transmission by country chart; <strong>p.18:</strong> US 3% growth (CC BY 4.0)</li>
+        <li><a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank" rel="noopener">DOE National Transmission Needs Study (Oct 2023)</a> — <strong>p.iii:</strong> US 3,300 circuit-mi/yr avg (≥100kV); <strong>p.iv:</strong> regional construction by year</li>
+        <li><a href="https://www.energy.gov/gdo/grid-deployment-office" target="_blank" rel="noopener">DOE Grid Deployment Office Fact Sheet (Oct 2023)</a> — See Needs Study Table VI-3 (p.123) for definitive 85.6 TW-mi US existing system</li>
+        <li><a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank" rel="noopener">Grid Strategies / ACEG "Fewer New Miles" (Jul 2024)</a> — <strong>p.4:</strong> Figure 1 (345kV+ by year); <strong>p.3:</strong> $25B/yr transmission spend, 90% reliability upgrades; <strong>p.6:</strong> investment by region (Brattle/FERC data). <em>Note: 2023 figure of 55 mi in this report was superseded by FERC revision (see below).</em></li>
+        <li><a href="https://cleanenergygrid.org/wp-content/uploads/2025/07/ACEG_Grid-Strategies_Fewer-New-Miles-2025_Rev-1.pdf" target="_blank" rel="noopener">ACEG/Grid Strategies "Fewer New Miles" Rev.1 (Jul 2025)</a> — <strong>Addendum p.16:</strong> FERC revised 2023 to ~450 mi (400 mi 345kV + 50 mi 500kV); confirmed 2024 at 888 mi (334 mi 345kV + 554 mi 500kV). Revised averages: 1,781 mi/yr (2010-14), 942 mi/yr (2015-19), 536 mi/yr (2020-24). <strong>Primary source:</strong> <a href="https://cms.ferc.gov/media/energy-infrastructure-update-april-2025" target="_blank" rel="noopener">FERC Energy Infrastructure Update for Apr 2025</a> (released Jul 1 2025). FERC data from NERC ES&D + Yes Energy/C Three Group. Index: <a href="https://www.ferc.gov/staff-reports-and-papers" target="_blank" rel="noopener">ferc.gov/staff-reports-and-papers</a>.</li>
+        <li><a href="https://www.nerc.com/pa/RAPA/ra/Pages/default.aspx" target="_blank" rel="noopener">NERC Long-Term Reliability Assessment 2024 Supplemental</a> — Table L: planned US circuit-miles by voltage class (2024–2034); Table N: by primary driver; Form D: 1,196 individual projects. 345kV class is 6,435 mi (39% of all planned).</li>
+        <li><a href="https://www.nrel.gov/analysis/national-transmission-planning-study.html" target="_blank" rel="noopener">NREL National Transmission Planning Study (2024)</a> — TW-mile expansion scenarios for US grid</li>
+        <li><a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank" rel="noopener">CEC Power Statistics (电力统计年快报) via China Energy Portal</a> — <strong>Primary Chinese source.</strong> Official voltage-class transmission line lengths 2012–2019 (1000kV AC, ±800kV DC, 500kV, 330kV, 220kV, etc.). Also: <a href="https://chinaenergyportal.org/en/2017-detailed-electricity-statistics-update-of-oct-2018/" target="_blank" rel="noopener">2017</a>, <a href="https://chinaenergyportal.org/en/2020-electricity-other-energy-statistics/" target="_blank" rel="noopener">2020 aggregate</a>, <a href="https://chinaenergyportal.org/en/2021-electricity-other-energy-statistics/" target="_blank" rel="noopener">2021 aggregate</a></li>
+        <li><a href="https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml" target="_blank" rel="noopener">CCTV News (央视新闻) — 14th FYP UHV Summary (Nov 22, 2025)</a> — <strong>Official state media.</strong> 44 UHV lines, 50,000+ km, 19 new projects in 14th FYP, 380B CNY invested, 420B kWh clean energy (2024), 9.8 km/day build rate, 920B kWh/yr West-to-East</li>
+        <li><a href="https://www.nea.gov.cn/2024-01/26/c_1310762246.htm" target="_blank" rel="noopener">National Energy Administration (国家能源局) — 2023 Statistics (Jan 26, 2024)</a> — Grid investment 527.5B CNY (+5.4% YoY), installed capacity 2,920 GW</li>
+        <li><a href="https://www.nanpudian.com/media_coverage/497.html" target="_blank" rel="noopener">Nanpudian (南普电) — UHV Project Tracker (Feb 8, 2025)</a> — 40 lines as of Nov 2024 (20 AC + 20 DC). SGCC: 36 projects / 48,000 km; CSG: 4 projects / 6,235 km. 14th FYP target: 150 GW; 15th FYP: 165 GW</li>
+        <li><a href="http://www.sgcc.com.cn/html/sgcc_main_en/col2017112406/column_2017112406_1.shtml" target="_blank" rel="noopener">State Grid Corp of China (SGCC) Annual Reports</a> — UHV line inventory, investment, cumulative totals</li>
+        <li><a href="https://english.www.gov.cn/policies/policywatch/202203/23/content_WS6239fed2c6d02e5335328b98.html" target="_blank" rel="noopener">China 14th Five-Year Plan (NEA)</a> — 24 new UHV lines, 300 GW inter-provincial target</li>
+        <li><a href="https://www.eia.gov/electricity/data/eia411/" target="_blank" rel="noopener">EIA Form 411 / Electric Power Annual</a> — US transmission mileage by voltage class</li>
+        <li><a href="https://en.wikipedia.org/wiki/Ultra-high-voltage_electricity_transmission_in_China" target="_blank" rel="noopener">Wikipedia — Ultra-high-voltage electricity transmission in China</a> — Complete UHV line inventory with voltage, type, capacity, length, dates, routes (saved as HTML)</li>
+        <li><a href="https://gwec.net/" target="_blank" rel="noopener">Global Wind Energy Council (GWEC)</a> — Annual wind capacity additions by country. China 2020 spike (71.7 GW) driven by subsidy deadline rush</li>
+        <li><a href="https://globalenergymonitor.org/report/boom-and-bust-coal-2025/" target="_blank" rel="noopener">Global Energy Monitor — Boom & Bust Coal 2025</a> — China coal plant commissioning by year; construction starts vs completions</li>
+        <li><a href="https://pris.iaea.org/" target="_blank" rel="noopener">IAEA Power Reactor Information System (PRIS)</a> — Nuclear reactor commissioning dates and capacities for both countries</li>
+        <li><a href="https://seia.org/" target="_blank" rel="noopener">SEIA / Wood Mackenzie Solar Market Insight</a> — US solar capacity additions (utility + distributed, GWdc)</li>
+        <li><a href="https://www.eia.gov/electricity/data/eia860/" target="_blank" rel="noopener">EIA Form 860</a> — US generator-level capacity additions, retirements, and fuel type</li>
+        <li><a href="https://chinaenergyportal.org/" target="_blank" rel="noopener">China Energy Portal</a> — Translated CEC electricity statistics (2006–2020): <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank" rel="noopener">2019 detailed stats</a> (full voltage-class breakdown, Section 4), <a href="https://chinaenergyportal.org/en/2020-electricity-other-energy-statistics-preliminary/" target="_blank" rel="noopener">2020 preliminary stats</a> (220kV+ aggregates). Also annual TWh generation.</li>
+        <li><a href="https://www.nea.gov.cn/2024-07/19/c_1310783264.htm" target="_blank" rel="noopener">NEA/EPPEI — China Electric Power Development Report 2024 (Jul 2024)</a> — Confirms end-2023 220kV+ transmission: ~920,000 km</li>
+        <li><a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" target="_blank" rel="noopener">China Energy Big Data Report 2024 (中国能源大数据报告2024, Jun 2024)</a> — <strong>Key source.</strong> Complete 2014–2023 annual time series: 220kV+ transmission (Chart 5-14), transformer capacity (Chart 5-13), grid investment (Table 1-4), line loss rates (Table 5-1). Published by 中能传媒研究院, sourcing CEC/NBS data. 94-page PDF saved as Ditan_source.pdf</li>
+        <li><a href="https://usercontent.one/wp/www.cet.energy/wp-content/uploads/2024/03/2024-03-CET_Summary-of-Chinas-Energy-and-Power-Sector-Statistics-in-2023.pdf" target="_blank" rel="noopener">CET — Summary of China's Energy and Power Sector Statistics in 2023 (Mar 2024)</a> — Installed capacity, generation, investment data</li>
+        <li><a href="https://www.eia.gov/electricity/monthly/" target="_blank" rel="noopener">EIA Electric Power Monthly</a> — US total electricity generation (TWh), Table 1.1</li>
+      </ul>
+    </div>
+
+    <div class="methodology reveal reveal-delay-1">
+      <strong>Methodology & Data Quality Notes</strong><br><br>
+      <strong>Definitions:</strong> China "transmission" = 220kV and above (standard Chinese definition). US "transmission" = 230kV and above.
+      These thresholds are comparable but not identical.<br><br>
+      <strong>Cumulative totals:</strong> China 220kV+ network: <strong>Complete 2014–2023 annual time series</strong> from <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" style="color:var(--text-muted)">China Energy Big Data Report 2024</a> (中国能源大数据报告2024), Chart 5-14: 578k (2014) → 608k → 646k → 686k → 725k → 759k → 812k → 843k → 882k → 920.5k km (2023). These are CEC's published 220kV+ aggregate figures (万千米 units). Exact 2023: 92.05万千米 = 920,500 km (report text p.60). 2024 confirmed at 960,970 km per <a href="https://finance.sina.com.cn/stock/relnews/hk/2025-07-10/doc-infeytki3691600.shtml" style="color:var(--text-muted)">CEC Annual Development Report 2025</a> (中国电力行业年度发展报告2025, Jul 2025: "220千伏及以上输电线路长度960970千米，同比增长3.5%"). 35kV+ total: 2,477,000 km in 2024 (+1.7% YoY). Note: earlier dataset versions used computed sums of individual voltage classes from China Energy Portal, which undercounted by 5–8% vs CEC's published aggregates; the Ditan chart values are authoritative.
+      IEA Grids 2023 (p.17) shows China total transmission at ~1.9M km including lower voltages; p.28 notes "710,000 km built in past decade."
+      US total at 230kV+ (~185,000 miles) from EIA Electric Power Annual. IEA (p.18) confirms US saw ~3% transmission expansion over the past decade.<br><br>
+      <strong>Annual construction (net change):</strong> Both US and China bars show <em>net year-over-year change in installed circuit-miles/km</em> — i.e., new construction minus retirements and reclassifications. This is the only methodology that gives apples-to-apples comparison, since both countries report cumulative totals by voltage class in annual filings.<br><br>
+      <strong>US source:</strong> FERC Form 1 data from EIA's Electric Power Annual, covering investor-owned utilities (~80% of US transmission). Voltage classes 230–344 kV, 345–499 kV, 500–764 kV, and 765+ kV summed for each year (1994–2024). Year-over-year differences yield net change. The 230–344 kV class accounts for ~42% of all US 230kV+ mileage (51,708 mi of 121,870 mi in 2024) and was excluded from previous versions of this chart that used 345kV+ Grid Strategies data. Key features of the FERC data: 2012 spike (+2,300 mi) reflects CREZ build-out in Texas; 2017 spike (+7,586 mi) likely includes reporting reclassifications; three negative years (2011: −1,241, 2018: −492, 2023: −534) indicate net retirements exceeded new construction.<br><br>
+      <strong>China source:</strong> CEC official 220kV+ cumulative totals. Year-by-year figures for 2013–2021 computed from voltage-class cumulative data via <a href="https://chinaenergyportal.org/" style="color:var(--text-muted)">China Energy Portal</a>; 2014–2023 cross-checked against <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" style="color:var(--text-muted)">China Energy Big Data Report 2024</a> (Chart 5-14). CEC 220kV+ aggregates confirm 35,029 km added in 2020 and 32,220 km in 2021. 2022–2024 estimated at ~35,000 km/year.<br><br>
+      <strong>Previous methodology:</strong> Earlier versions of this chart used US data at 345kV+ only (from Grid Strategies "Fewer New Miles" Jul 2024, approximate visual readings from Figure 1). This excluded the 230–344 kV class, understating US construction and overstating the gap. The 345kV+ series showed ratios of ~30–50:1; the matched 230kV+ series shows ~11:1 cumulative.
+      DOE Needs Study (p.iii) reports US averaged 3,300 circuit-miles/year at ≥100kV (2011-2020), a broader category.<br><br>
+      <strong>GW·miles:</strong> All GW·mile figures use thermal ratings for AC lines and design capacity for HVDC.
+      Thermal rating reflects the physical infrastructure built (conductor, towers, right-of-way) — the maximum power the line can carry.
+      SIL (surge impedance loading) is a lower theoretical baseline that can be exceeded at any time with series compensation, SVCs, or STATCOMs.
+      For reference, DOE Needs Study 2023 (Table VI-3, p.123) reports the US system at 85.6 TW-mi using SIL; our HIFLD-derived thermal total is 243 TW-mi (~2.8× higher).<br>
+      AC thermal ratings used: 220/230kV≈0.6GW, 330kV≈1.0GW, 345kV≈1.5GW, 500kV≈2.7GW, 750/765kV≈4.5GW, 1000kV AC≈6.0GW.
+      HVDC design capacity: ±800kV≈8.0GW, ±1100kV=12.0GW, HVDC≤500kV≈2.5GW.<br>
+      <em>Voltage breakdown chart (total system):</em> US miles computed from <a href="https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1" style="color:var(--text-muted)">HIFLD</a> geospatial data — 52,244 transmission line features, haversine-computed from coordinates, totaling 186,623 miles at 230kV+ (includes both "In Service" and "Not Available" status features). China miles extrapolated from 2019 CEC voltage-class data to 2024 aggregates.<br>
+      <em>Hero card (cumulative build 2010–24):</em> New-build GW·mi = cumulative new-build miles × weighted-average thermal GW/mi.
+      China avg: 3.52 GW/mi (from CEC 2012–2019 voltage-class additions: 542,408 GW·km / 247,802 km = 2.19 GW/km × 1.609).
+      US avg: 1.30 GW/mi (from HIFLD total system: 243,141 GW·mi / 186,623 mi).
+      The GW·mi ratio exceeds the miles ratio because China's new build skews to higher-capacity voltages (500kV, UHV).<br><br>
+      <strong>Investment:</strong> 2023 figures from IEA World Energy Investment 2024 (p.80): China $80B, US $100B.
+      IEA definition includes all T&D capital expenditure (new construction, reliability upgrades, distribution modernization, smart grid).
+      Grid Strategies (p.3) clarifies US transmission-specific spending at ~$25B/yr (citing Brattle Group), with 90% driven by reliability upgrades (p.7).
+      The gap between $100B (IEA total T&D) and $25B (transmission only) reflects large distribution spending.
+      Pre-2023 figures estimated from IEA chart trends (p.78). China 2024 ($85B) reflects SGCC's announced record investment.
+      <strong>China grid investment in CNY</strong> (complete 2014–2024 from <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" style="color:var(--text-muted)">Ditan report</a> Table 1-4, sourcing NBS; 2024 from CEC Report 2025): 412B (2014), 464B (2015), 543B (2016, peak), 534B (2017), 537B (2018), 486B (2019), 490B (2020), 495B (2021), 501B (2022), 528B (2023), 608B (2024, record). Generation investment first exceeded grid in 2020; by 2024 generation was 2× grid (1,209B vs 608B). SGCC plans 650B CNY (~$89B) for 2025.<br><br>
+      <strong>Voltage breakdown:</strong> China voltage-class mileage 2012–2019 from official CEC data (<a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" style="color:var(--text-muted)">China Energy Portal</a>): e.g., 2019 = 454,585 km at 220kV, 32,314 km at 330kV, 195,636 km at 500kV, 23,256 km at 750kV, 10,872 km at 1000kV AC + DC totals.
+      US breakdown estimated — NERC 2024 Supplemental (Table L) provides planned additions by voltage class but not existing inventory.<br><br>
+      <strong>UHV inventory:</strong> <a href="https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml" style="color:var(--text-muted)">CCTV state media (Nov 22, 2025)</a> reports 44 operational UHV lines totaling 50,000+ km, with 19 new projects initiated during the 14th FYP and 380B CNY invested.
+      <a href="https://www.nanpudian.com/media_coverage/497.html" style="color:var(--text-muted)">Nanpudian (Feb 2025)</a> provides operator split: SGCC 36 projects / 48,000 km, CSG 4 projects / 6,235 km.
+      CEC voltage-class data gives official UHV km for 2012–2019 (e.g., 2019: 10,872 km at 1000kV AC + 21,907 km at ±800kV DC + 3,295 km at ±1100kV DC = 36,074 km).
+      Wikipedia UHV article (saved Feb 2026) provides individual line-by-line inventory (46 completed + 8 under construction).
+      Clean energy via UHV: ~420B kWh in 2024, ~60% of total UHV transmission (CCTV). West-to-East: 920+ billion kWh/year.<br><br>
+      <strong>Generation capacity additions:</strong> China wind from GWEC/NEA; solar from NEA/pv magazine; nuclear from IAEA PRIS; coal commissioned from Global Energy Monitor Boom & Bust reports; gas estimated from cumulative fleet growth (~66 GW in 2015 to ~130 GW in 2024).
+      US wind from DOE/Berkeley Lab Wind Technologies Market Report; solar from SEIA/Wood Mackenzie (total market, GWdc); nuclear limited to Watts Bar 2 (2016), Vogtle 3 (2023), Vogtle 4 (2024); coal is zero throughout; gas from EIA Form 860.
+      China coal "commissioned" = plants starting commercial operation, distinct from "construction starts" which can be 2–4× higher in some years.
+      China gas annual additions are estimates due to limited granular public English-language data.<br><br>
+      <strong>Total electricity generation:</strong> China TWh from NBS/CEC via China Energy Portal. 2024 figure (9,880 TWh) uses broader CEC/NEA scope covering all producers.
+      US TWh from EIA Electric Power Monthly Table 1.1. China generation grew 72% over 2015–2024; US grew 6%.<br><br>
+      <strong>Source status:</strong> All cited English-language sources have been downloaded and page-verified, including FERC Energy Infrastructure Update for April 2025 (primary source for 2023/2024 revisions) and ACEG/Grid Strategies "Fewer New Miles" Rev.1 Jul 2025. CEC annual statistics (电力统计年快报) for 2019 (detailed voltage-class breakdown) and 2020 (preliminary 220kV+ aggregates) downloaded via China Energy Portal English translations. CET "Summary of China's Energy and Power Sector Statistics in 2023" PDF downloaded. <strong>Chinese-language sources verified and downloaded:</strong> (1) China Energy Big Data Report 2024 (中国能源大数据报告2024, 94-page PDF saved as Ditan_source.pdf) — provides the <em>authoritative</em> complete 2014–2023 annual 220kV+ transmission time series (Chart 5-14), transformer capacity (Chart 5-13), grid investment (Table 1-4), and line loss rates (Table 5-1), all sourcing CEC/NBS data. (2) CEC Annual Development Report 2025 (full text via Sina Finance, Jul 2025) confirms 2024 cumulative 220kV+ = 960,970 km. (3) CEC Annual Development Report 2023 (full text via ideacarbon.org, Jul 2023) confirms 2022 cumulative 220kV+ = ~880,000 km. China 2023 cumulative figure confirmed at 920,500 km (Ditan report text: "92.05万千米"). Post-2020 voltage-class breakdowns (individual 1000kV/750kV/500kV/330kV/220kV figures) are behind CEC paywall and not freely available in English or Chinese.
+    </div>
+
+    <p class="built-with">Built with Chart.js · Data compiled February 2026</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════ CHARTS ═══════════════════ -->
+<script>
+// ── Chart.js Defaults ──
+Chart.defaults.color = '#94A3B8';
+Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.08)';
+Chart.defaults.font.family = "'Outfit', system-ui, sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
+Chart.defaults.plugins.legend.labels.padding = 16;
+
+const CHINA = '#DC2626';
+const CHINA_BG = 'rgba(220, 38, 38, 0.15)';
+const US = '#3B82F6';
+const US_BG = 'rgba(59, 130, 246, 0.15)';
+const ACCENT = '#F59E0B';
+
+const monoFont = "'JetBrains Mono', monospace";
+const fmtK = v => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v.toLocaleString();
+const fmtFull = v => v.toLocaleString();
+const KM_TO_MILES = 0.621371;
+const toMiles = km => km * KM_TO_MILES;
+
+function setTextById(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function roundTo(value, step) {
+  return Math.round(value / step) * step;
+}
+
+function formatMiles(value) {
+  return Math.round(value).toLocaleString();
+}
+
+let cumulativeLabels = [2012, 2014, 2016, 2018, 2020, 2022, 2024];
+let cumulativeChinaMiles = [303800, 343500, 381700, 438400, 493500, 545700, 590400];
+let cumulativeUSMiles = [173000, 175500, 179000, 181000, 183000, 184000, 185000];
+
+// ── 1. Cumulative HV Transmission ──
+const cumulativeChart = new Chart(document.getElementById('cumulativeChart'), {
+  type: 'line',
+  data: {
+    labels: cumulativeLabels,
+    datasets: [
+      {
+        label: 'China (220kV+)',
+        data: cumulativeChinaMiles,
+        borderColor: CHINA,
+        backgroundColor: CHINA_BG,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+      },
+      {
+        label: 'United States (230kV+)',
+        data: cumulativeUSMiles,
+        borderColor: US,
+        backgroundColor: US_BG,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.2,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 650000,
+        ticks: {
+          callback: v => fmtK(v) + ' mi',
+          font: { family: monoFont, size: 11 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+      },
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 11 } },
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' miles',
+        }
+      }
+    }
+  }
+});
+
+// ── 2. Annual Construction ──
+let annualLabels = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+let chinaAnnual = [23600,24900,23600,21850,17840,19300,18920,21150,35570,19370,21770,20020,21750,21750,22990];
+let usAnnual    = [1729,-1241,2300,1142,1694,1340,173,7586,-492,2860,2516,5271,1648,-534,3818];
+
+const annualChart = new Chart(document.getElementById('annualChart'), {
+  type: 'bar',
+  data: {
+    labels: annualLabels,
+    datasets: [
+      {
+        label: 'China',
+        data: chinaAnnual,
+        backgroundColor: CHINA,
+        borderRadius: 3,
+        barPercentage: 0.85,
+        categoryPercentage: 0.8,
+      },
+      {
+        label: 'United States',
+        data: usAnnual,
+        backgroundColor: US,
+        borderRadius: 3,
+        barPercentage: 0.85,
+        categoryPercentage: 0.8,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.2,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        ticks: {
+          callback: v => fmtK(v) + ' mi',
+          font: { family: monoFont, size: 11 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+      },
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 11 } },
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const us = usAnnual[ctx.dataIndex];
+            const cn = chinaAnnual[ctx.dataIndex];
+            if (ctx.datasetIndex === 1) {
+              if (us <= 0) return ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' mi (net shrinkage)';
+              const ratio = Math.round(cn / us);
+              return ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' mi  (ratio: ' + ratio + ':1)';
+            }
+            return ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' mi';
+          }
+        }
+      }
+    }
+  }
+});
+
+// ── 3. Voltage Breakdown — Miles ──
+const vColors = {
+  '220/230 kV': '#64748B',
+  '330/345 kV': '#0EA5E9',
+  '500 kV':     '#3B82F6',
+  '750/765 kV': '#8B5CF6',
+  '±800kV DC':  '#EC4899',
+  '1000kV AC':  '#F97316',
+  '±1100kV DC': '#EAB308',
+  'HVDC ≤500kV':'#14B8A6',
+};
+
+const voltageLabels = Object.keys(vColors);
+let voltageMilesChina = [346000, 31100, 173900, 12400, 18600, 6200, 2050, 0];
+let voltageMilesUS    = [88650, 65508, 28534, 2410, 0, 0, 0, 1521];
+
+const voltageMilesChart = new Chart(document.getElementById('voltageMilesChart'), {
+  type: 'bar',
+  data: {
+    labels: ['China', 'US'],
+    datasets: voltageLabels.map((label, i) => ({
+      label,
+      data: [voltageMilesChina[i], voltageMilesUS[i]],
+      backgroundColor: Object.values(vColors)[i],
+      borderRadius: 2,
+    }))
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 1.6,
+    scales: {
+      x: {
+        stacked: true,
+        ticks: {
+          callback: v => fmtK(v),
+          font: { family: monoFont, size: 10 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+        title: { display: true, text: 'Miles', color: '#64748B', font: { size: 11 } },
+      },
+      y: {
+        stacked: true,
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 12 } },
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + fmtFull(ctx.parsed.x) + ' mi',
+        }
+      }
+    }
+  }
+});
+
+// ── 4. Voltage Breakdown — GW·Miles (Thermal) ──
+// Capacity ratings: thermal for AC lines, design capacity for HVDC
+// AC thermal: 220/230kV=0.6GW, 330kV=1.0GW, 345kV=1.5GW, 500kV=2.7GW, 750/765kV=4.5GW, 1000kV=6.0GW
+// DC ratings: ±800kV=8.0GW avg, ±1100kV=12.0GW (design), HVDC≤500kV=2.5GW avg
+// US miles from HIFLD geospatial data (Feb 2026). China miles from CEC extrapolation.
+let gwMilesChina = [207600, 31100, 469500, 55800, 148800, 37200, 24600, 0];
+let gwMilesUS    = [53190, 98262, 77042, 10845, 0, 0, 0, 3802];
+
+const voltageGwChart = new Chart(document.getElementById('voltageGwChart'), {
+  type: 'bar',
+  data: {
+    labels: ['China', 'US'],
+    datasets: voltageLabels.map((label, i) => ({
+      label,
+      data: [gwMilesChina[i], gwMilesUS[i]],
+      backgroundColor: Object.values(vColors)[i],
+      borderRadius: 2,
+    }))
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 1.6,
+    scales: {
+      x: {
+        stacked: true,
+        ticks: {
+          callback: v => fmtK(v),
+          font: { family: monoFont, size: 10 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+        title: { display: true, text: 'GW·Miles', color: '#64748B', font: { size: 11 } },
+      },
+      y: {
+        stacked: true,
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 12 } },
+      }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + fmtFull(ctx.parsed.x) + ' GW·mi',
+        }
+      }
+    }
+  }
+});
+
+// ── 5. UHV Growth (with miles/GW·mi toggle) ──
+// CEC official (km→mi): 2012=5953→3700, 2014=13243→8230, 2016=19666→12220, 2018=33336→20720, 2019=36074→22420. CCTV 2025: 50000→31070
+// GW·mi thermal: China UHV avg ≈7.5 GW (weighted ±800kV DC @ 8GW + 1000kV AC @ 6GW). US 765kV @ 4.5 GW. PDCI @ 3.1 GW.
+let uhvMilesChina = [3700, 8230, 12220, 20720, 22420, 31070];
+// US combined: 765kV AC (2,600 mi, all 1960s–80s AEP system) + Pacific DC Intertie (846 mi, ±500kV, 3.1 GW, 1970)
+let uhvMilesUS    = [3446, 3446, 3446, 3446, 3446, 3446];
+let uhvGwMiChina  = uhvMilesChina.map(v => Math.round(v * 7.5));
+// GW·mi: 765kV @ 4.5 GW (2,600 mi) + PDCI @ 3.1 GW (846 mi) = 11,700 + 2,623 = 14,323 per year
+let uhvGwMiUS     = uhvMilesUS.map(() => 14323);
+let uhvLabels     = [2012, 2014, 2016, 2018, 2019, 2025];
+
+const uhvChart = new Chart(document.getElementById('uhvChart'), {
+  type: 'line',
+  data: {
+    labels: uhvLabels,
+    datasets: [
+      {
+        label: 'China UHV (CEC/CCTV official)',
+        data: [...uhvMilesChina],
+        borderColor: CHINA,
+        backgroundColor: CHINA_BG,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 2.5,
+      },
+      {
+        label: 'US (765kV AC + Pacific DC Intertie)',
+        data: [...uhvMilesUS],
+        borderColor: US,
+        backgroundColor: 'transparent',
+        borderDash: [8, 4],
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        borderWidth: 2,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.2,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: v => fmtK(v) + ' mi',
+          font: { family: monoFont, size: 11 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+      },
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 11 } },
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' miles',
+        }
+      }
+    }
+  }
+});
+
+let uhvMode = 'miles';
+function setUhvMode(mode) {
+  uhvMode = mode;
+  const isMi = mode === 'miles';
+  const unit = isMi ? 'mi' : 'GW·mi';
+  const unitLong = isMi ? 'miles' : 'GW·mi';
+
+  uhvChart.data.datasets[0].data = [...(isMi ? uhvMilesChina : uhvGwMiChina)];
+  uhvChart.data.datasets[1].data = [...(isMi ? uhvMilesUS : uhvGwMiUS)];
+  uhvChart.options.scales.y.ticks.callback = v => fmtK(v) + ' ' + unit;
+  uhvChart.options.plugins.tooltip.callbacks.label = ctx =>
+    ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' ' + unitLong;
+  uhvChart.update();
+
+  document.getElementById('uhvToggleMi').classList.toggle('active', isMi);
+  document.getElementById('uhvToggleGw').classList.toggle('active', !isMi);
+}
+
+// ── 6. Grid Investment (IEA WEI 2024, p.78 chart + p.80 text) ──
+// 2023 figures: China $80B, US $100B per IEA WEI 2024 p.80
+// US total includes T&D reliability upgrades + new construction (IEA definition)
+let investmentLabels = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+let investmentChina = [65, 68, 73, 75, 72, 70, 73, 78, 80, 85];
+let investmentUS = [42, 47, 50, 55, 58, 60, 65, 75, 100, 105];
+
+const investmentChart = new Chart(document.getElementById('investmentChart'), {
+  type: 'bar',
+  data: {
+    labels: investmentLabels,
+    datasets: [
+      {
+        label: 'China (SGCC + CSG)',
+        data: investmentChina,
+        backgroundColor: CHINA,
+        borderRadius: 3,
+        barPercentage: 0.8,
+        categoryPercentage: 0.75,
+      },
+      {
+        label: 'United States (all utilities)',
+        data: investmentUS,
+        backgroundColor: US,
+        borderRadius: 3,
+        barPercentage: 0.8,
+        categoryPercentage: 0.75,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.2,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: v => '$' + v + 'B',
+          font: { family: monoFont, size: 11 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+      },
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 11 } },
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y + 'B',
+          afterBody: (items) => {
+            if (items[0] && items[0].dataIndex === 8) return '  ← 2023: US $100B built ~450 mi new HV';
+            return '';
+          }
+        }
+      }
+    }
+  }
+});
+
+function updateTransmissionMetricCards() {
+  const heroChina = cumulativeChinaMiles[cumulativeChinaMiles.length - 1];
+  const heroUS = cumulativeUSMiles[cumulativeUSMiles.length - 1];
+  if (Number.isFinite(heroChina) && Number.isFinite(heroUS) && heroUS > 0) {
+    setTextById('hero-china-miles', formatMiles(heroChina));
+    setTextById('hero-us-miles', formatMiles(heroUS));
+    setTextById('hero-ratio', (heroChina / heroUS).toFixed(1) + '×');
+  }
+
+  const chinaBuild = chinaAnnual.reduce((sum, v) => sum + v, 0);
+  const usBuild = usAnnual.reduce((sum, v) => sum + v, 0);
+  if (usBuild > 0) {
+    setTextById('metric-cumulative-ratio', (chinaBuild / usBuild).toFixed(1) + '×');
+    setTextById(
+      'metric-cumulative-detail',
+      'China +' + formatMiles(roundTo(chinaBuild, 1000)) + ' mi vs US +' + formatMiles(roundTo(usBuild, 100)) + ' mi (net)'
+    );
+    setTextById('construction-callout-ratio', '~' + Math.round(chinaBuild / usBuild) + ':1');
+    setTextById('construction-callout-china-total', '~' + formatMiles(roundTo(chinaBuild, 1000)));
+    setTextById('construction-callout-us-total', '~' + formatMiles(roundTo(usBuild, 100)));
+  }
+
+  const y2023 = annualLabels.indexOf(2023);
+  if (y2023 >= 0) {
+    const us2023 = usAnnual[y2023];
+    const cn2023 = chinaAnnual[y2023];
+    if (us2023 <= 0) {
+      setTextById('metric-peak-ratio', formatMiles(us2023) + ' mi');
+      setTextById('metric-peak-detail', 'US 230kV+ shrank; China added ~' + formatMiles(roundTo(cn2023, 50)) + ' mi');
+      setTextById('metric-paradox-value', '$100B → ' + formatMiles(us2023) + ' mi');
+      setTextById('metric-paradox-detail', 'US spent more on grids than China, yet HV network shrank');
+    } else {
+      const peakRatio = cn2023 / us2023;
+      setTextById('metric-peak-ratio', Math.round(peakRatio) + ':1');
+      setTextById('metric-peak-detail', 'US +' + formatMiles(us2023) + ' mi; China +' + formatMiles(roundTo(cn2023, 50)) + ' mi');
+      setTextById('metric-paradox-value', '$100B → ' + formatMiles(us2023) + ' mi');
+      setTextById('metric-paradox-detail', 'US spent more on grids, built a fraction of China\'s output');
+    }
+  }
+
+  // ── New-build thermal GW·mi for cumulative build card ──
+  // China avg: 2.19 GW/km (3.52 GW/mi) from CEC 2012-2019 voltage-class additions
+  //   (220kV×0.6 + 330kV×1.0 + 500kV×2.7 + 750kV×4.5 + 1000kV×6.0 + ±800kV×8.0 + ±1100kV×12.0)
+  //   weighted by km added each class → 542,408 GW·km / 247,802 km = 2.19 GW/km
+  // US avg: 1.30 GW/mi from HIFLD total system (243,141 GW·mi / 186,623 mi)
+  const CHINA_NEW_BUILD_GW_PER_MI = 3.52;
+  const US_NEW_BUILD_GW_PER_MI = 1.30;
+  if (usBuild > 0) {
+    const chinaBuildGwMi = chinaBuild * CHINA_NEW_BUILD_GW_PER_MI;
+    const usBuildGwMi = usBuild * US_NEW_BUILD_GW_PER_MI;
+    const buildGwRatio = chinaBuildGwMi / usBuildGwMi;
+    setTextById(
+      'metric-thermal-detail',
+      'Thermal GW·mi: ~' + Math.round(chinaBuildGwMi / 1000) + 'K vs ~' + Math.round(usBuildGwMi / 1000) + 'K (~' + Math.round(buildGwRatio) + '×)'
+    );
+  }
+
+  // ── Total system thermal GW·mi for voltage breakdown chart callout ──
+  const chinaThermal = gwMilesChina.reduce((sum, v) => sum + v, 0);
+  const usThermal = gwMilesUS.reduce((sum, v) => sum + v, 0);
+  if (usThermal > 0) {
+    const thermalRatio = chinaThermal / usThermal;
+    setTextById('voltage-callout-ratio', thermalRatio.toFixed(1) + '×');
+    setTextById('voltage-callout-china', Math.round(chinaThermal / 1000) + 'K');
+    setTextById('voltage-callout-us', Math.round(usThermal / 1000) + 'K');
+    const idx500 = voltageLabels.indexOf('500 kV');
+    if (idx500 >= 0) setTextById('voltage-callout-500kv', formatMiles(gwMilesChina[idx500]));
+  }
+}
+
+function refreshTransmissionCharts() {
+  cumulativeChart.data.labels = cumulativeLabels;
+  cumulativeChart.data.datasets[0].data = cumulativeChinaMiles;
+  cumulativeChart.data.datasets[1].data = cumulativeUSMiles;
+  cumulativeChart.update();
+
+  annualChart.data.labels = annualLabels;
+  annualChart.data.datasets[0].data = chinaAnnual;
+  annualChart.data.datasets[1].data = usAnnual;
+  annualChart.update();
+
+  voltageMilesChart.data.datasets.forEach((dataset, i) => {
+    dataset.data = [voltageMilesChina[i], voltageMilesUS[i]];
+  });
+  voltageMilesChart.update();
+
+  voltageGwChart.data.datasets.forEach((dataset, i) => {
+    dataset.data = [gwMilesChina[i], gwMilesUS[i]];
+  });
+  voltageGwChart.update();
+
+  investmentChart.data.labels = investmentLabels;
+  investmentChart.data.datasets[0].data = investmentChina;
+  investmentChart.data.datasets[1].data = investmentUS;
+  investmentChart.update();
+
+  uhvChart.data.labels = uhvLabels;
+  setUhvMode(uhvMode);
+
+  updateTransmissionMetricCards();
+}
+
+function applyTransmissionJsonData(jsonData) {
+  const chartData = jsonData?.chart_ready_data;
+  const annualRates = jsonData?.annual_construction_rates;
+  const comparisonRows = Array.isArray(jsonData?.construction_rate_comparison_km_per_year?.data)
+    ? jsonData.construction_rate_comparison_km_per_year.data
+    : [];
+
+  const cumulative = chartData?.cumulative_hv_transmission_km;
+  if (
+    Array.isArray(cumulative?.labels) &&
+    Array.isArray(cumulative?.china_220kv_plus) &&
+    Array.isArray(cumulative?.us_230kv_plus) &&
+    cumulative.labels.length === cumulative.china_220kv_plus.length &&
+    cumulative.labels.length === cumulative.us_230kv_plus.length
+  ) {
+    const nextLabels = cumulative.labels.map(Number);
+    const nextChina = cumulative.china_220kv_plus.map(v => Math.round(toMiles(Number(v))));
+    const nextUS = cumulative.us_230kv_plus.map(v => Math.round(toMiles(Number(v))));
+    if (nextLabels.every(Number.isFinite) && nextChina.every(Number.isFinite) && nextUS.every(Number.isFinite)) {
+      cumulativeLabels = nextLabels;
+      cumulativeChinaMiles = nextChina;
+      cumulativeUSMiles = nextUS;
+    }
+  }
+
+  const voltageMiles = chartData?.voltage_breakdown_miles;
+  if (
+    Array.isArray(voltageMiles?.labels) &&
+    Array.isArray(voltageMiles?.china) &&
+    Array.isArray(voltageMiles?.us) &&
+    voltageMiles.labels.length === voltageLabels.length &&
+    voltageMiles.china.length === voltageLabels.length &&
+    voltageMiles.us.length === voltageLabels.length
+  ) {
+    const labelsMatch = voltageMiles.labels.every((label, i) => String(label) === voltageLabels[i]);
+    const nextChina = voltageMiles.china.map(Number);
+    const nextUS = voltageMiles.us.map(Number);
+    if (labelsMatch && nextChina.every(Number.isFinite) && nextUS.every(Number.isFinite)) {
+      voltageMilesChina = nextChina;
+      voltageMilesUS = nextUS;
+    }
+  }
+
+  const voltageThermal = chartData?.voltage_breakdown_thermal_gw_miles;
+  if (
+    Array.isArray(voltageThermal?.labels) &&
+    Array.isArray(voltageThermal?.china) &&
+    Array.isArray(voltageThermal?.us) &&
+    voltageThermal.labels.length === voltageLabels.length &&
+    voltageThermal.china.length === voltageLabels.length &&
+    voltageThermal.us.length === voltageLabels.length
+  ) {
+    const labelsMatch = voltageThermal.labels.every((label, i) => String(label) === voltageLabels[i]);
+    const nextChina = voltageThermal.china.map(Number);
+    const nextUS = voltageThermal.us.map(Number);
+    if (labelsMatch && nextChina.every(Number.isFinite) && nextUS.every(Number.isFinite)) {
+      gwMilesChina = nextChina;
+      gwMilesUS = nextUS;
+    }
+  }
+
+  // US annual data: hardcoded FERC Form 1 230kV+ net change is authoritative.
+  // JSON file has 345kV+ Grid Strategies data — do NOT override US values from JSON.
+  // China annual data: CEC 220kV+ from JSON is fine to override.
+  const chinaByYearKm = new Map();
+  const chinaEarlyByYearKm = new Map();
+
+  if (Array.isArray(annualRates?.china?.data)) {
+    annualRates.china.data.forEach(row => {
+      const year = Number(row.period);
+      const km = Number(row.km_added);
+      if (Number.isFinite(year) && Number.isFinite(km)) chinaByYearKm.set(year, km);
+    });
+  }
+  comparisonRows.forEach(row => {
+    const year = Number(row.year);
+    const chinaKm = Number(row.china_km);
+    if (Number.isFinite(year) && Number.isFinite(chinaKm)) chinaEarlyByYearKm.set(year, chinaKm);
+  });
+
+  const nextAnnualLabels = Array.from({ length: 15 }, (_, i) => 2010 + i);
+  const nextChinaAnnual = nextAnnualLabels.map((year, idx) => {
+    if (chinaByYearKm.has(year)) return Math.round(toMiles(chinaByYearKm.get(year)));
+    if (chinaEarlyByYearKm.has(year)) return Math.round(toMiles(chinaEarlyByYearKm.get(year)));
+    return chinaAnnual[idx];
+  });
+  // US values stay as hardcoded FERC Form 1 230kV+ data
+  if (nextChinaAnnual.every(Number.isFinite)) {
+    annualLabels = nextAnnualLabels;
+    chinaAnnual = nextChinaAnnual;
+  }
+
+  const uhv = chartData?.uhv_cumulative_km;
+  if (
+    Array.isArray(uhv?.labels) &&
+    Array.isArray(uhv?.china_uhv) &&
+    Array.isArray(uhv?.us_765kv) &&
+    uhv.labels.length === uhv.china_uhv.length &&
+    uhv.labels.length === uhv.us_765kv.length
+  ) {
+    const PDCI_MILES = 846;  // Pacific DC Intertie, constant (built 1970)
+    const PDCI_GW = 3.1;
+    const nextUhvLabels = uhv.labels.map(Number);
+    const nextUhvChinaMiles = uhv.china_uhv.map(v => Math.round(toMiles(Number(v))));
+    const nextUhv765Miles = uhv.us_765kv.map(v => Math.round(toMiles(Number(v))));
+    if (nextUhvLabels.every(Number.isFinite) && nextUhvChinaMiles.every(Number.isFinite) && nextUhv765Miles.every(Number.isFinite)) {
+      uhvLabels = nextUhvLabels;
+      uhvMilesChina = nextUhvChinaMiles;
+      uhvMilesUS = nextUhv765Miles.map(v => v + PDCI_MILES);  // combine 765kV + PDCI
+      uhvGwMiChina = uhvMilesChina.map(v => Math.round(v * 7.5));
+      uhvGwMiUS = nextUhv765Miles.map(v => Math.round(v * 4.5 + PDCI_MILES * PDCI_GW));  // weighted GW·mi
+    }
+  }
+
+  const investment = chartData?.grid_investment_billion_usd;
+  if (
+    Array.isArray(investment?.labels) &&
+    Array.isArray(investment?.china) &&
+    Array.isArray(investment?.us) &&
+    investment.labels.length === investment.china.length &&
+    investment.labels.length === investment.us.length
+  ) {
+    const nextLabels = investment.labels.map(Number);
+    const nextChina = investment.china.map(Number);
+    const nextUS = investment.us.map(Number);
+    if (nextLabels.every(Number.isFinite) && nextChina.every(Number.isFinite) && nextUS.every(Number.isFinite)) {
+      investmentLabels = nextLabels;
+      investmentChina = nextChina;
+      investmentUS = nextUS;
+    }
+  }
+}
+
+async function loadTransmissionDataFromJson() {
+  try {
+    const response = await fetch('./transmission-infrastructure-comparison.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const jsonData = await response.json();
+    applyTransmissionJsonData(jsonData);
+    refreshTransmissionCharts();
+  } catch (err) {
+    console.warn('Using embedded transmission data; JSON fetch failed.', err);
+  }
+}
+
+updateTransmissionMetricCards();
+loadTransmissionDataFromJson();
+
+// ── 7. Generation Buildout — Capacity Additions ──
+const buildoutYears = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+const FUEL = {
+  coal:    '#64748B',
+  gas:     '#F97316',
+  nuclear: '#8B5CF6',
+  wind:    '#06B6D4',
+  solar:   '#EAB308',
+};
+
+const chinaCoal    = [52, 48, 40, 33, 42, 38, 26.2, 26.8, 47.4, 30.5];
+const chinaGas     = [5, 6, 6, 6, 6, 6, 7, 8, 9, 10];
+const chinaNuclear = [8.6, 7.2, 3.2, 8.8, 4.1, 2.2, 3.4, 1.2, 1.2, 3.5];
+const chinaWind    = [30.8, 23.3, 19.7, 21.1, 26.2, 71.7, 47.6, 49.8, 75.9, 79.8];
+const chinaSolar   = [15.1, 34.5, 53.0, 44.4, 30.1, 48.2, 53.0, 87.4, 216.9, 277.2];
+
+const usCoal    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const usGas     = [6.3, 8.0, 11.6, 18.0, 8.0, 9.0, 6.6, 5.6, 8.6, 2.1];
+const usNuclear = [0, 1.2, 0, 0, 0, 0, 0, 0, 1.1, 1.1];
+const usWind    = [8.6, 8.2, 7.0, 7.6, 9.1, 16.9, 13.4, 8.5, 6.4, 4.2];
+const usSolar   = [7.5, 14.8, 10.6, 10.6, 13.3, 19.2, 26.8, 20.2, 32.4, 50.0];
+
+function makeCapacityDatasets(coal, gas, nuclear, wind, solar) {
+  return [
+    { label: 'Coal', data: coal, backgroundColor: FUEL.coal, borderRadius: 2 },
+    { label: 'Natural Gas', data: gas, backgroundColor: FUEL.gas, borderRadius: 2 },
+    { label: 'Nuclear', data: nuclear, backgroundColor: FUEL.nuclear, borderRadius: 2 },
+    { label: 'Wind', data: wind, backgroundColor: FUEL.wind, borderRadius: 2 },
+    { label: 'Solar', data: solar, backgroundColor: FUEL.solar, borderRadius: 2 },
+  ];
+}
+
+const capacityOpts = (maxY) => ({
+  responsive: true,
+  maintainAspectRatio: true,
+  aspectRatio: 1.2,
+  interaction: { intersect: false, mode: 'index' },
+  scales: {
+    x: {
+      stacked: true,
+      grid: { display: false },
+      ticks: { font: { family: monoFont, size: 10 }, maxRotation: 45 },
+    },
+    y: {
+      stacked: true,
+      beginAtZero: true,
+      max: maxY,
+      ticks: {
+        callback: v => v + ' GW',
+        font: { family: monoFont, size: 10 },
+      },
+      grid: { color: 'rgba(148,163,184,0.06)' },
+    }
+  },
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      callbacks: {
+        label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' GW',
+        afterBody: (items) => {
+          const total = items.reduce((s, i) => s + i.parsed.y, 0);
+          return '  Total: ' + total.toFixed(1) + ' GW';
+        }
+      }
+    }
+  }
+});
+
+new Chart(document.getElementById('chinaCapacityChart'), {
+  type: 'bar',
+  data: { labels: buildoutYears, datasets: makeCapacityDatasets(chinaCoal, chinaGas, chinaNuclear, chinaWind, chinaSolar) },
+  options: capacityOpts(420),
+});
+
+new Chart(document.getElementById('usCapacityChart'), {
+  type: 'bar',
+  data: { labels: buildoutYears, datasets: makeCapacityDatasets(usCoal, usGas, usNuclear, usWind, usSolar) },
+  options: capacityOpts(420),
+});
+
+// ── 8. Resource Comparison (dropdown + GW/TWh toggle) ──
+
+// Capacity factors for estimating first-year TWh from new capacity
+// TWh Added = GW × CF × 8.76 (hours in year / 1000)
+const CF = {
+  china: { coal: 0.52, gas: 0.35, nuclear: 0.87, wind: 0.24, solar: 0.16 },
+  us:    { coal: 0.50, gas: 0.42, nuclear: 0.92, wind: 0.35, solar: 0.25 },
+};
+function twhAdded(gwArr, cf) { return gwArr.map(gw => +(gw * cf * 8.76).toFixed(1)); }
+
+// TWh Added per fuel (estimated annual output from that year's new capacity)
+const chinaSolarTwhA   = twhAdded(chinaSolar,   CF.china.solar);
+const chinaWindTwhA    = twhAdded(chinaWind,    CF.china.wind);
+const chinaNuclearTwhA = twhAdded(chinaNuclear, CF.china.nuclear);
+const chinaCoalTwhA    = twhAdded(chinaCoal,    CF.china.coal);
+const chinaGasTwhA     = twhAdded(chinaGas,     CF.china.gas);
+
+const usSolarTwhA   = twhAdded(usSolar,   CF.us.solar);
+const usWindTwhA    = twhAdded(usWind,    CF.us.wind);
+const usNuclearTwhA = twhAdded(usNuclear, CF.us.nuclear);
+const usCoalTwhA    = twhAdded(usCoal,    CF.us.coal);
+const usGasTwhA     = twhAdded(usGas,     CF.us.gas);
+
+const resourceGW = {
+  solar:   { china: chinaSolar,   us: usSolar,
+    insight: 'China installed 277 GW of solar in 2024 — 5.5× the US total. China\'s annual additions grew 18× since 2015.' },
+  wind:    { china: chinaWind,    us: usWind,
+    insight: 'US wind additions peaked at 16.9 GW in 2020 then collapsed to 4.2 GW by 2024. China held steady at 75–80 GW/yr.' },
+  nuclear: { china: chinaNuclear, us: usNuclear,
+    insight: 'The US completed just 3 reactors in the entire decade (Watts Bar 2, Vogtle 3 & 4). China averaged 4+ reactors per year.' },
+  coal:    { china: chinaCoal,    us: usCoal,
+    insight: 'The US added zero new coal capacity in the entire 2015–2024 period. China commissioned 384 GW — more than the entire US coal fleet.' },
+  gas:     { china: chinaGas,     us: usGas,
+    insight: 'Natural gas is the one category where the US and China are comparable in buildout, though US additions dropped to just 2.1 GW in 2024.' },
+  total:   {
+    china: buildoutYears.map((_, i) => chinaCoal[i] + chinaGas[i] + chinaNuclear[i] + chinaWind[i] + chinaSolar[i]),
+    us:    buildoutYears.map((_, i) => usCoal[i] + usGas[i] + usNuclear[i] + usWind[i] + usSolar[i]),
+    insight: 'China added ~400 GW in 2024 vs ~57 GW for the US — a 7:1 ratio. The gap has widened dramatically since 2020.' },
+};
+
+const resourceTWh = {
+  solar:   { china: chinaSolarTwhA,   us: usSolarTwhA,
+    insight: 'China\'s 2024 solar buildout adds ~388 TWh/yr of potential output vs ~110 TWh for the US — a 3.5× gap. China\'s single year of solar additions exceeds the output of the entire existing US solar fleet (304 TWh in 2024).' },
+  wind:    { china: chinaWindTwhA,    us: usWindTwhA,
+    insight: 'China\'s 2024 wind buildout adds ~168 TWh/yr — 13× the US figure of ~13 TWh. US wind additions have collapsed since 2020.' },
+  nuclear: { china: chinaNuclearTwhA, us: usNuclearTwhA,
+    insight: 'Nuclear yields the highest TWh per GW thanks to ~90% capacity factors. China\'s 2024 reactors add ~27 TWh/yr; the US added ~9 TWh with Vogtle 4.' },
+  coal:    { china: chinaCoalTwhA,    us: usCoalTwhA,
+    insight: 'The US added zero coal TWh in the entire decade. China\'s 2024 coal buildout alone adds ~139 TWh/yr — equivalent to Chile\'s total electricity consumption.' },
+  gas:     { china: chinaGasTwhA,     us: usGasTwhA,
+    insight: 'Gas plants added in the US yield more TWh per GW (42% CF vs 35%) but US additions collapsed to just 2.1 GW (~8 TWh/yr) in 2024.' },
+  total:   {
+    china: buildoutYears.map((_, i) => chinaCoalTwhA[i] + chinaGasTwhA[i] + chinaNuclearTwhA[i] + chinaWindTwhA[i] + chinaSolarTwhA[i]),
+    us:    buildoutYears.map((_, i) => usCoalTwhA[i] + usGasTwhA[i] + usNuclearTwhA[i] + usWindTwhA[i] + usSolarTwhA[i]),
+    insight: 'New plants built in 2024: China adds ~752 TWh/yr of potential output vs ~140 TWh for the US — a 5.4× gap in energy terms.' },
+};
+
+let currentMetricMode = 'gw'; // 'gw' or 'twh'
+let currentResourceKey = 'solar';
+
+const resourceCanvas = document.getElementById('resourceCompareChart');
+let resourceChart = null;
+
+// fuel order for stacked "all sources": coal on bottom, solar on top
+const fuelKeys   = ['coal', 'gas', 'nuclear', 'wind', 'solar'];
+const fuelLabels = ['Coal', 'Natural Gas', 'Nuclear', 'Wind', 'Solar'];
+const fuelColors = [FUEL.coal, FUEL.gas, FUEL.nuclear, FUEL.wind, FUEL.solar];
+// lighter versions for US side
+const fuelColorsUS = [
+  'rgba(100,116,139,0.55)',  // coal
+  'rgba(249,115,22,0.55)',   // gas
+  'rgba(139,92,246,0.55)',   // nuclear
+  'rgba(6,182,212,0.55)',    // wind
+  'rgba(234,179,8,0.55)',    // solar
+];
+
+function getGWByFuel(fuel, country) {
+  if (country === 'china') return { coal: chinaCoal, gas: chinaGas, nuclear: chinaNuclear, wind: chinaWind, solar: chinaSolar }[fuel];
+  return { coal: usCoal, gas: usGas, nuclear: usNuclear, wind: usWind, solar: usSolar }[fuel];
+}
+function getTWhByFuel(fuel, country) {
+  if (country === 'china') return { coal: chinaCoalTwhA, gas: chinaGasTwhA, nuclear: chinaNuclearTwhA, wind: chinaWindTwhA, solar: chinaSolarTwhA }[fuel];
+  return { coal: usCoalTwhA, gas: usGasTwhA, nuclear: usNuclearTwhA, wind: usWindTwhA, solar: usSolarTwhA }[fuel];
+}
+
+function buildStackedDatasets(mode) {
+  const getFn = mode === 'gw' ? getGWByFuel : getTWhByFuel;
+  const datasets = [];
+  // China fuels (solid colors)
+  fuelKeys.forEach((fuel, i) => {
+    datasets.push({
+      label: 'China · ' + fuelLabels[i],
+      data: getFn(fuel, 'china'),
+      backgroundColor: fuelColors[i],
+      borderRadius: 2,
+      stack: 'China',
+      barPercentage: 0.9,
+      categoryPercentage: 0.8,
+    });
+  });
+  // US fuels (lighter colors + border)
+  fuelKeys.forEach((fuel, i) => {
+    datasets.push({
+      label: 'US · ' + fuelLabels[i],
+      data: getFn(fuel, 'us'),
+      backgroundColor: fuelColorsUS[i],
+      borderColor: fuelColors[i],
+      borderWidth: 1,
+      borderRadius: 2,
+      stack: 'US',
+      barPercentage: 0.9,
+      categoryPercentage: 0.8,
+    });
+  });
+  return datasets;
+}
+
+function buildSimpleDatasets(chinaData, usData) {
+  return [
+    { label: 'China', data: chinaData, backgroundColor: CHINA, borderRadius: 3, barPercentage: 0.85, categoryPercentage: 0.8 },
+    { label: 'United States', data: usData, backgroundColor: US, borderRadius: 3, barPercentage: 0.85, categoryPercentage: 0.8 },
+  ];
+}
+
+function createResourceChart(key, mode) {
+  if (resourceChart) resourceChart.destroy();
+  const isTotal = key === 'total';
+  const unit = mode === 'gw' ? 'GW' : 'TWh';
+  const source = mode === 'gw' ? resourceGW : resourceTWh;
+  const d = source[key];
+
+  const datasets = isTotal
+    ? buildStackedDatasets(mode)
+    : buildSimpleDatasets(d.china, d.us);
+
+  // compute max for y-axis
+  let maxVal;
+  if (isTotal) {
+    // sum stacks per year for China (the larger side)
+    const getFn = mode === 'gw' ? getGWByFuel : getTWhByFuel;
+    maxVal = buildoutYears.reduce((mx, _, i) => {
+      const chinaSum = fuelKeys.reduce((s, f) => s + getFn(f, 'china')[i], 0);
+      return Math.max(mx, chinaSum);
+    }, 0);
+  } else {
+    maxVal = Math.max(...d.china, ...d.us);
+  }
+  const step = maxVal > 2000 ? 1000 : maxVal > 500 ? 500 : maxVal > 100 ? 50 : 10;
+  const yMax = Math.ceil(maxVal * 1.12 / step) * step;
+
+  resourceChart = new Chart(resourceCanvas, {
+    type: 'bar',
+    data: { labels: buildoutYears, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      aspectRatio: 2.2,
+      interaction: { intersect: false, mode: 'index' },
+      scales: {
+        y: {
+          stacked: isTotal,
+          beginAtZero: true,
+          max: yMax,
+          ticks: {
+            callback: v => {
+              if (mode === 'twh' && v >= 1000) return (v / 1000).toFixed(v >= 10000 ? 0 : 1) + 'k TWh';
+              return v + ' ' + unit;
+            },
+            font: { family: monoFont, size: 11 },
+          },
+          grid: { color: 'rgba(148,163,184,0.06)' },
+        },
+        x: {
+          stacked: isTotal,
+          grid: { display: false },
+          ticks: { font: { family: monoFont, size: 11 } },
+        }
+      },
+      plugins: {
+        legend: isTotal ? {
+          display: true,
+          labels: {
+            filter: (item) => item.text.startsWith('China'),
+            generateLabels: (chart) => {
+              // show only 5 fuel labels (not 10)
+              return fuelKeys.map((_, i) => ({
+                text: fuelLabels[i],
+                fillStyle: fuelColors[i],
+                strokeStyle: fuelColors[i],
+                lineWidth: 0,
+                hidden: false,
+                index: i,
+                pointStyle: 'rectRounded',
+              }));
+            },
+            usePointStyle: true, pointStyleWidth: 10, padding: 12,
+            font: { size: 11 },
+          },
+        } : { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const val = mode === 'gw' ? ctx.parsed.y.toFixed(1) : Math.round(ctx.parsed.y).toLocaleString();
+              return ctx.dataset.label + ': ' + val + ' ' + unit;
+            },
+            afterBody: isTotal ? (items) => {
+              // sum China stack and US stack
+              const chinaSum = items.filter(i => i.dataset.stack === 'China').reduce((s, i) => s + i.parsed.y, 0);
+              const usSum = items.filter(i => i.dataset.stack === 'US').reduce((s, i) => s + i.parsed.y, 0);
+              const chinaStr = mode === 'gw' ? chinaSum.toFixed(0) : Math.round(chinaSum).toLocaleString();
+              const usStr = mode === 'gw' ? usSum.toFixed(0) : Math.round(usSum).toLocaleString();
+              let line = '\n  China total: ' + chinaStr + ' ' + unit + '\n  US total: ' + usStr + ' ' + unit;
+              if (usSum > 0) line += '\n  Ratio: ' + (chinaSum / usSum).toFixed(1) + '×';
+              return line;
+            } : (items) => {
+              if (items.length === 2) {
+                const a = items[0].parsed.y, b = items[1].parsed.y;
+                if (a > 0 && b > 0 && a >= b) return '  China/US ratio: ' + (a / b).toFixed(1) + '×';
+                if (a > 0 && b > 0 && b > a) return '  US/China ratio: ' + (b / a).toFixed(1) + '×';
+                if (b === 0 && a > 0) return '  US: zero';
+              }
+              return '';
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function updateResourceMeta(key) {
+  const source = currentMetricMode === 'gw' ? resourceGW : resourceTWh;
+  const d = source[key];
+  const unit = currentMetricMode === 'gw' ? 'GW' : 'TWh';
+  const chinaTotal = d.china.reduce((a, b) => a + b, 0);
+  const usTotal = d.us.reduce((a, b) => a + b, 0);
+  const ratioEl = document.getElementById('resourceRatio');
+  if (usTotal > 0 && chinaTotal >= usTotal) {
+    ratioEl.textContent = '10-yr total: ' + (chinaTotal / usTotal).toFixed(1) + '× China';
+  } else if (usTotal > 0 && chinaTotal < usTotal) {
+    ratioEl.textContent = '10-yr total: ' + (usTotal / chinaTotal).toFixed(1) + '× US';
+  } else if (usTotal === 0) {
+    ratioEl.textContent = 'US: 0 ' + unit + ' in 10 years';
+  } else {
+    ratioEl.textContent = '';
+  }
+  document.getElementById('resourceInsight').textContent = d.insight;
+}
+
+function updateResourceChart(key) {
+  currentResourceKey = key;
+  createResourceChart(key, currentMetricMode);
+  updateResourceMeta(key);
+}
+
+function setMetricMode(mode) {
+  currentMetricMode = mode;
+  document.getElementById('toggleGW').classList.toggle('active', mode === 'gw');
+  document.getElementById('toggleTWh').classList.toggle('active', mode === 'twh');
+  updateResourceChart(currentResourceKey);
+}
+
+document.getElementById('resourceSelect').addEventListener('change', (e) => {
+  updateResourceChart(e.target.value);
+});
+
+// initialize
+updateResourceChart('solar');
+
+// ── 9. TWh Generation Comparison ──
+const chinaTwh = [5740, 6023, 6417, 6995, 7327, 7624, 8534, 8849, 9456, 9880];
+const usTwh    = [4079, 4078, 4035, 4181, 4131, 4010, 4110, 4231, 4183, 4309];
+
+new Chart(document.getElementById('twhChart'), {
+  type: 'line',
+  data: {
+    labels: buildoutYears,
+    datasets: [
+      {
+        label: 'China',
+        data: chinaTwh,
+        borderColor: CHINA,
+        backgroundColor: CHINA_BG,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+      },
+      {
+        label: 'United States',
+        data: usTwh,
+        borderColor: US,
+        backgroundColor: US_BG,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2.2,
+    interaction: { intersect: false, mode: 'index' },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 11000,
+        ticks: {
+          callback: v => (v / 1000).toFixed(0) + 'k TWh',
+          font: { family: monoFont, size: 11 },
+        },
+        grid: { color: 'rgba(148,163,184,0.06)' },
+      },
+      x: {
+        grid: { display: false },
+        ticks: { font: { family: monoFont, size: 11 } },
+      }
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' TWh',
+          afterBody: (items) => {
+            if (items.length === 2) {
+              const ratio = (items[0].parsed.y / items[1].parsed.y).toFixed(1);
+              return '  Ratio: ' + ratio + '×';
+            }
+            return '';
+          }
+        }
+      }
+    }
+  }
+});
+
+// ── Scroll Reveal ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

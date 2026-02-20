@@ -1,0 +1,966 @@
+{
+  "title": "China vs United States: Transmission Infrastructure Comparison (2010-2025)",
+  "last_updated": "2026-02-19",
+  "data_sources": [
+    {
+      "id": "CEC",
+      "name": "China Electricity Council (CEC) Annual Power Statistics (电力统计年快报基本数据一览表)",
+      "via": "China Energy Portal (chinaenergyportal.org) — English translations by ANU Centre for Climate and Energy Policy",
+      "url": "https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/",
+      "url_all_years": "https://chinaenergyportal.org/en/2017-detailed-electricity-statistics-update-of-oct-2018/",
+      "coverage": "Voltage-class transmission line lengths 2012-2019; 220kV+ aggregates 2020-2021",
+      "authority": "Official CEC statistical compilation — primary source for China grid data by voltage class",
+      "downloaded": "CEC-electricity-statistics-2019.txt (full voltage-class breakdown), CEC-electricity-statistics-2020-preliminary.txt (220kV+ aggregates)"
+    },
+    {
+      "id": "CEC-Report-2025",
+      "name": "CEC Annual Development Report 2025 (中国电力行业年度发展报告2025)",
+      "url": "https://finance.sina.com.cn/stock/relnews/hk/2025-07-10/doc-infeytki3691600.shtml",
+      "date": "2025-07-10",
+      "authority": "China Electricity Council (CEC / 中国电力企业联合会)",
+      "key_figures": "End-2024: 35kV+ = 2,477,000 km (+1.7%); 220kV+ = 960,970 km (+3.5%); transformer 220kV+ = 578,067万千伏安 (+4.9%)",
+      "note": "Full text republished on Sina Finance. Sections 8-9 (investment, DC projects) are summarized only in this version."
+    },
+    {
+      "id": "CEC-Report-2023",
+      "name": "CEC Annual Development Report 2023 (中国电力行业年度发展报告2023)",
+      "url": "https://ideacarbon.org/news_free/59942/",
+      "date": "2023-07-11",
+      "authority": "China Electricity Council (CEC)",
+      "key_figures": "End-2022: 220kV+ = ~880,000 km (88万千米); 2022 AC 110kV+ additions = 60,170 km; DC additions = 2,223 km"
+    },
+    {
+      "id": "Ditan-BigData-2024",
+      "name": "China Energy Big Data Report 2024 (中国能源大数据报告2024)",
+      "url": "https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf",
+      "date": "2024-06",
+      "authority": "China Energy Media Research Institute (中能传媒研究院)",
+      "key_figures": "Complete 2014-2023 time series: 220kV+ transmission 578k→920k km; transformer capacity 30.9→54.0 亿千伏安; line loss rate 6.64%→4.54%; grid investment 527.5B CNY (2023)",
+      "downloaded": "Ditan_source.pdf",
+      "note": "94-page report. Chart 5-14 provides the authoritative 2014-2023 annual 220kV+ transmission line time series sourcing CEC data. Key text on p60: end-2023 exact = 92.05万千米."
+    },
+    {
+      "id": "NEA-EPPEI-2024",
+      "name": "China Electric Power Development Report 2024 (中国电力发展报告2024) via NEA",
+      "url": "https://www.nea.gov.cn/2024-07/19/c_1310783264.htm",
+      "date": "2024-07-19",
+      "authority": "Electric Power Planning & Engineering Institute (EPPEI) via NEA",
+      "key_figures": "End-2023: 220kV+ transmission line length ~920,000 km"
+    },
+    {
+      "id": "CET-2023",
+      "name": "Summary of China's Energy and Power Sector Statistics in 2023",
+      "url": "https://usercontent.one/wp/www.cet.energy/wp-content/uploads/2024/03/2024-03-CET_Summary-of-Chinas-Energy-and-Power-Sector-Statistics-in-2023.pdf",
+      "date": "2024-03",
+      "authority": "China Energy Transformation (CET) Programme",
+      "key_figures": "2023 generation capacity 2,920 GW, grid investment 527.5B CNY",
+      "downloaded": "CET-China-Energy-Power-Statistics-2023.pdf"
+    },
+    {
+      "id": "CCTV-UHV",
+      "name": "CCTV News — 14th FYP UHV Summary (央视新闻 · 特高压十四五总结)",
+      "url": "https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml",
+      "date": "2025-11-22",
+      "authority": "Official state media reporting government data",
+      "key_figures": "44 UHV lines, 50,000+ km, 380B CNY invested, 420B kWh clean energy (2024)"
+    },
+    {
+      "id": "NEA-2023",
+      "name": "National Energy Administration (NEA) 2023 Power Statistics Press Release (国家能源局)",
+      "url": "https://www.nea.gov.cn/2024-01/26/c_1310762246.htm",
+      "date": "2024-01-26",
+      "authority": "Official government agency",
+      "key_figures": "2023 grid investment 527.5B CNY (+5.4% YoY)"
+    },
+    {
+      "id": "NANPUDIAN",
+      "name": "Nanpudian — UHV Project Tracker & 15th FYP Analysis (南普电)",
+      "url": "https://www.nanpudian.com/media_coverage/497.html",
+      "date": "2025-02-08",
+      "authority": "Energy industry analysis citing official SGCC/NEA data",
+      "key_figures": "40 lines (Nov 2024), SGCC 36 projects / 48,000 km, CSG 4 projects / 6,235 km"
+    },
+    {
+      "id": "IEA-WEI-2024",
+      "name": "IEA World Energy Investment 2024",
+      "url": "https://www.iea.org/reports/world-energy-investment-2024",
+      "key_pages": "p.78 (grid investment by geography chart), p.80 (China $80B, US $100B text)",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "IEA-GRIDS-2023",
+      "name": "IEA Electricity Grids and Secure Energy Transitions (2023)",
+      "url": "https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions",
+      "key_pages": "p.17 (transmission by country, 'half a million km'), p.18 (US 3% expansion, HVDC), p.20 (SGCC $75B budget, $22B UHV), p.28 (710,000 km built in decade)",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "GRID-STRATEGIES",
+      "name": "Grid Strategies LLC — Fewer New Miles: The US Transmission Grid in the 2020s",
+      "url": "https://cleanenergygrid.org/transmission-projects-ready-to-go/",
+      "date": "2024-07",
+      "key_pages": "p.4 (55 miles in 2023, Figure 1 annual chart at 345kV+)",
+      "note": "Source for FERC Energy Infrastructure Updates analysis. Does NOT contain 888-mile 2024 figure."
+    },
+    {
+      "id": "DOE-NEEDS-2023",
+      "name": "DOE National Transmission Needs Study (Oct 2023)",
+      "url": "https://www.energy.gov/gdo/national-transmission-needs-study",
+      "key_pages": "p.iii (3,300 circuit-mi/yr avg at 100kV+), Table VI-3 p.123 (85.6 TW-mi existing US system), Table VI-2 p.122 (AC line capacity ratings)"
+    },
+    {
+      "id": "DOE-FACTSHEET",
+      "name": "DOE Grid Deployment Office Fact Sheet (Oct 2023)",
+      "url": "https://www.energy.gov/gdo/grid-deployment-office"
+    },
+    {
+      "id": "EIA",
+      "name": "US EIA Electric Power Annual",
+      "url": "https://www.eia.gov/electricity/annual/"
+    },
+    {
+      "id": "NERC-LTRA",
+      "name": "NERC Long-Term Reliability Assessment 2025",
+      "url": "https://www.nerc.com/pa/RAPA/ra/Pages/default.aspx"
+    },
+    {
+      "id": "NREL-NTP",
+      "name": "NREL National Transmission Planning Study (2024)",
+      "url": "https://www.nrel.gov/analysis/national-transmission-planning-study.html"
+    }
+  ],
+  "notes_on_methodology": [
+    "China data: 220kV and above is the standard threshold for 'transmission' (vs distribution). Some sources report 110kV+, which inflates totals.",
+    "China voltage-class data (2012-2019): From CEC annual Power Statistics Quick Report (电力统计年快报), translated by China Energy Portal (chinaenergyportal.org). These are official CEC figures. See 'cec_voltage_class_data' section.",
+    "China 220kV+ aggregates (2020-2024): 2020-2021 from CEC via China Energy Portal. 2022: ~880,000 km from CEC Annual Development Report 2023 ('88万千米'). 2023 confirmed at 919,667 km (CEIC Data/CEC; corroborated by NEA EPPEI report '约92万千米'). 2024 confirmed at 960,970 km per CEC Annual Development Report 2025 (中国电力行业年度发展报告2025, published Jul 10 2025: '220千伏及以上输电线路长度960970千米，同比增长3.5%').",
+    "China UHV totals: CCTV state media (Nov 22, 2025) reports 44 operational lines totaling 50,000+ km. Nanpudian (Feb 2025) gives SGCC/CSG split.",
+    "US data: 230kV and above is the standard threshold for 'high-voltage transmission'. Total 'transmission' (100kV+) is ~240,000 miles. Total circuit miles including all voltages is ~700,000.",
+    "US annual construction (345kV+): 2023 revised to ~450 mi (FERC Jul 2025 revision via Grid Strategies Rev.1 addendum). 2024 confirmed at 888 mi (334 mi at 345kV + 554 mi at 500kV) per FERC Energy Infrastructure Update April 2025, confirmed by Grid Strategies Rev.1 addendum p.16.",
+    "US existing system: 85.6 TW-mi per DOE Needs Study Table VI-3 (p.123), not 75 TW-mi (which was a visual estimate from the Fact Sheet chart).",
+    "GW-miles/TW-km: Uses SIL for AC, design capacity for HVDC. US total calibrated to DOE's 85.6 TW-mi.",
+    "Investment: IEA WEI 2024 (p.80) definition = all T&D capital expenditure. China grid investment also available in CNY from NEA: 527.5B CNY for 2023. SGCC plans 650B CNY for 2025.",
+    "1 mile = 1.609 km for conversions."
+  ],
+
+  "system_overview": {
+    "china": {
+      "total_transmission_network_km": {
+        "2014": 578000,
+        "2015": 608000,
+        "2016": 646000,
+        "2017": 686000,
+        "2018": 725000,
+        "2019": 759000,
+        "2020": 812000,
+        "2021": 843000,
+        "2022": 882000,
+        "2023": 920500,
+        "2024": 960970,
+        "note": "220kV and above circuit-km. 2014-2023 from China Energy Big Data Report 2024 (中国能源大数据报告2024, published June 2024 by 中能传媒研究院), Chart 5-14 '2014~2023年220千伏及以上输电线路回路长度及增速'. Values are CEC's published aggregates in 万千米, converted to km. 2023 exact: 920,500 km (text states '92.05万千米'). 2024 exact: 960,970 km per CEC Annual Development Report 2025. Note: earlier dataset (pre-correction) used computed sums of individual AC voltage classes which undercounted by 5-8% vs CEC's published 220kV+ aggregate.",
+        "source": "China Energy Big Data Report 2024 (Ditan_source.pdf) Chart 5-14; 2024 from CEC Annual Development Report 2025"
+      },
+      "total_grid_all_voltages_km": {
+        "2013": 1554236,
+        "2014": 1628472,
+        "2015": 1696849,
+        "2016": 1756141,
+        "2017": 1825611,
+        "2018": 1892018,
+        "2019": 1975312,
+        "2023": 2425000,
+        "2024": 2477000,
+        "note": "All voltage levels 35kV and above, circuit-km. 2013-2019 from CEC official statistics via China Energy Portal. 2023: 242.5万千米 per SASAC article (Nov 2024). 2024: 247.7万千米 per CEC Annual Development Report 2025 (+1.7% YoY).",
+        "source": "CEC (电力统计年快报) via chinaenergyportal.org; 2023-2024 from CEC Annual Development Reports"
+      }
+    },
+    "united_states": {
+      "total_transmission_network_miles": {
+        "note": "High-voltage transmission at 230kV and above.",
+        "2010": 170000,
+        "2012": 173000,
+        "2015": 178000,
+        "2018": 181000,
+        "2020": 183000,
+        "2022": 184000,
+        "2023": 184500,
+        "2024": 185000
+      },
+      "total_transmission_network_km": {
+        "note": "Converted from miles (x1.609). 230kV and above.",
+        "2010": 273500,
+        "2012": 278400,
+        "2015": 286400,
+        "2018": 291200,
+        "2020": 294500,
+        "2022": 296000,
+        "2023": 296800,
+        "2024": 297700
+      },
+      "total_all_voltages_miles": {
+        "note": "All transmission voltages 100kV+, as reported by EIA.",
+        "value": 240000,
+        "year": 2024
+      },
+      "total_circuit_miles_all_voltages": {
+        "note": "Total circuit miles including all voltage levels (EIA).",
+        "value": 700000,
+        "year": 2024
+      }
+    }
+  },
+
+  "annual_construction_rates": {
+    "china": {
+      "unit": "km per year (220kV and above)",
+      "data": [
+        { "period": "2013", "km_added": 35159, "note": "CEC official: computed from voltage-class totals (523,908 - 488,749)", "source": "CEC via chinaenergyportal.org" },
+        { "period": "2014", "km_added": 28714, "note": "CEC official: (552,622 - 523,908)", "source": "CEC" },
+        { "period": "2015", "km_added": 31063, "note": "CEC official: (583,685 - 552,622)", "source": "CEC" },
+        { "period": "2016", "km_added": 30449, "note": "CEC official: (614,134 - 583,685)", "source": "CEC" },
+        { "period": "2017", "km_added": 34035, "note": "CEC official: (648,169 - 614,134). Major UHV year: 8 lines completed", "source": "CEC" },
+        { "period": "2018", "km_added": 57230, "note": "CEC official: (705,399 - 648,169). Large jump includes 500kV + UHV additions", "source": "CEC" },
+        { "period": "2019", "km_added": 31169, "note": "CEC official: (736,568 - 705,399)", "source": "CEC" },
+        { "period": "2020", "km_added": 35029, "note": "CEC official 220kV+ aggregate: 794,118 - 754,785 (corrected: used CEC 220kV+ for 2019=754,785)", "source": "CEC via chinaenergyportal.org" },
+        { "period": "2021", "km_added": 32220, "note": "CEC official 220kV+ aggregate: 843,390 - 794,118 - note: CEC 220kV+ includes DC lines", "source": "CEC via chinaenergyportal.org" },
+        { "period": "2022", "km_added": 35000, "note": "Estimated from 2021 base (843,390 km) + avg growth rate" },
+        { "period": "2023", "km_added": 35000, "note": "Estimated" },
+        { "period": "2024", "km_added": 37000, "note": "Estimated. Record SGCC investment year (650B CNY planned for 2025, per Carbon Brief)" }
+      ],
+      "average_annual_2013_2019_official": 32546,
+      "average_annual_2020_2021_official": 33625,
+      "note": "2013-2019 computed from CEC voltage-class data (official). 2020-2021 from CEC 220kV+ aggregate (official). 2022-2024 estimated. Pre-2013 CEC data not available in English translations.",
+      "source": "CEC (电力统计年快报) via chinaenergyportal.org"
+    },
+    "united_states": {
+      "unit": "miles per year (345kV and above)",
+      "data": [
+        { "period": "2010", "miles_added": 1200, "km_equivalent": 1931, "note": "Approx from Grid Strategies Fig.1" },
+        { "period": "2011", "miles_added": 1300, "km_equivalent": 2092, "note": "Approx from Grid Strategies Fig.1" },
+        { "period": "2012", "miles_added": 3900, "km_equivalent": 6275, "note": "Peak year: CREZ (TX) 345kV completions. Grid Strategies Fig.1" },
+        { "period": "2013", "miles_added": 1000, "km_equivalent": 1609, "note": "Post-CREZ decline. Grid Strategies Fig.1" },
+        { "period": "2014", "miles_added": 800, "km_equivalent": 1287, "note": "Grid Strategies Fig.1" },
+        { "period": "2015", "miles_added": 700, "km_equivalent": 1126, "note": "Grid Strategies Fig.1" },
+        { "period": "2016", "miles_added": 600, "km_equivalent": 965, "note": "Grid Strategies Fig.1" },
+        { "period": "2017", "miles_added": 1100, "km_equivalent": 1770, "note": "Some 500kV activity. Grid Strategies Fig.1" },
+        { "period": "2018", "miles_added": 700, "km_equivalent": 1126, "note": "Grid Strategies Fig.1" },
+        { "period": "2019", "miles_added": 500, "km_equivalent": 805, "note": "Grid Strategies Fig.1" },
+        { "period": "2020", "miles_added": 650, "km_equivalent": 1046, "note": "Grid Strategies Fig.1" },
+        { "period": "2021", "miles_added": 550, "km_equivalent": 885, "note": "Grid Strategies Fig.1" },
+        { "period": "2022", "miles_added": 200, "km_equivalent": 322, "note": "Grid Strategies Fig.1" },
+        { "period": "2023", "miles_added": 450, "km_equivalent": 724, "note": "FERC revised (Jul 2025): ~400 mi at 345kV + ~50 mi at 500kV. Originally reported as 55 mi by Grid Strategies Jul 2024 (pre-revision FERC data). Corrected per ACEG/Grid Strategies Jul 23 2025 addendum." },
+        { "period": "2024", "miles_added": 888, "km_equivalent": 1429, "note": "Confirmed: 334 mi at 345kV + 554 mi at 500kV. Per FERC Energy Infrastructure Update Apr 2025 (released Jul 1 2025), cited in ACEG/Grid Strategies Jul 23 2025 addendum." }
+      ],
+      "average_annual_2010_2014": 1640,
+      "average_annual_2015_2019": 720,
+      "average_annual_2020_2024": 548,
+      "note": "Averages are computed directly from the annual miles_added series in this file (visual estimates for 2010-2022 from Grid Strategies Figure 1; FERC-revised values for 2023-2024). 2012 peak ~3,900 mi (CREZ 345kV). FERC revised 2023 from 55 mi to ~450 mi (400 mi 345kV + 50 mi 500kV) and confirmed 2024 at 888 mi (334 mi 345kV + 554 mi 500kV) in Energy Infrastructure Update for April 2025 (released Jul 1 2025), reported by ACEG/Grid Strategies Rev.1 (Jul 2025). Primary FERC source: https://cms.ferc.gov/media/energy-infrastructure-update-april-2025. FERC index: https://www.ferc.gov/staff-reports-and-papers.",
+      "grid_strategies_investment_data": {
+        "annual_transmission_spend_2023": "$25B+",
+        "reliability_share": "90% of spend is reliability upgrades (p.7)",
+        "source": "Grid Strategies 'Fewer New Miles' Jul 2024, p.3, p.6-7 (citing Brattle Group/FERC Form 1)"
+      }
+    }
+  },
+
+  "cec_voltage_class_data": {
+    "source": "China Electricity Council (CEC) Annual Power Statistics (电力统计年快报基本数据一览表), translated by China Energy Portal (chinaenergyportal.org)",
+    "urls": {
+      "2019": "https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/",
+      "2018": "https://chinaenergyportal.org/en/2018-detailed-electricity-statistics-update-of-dec-2019/",
+      "2017": "https://chinaenergyportal.org/en/2017-detailed-electricity-statistics-update-of-oct-2018/",
+      "2016": "https://chinaenergyportal.org/en/2016-detailed-electricity-statistics-updated/",
+      "2015": "https://chinaenergyportal.org/en/2015-detailed-electricity-statistics/",
+      "2014": "https://chinaenergyportal.org/en/2014-detailed-electricity-statistics/",
+      "2013": "https://chinaenergyportal.org/en/2013-detailed-electricity-statistics/",
+      "2020_aggregate": "https://chinaenergyportal.org/en/2020-electricity-other-energy-statistics/",
+      "2021_aggregate": "https://chinaenergyportal.org/en/2021-electricity-other-energy-statistics/"
+    },
+    "note": "This is the gold-standard source for China grid data by voltage class. CEC publishes the 电力统计年快报 annually; China Energy Portal provides English translations. Detailed voltage breakdown available 2012-2019. 2020-2021 only have 220kV+ aggregates.",
+    "ac_transmission_circuit_km": {
+      "1000kV_UHV_AC": {
+        "2012": 639, "2013": 1936, "2014": 3111, "2015": 3114,
+        "2016": 7366, "2017": 10073, "2018": 11005, "2019": 10872
+      },
+      "750kV": {
+        "2012": 10088, "2013": 12666, "2014": 13881, "2015": 15665,
+        "2016": 17478, "2017": 18830, "2018": 20543, "2019": 23256
+      },
+      "500kV": {
+        "2012": 137104, "2013": 146166, "2014": 152107, "2015": 157974,
+        "2016": 165992, "2017": 173772, "2018": 187158, "2019": 195636
+      },
+      "330kV": {
+        "2012": 22701, "2013": 24065, "2014": 25146, "2015": 26811,
+        "2016": 28336, "2017": 30183, "2018": 30477, "2019": 32314
+      },
+      "220kV": {
+        "2012": 318217, "2013": 339075, "2014": 358377, "2015": 380121,
+        "2016": 394962, "2017": 415311, "2018": 434493, "2019": 454585
+      },
+      "110kV": {
+        "2012": 517983, "2013": 545815, "2014": 566571, "2015": 591637,
+        "2017": 631361, "2018": 652891, "2019": 684406
+      },
+      "35kV": {
+        "2012": 456168, "2013": 464525, "2014": 484296, "2015": 496098,
+        "2017": 508682, "2018": 514066, "2019": 531880
+      }
+    },
+    "dc_transmission_circuit_km": {
+      "plus_minus_1100kV_UHV_DC": {
+        "2018": 608, "2019": 3295,
+        "note": "Changji-Guquan (Zhundong-Wannan) line. First appears in 2018 data."
+      },
+      "plus_minus_800kV_UHV_DC": {
+        "2012": 5314, "2013": 6904, "2014": 10132, "2015": 10580,
+        "2016": 12300, "2017": 20874, "2018": 21723, "2019": 21907
+      },
+      "plus_minus_660kV": {
+        "2012": 1400, "2013": 1400, "2014": 1336, "2015": 1336,
+        "2016": 1336, "2017": 1334, "2018": 2091, "2019": 1334
+      },
+      "plus_minus_500kV": {
+        "2012": 9145, "2013": 10653, "2014": 11875, "2015": 11872,
+        "2016": 12977, "2017": 13552, "2018": 15428, "2019": 13733
+      },
+      "plus_minus_400kV": {
+        "2012": 1031, "2013": 1031, "2014": 1640, "2015": 1640,
+        "2016": 1640, "2017": 1640, "2018": 1640, "2019": 1639
+      }
+    },
+    "total_all_voltages_35kv_plus_circuit_km": {
+      "2013": 1554236, "2014": 1628472, "2015": 1696849,
+      "2016": 1756141, "2017": 1825611, "2018": 1892018, "2019": 1975312
+    },
+    "aggregate_220kv_plus_circuit_km": {
+      "2018": 733393, "2019": 754785, "2020": 794118, "2021": 843390,
+      "note": "CEC 220kV+ aggregate (includes AC + DC at 220kV and above). Official figures.",
+      "new_additions_km": {
+        "2018": 41035, "2019": 34022, "2020": 35029, "2021": 32220
+      }
+    },
+    "grid_investment_billion_cny": {
+      "2014": 411.9, "2015": 464.0, "2016": 543.1, "2017": 533.9,
+      "2018": 537.3, "2019": 485.6, "2020": 489.6, "2021": 495.1,
+      "2022": 501.2, "2023": 527.5, "2024": 608.4,
+      "2025_sgcc_plan": 650.0,
+      "source_2014_2023": "China Energy Big Data Report 2024 (Ditan_source.pdf) Table 1-4, sourcing NBS",
+      "source_2024": "CEC Annual Development Report 2025: 全国电网工程建设完成投资6084亿元，同比增长15.3%",
+      "source_2025": "Carbon Brief (Jan 2025) citing SGCC announcement",
+      "note": "Grid investment peaked 543.1B in 2016, declined to 485.6B in 2019, then recovered. 2024 DC investment 47.6B CNY (+227.5%), AC 540.6B CNY (+8.4%), distribution 321.6B CNY (+10.1%). For USD conversion, IEA WEI 2024 (p.80) gives China $80B for 2023 and US $100B."
+    }
+  },
+
+  "uhv_breakdown": {
+    "china": {
+      "definition": "UHV = 800kV DC (UHVDC) and 1000kV AC (UHVAC)",
+      "total_uhv_lines_operational": {
+        "2015": 14,
+        "2018": 22,
+        "2020": 28,
+        "2022": 37,
+        "2024_end": 42,
+        "2025_mid": 46,
+        "under_construction": 8,
+        "total_including_construction": 54,
+        "note": "Per Wikipedia (saved Feb 2026): 46 completed + 8 under construction = 54 total. Peak completion years: 2017 (8 lines), 2020 (7 lines).",
+        "source": "Wikipedia 'Ultra-high-voltage electricity transmission in China' (saved Feb 2026)"
+      },
+      "uhv_breakdown_by_type_all_54": {
+        "UHVAC_1000kV_lines": 25,
+        "UHVDC_800kV_lines": 28,
+        "UHVDC_1100kV_lines": 1,
+        "note": "25 AC (1000kV) + 28 DC (±800kV) + 1 DC (±1100kV) = 54 total."
+      },
+      "uhv_aggregate_statistics": {
+        "total_route_length_km": 63666,
+        "total_route_length_miles": 39560,
+        "total_capacity_GW_where_available": 290.4,
+        "completed_lines_capacity_GW": 248.4,
+        "note": "19 of 54 lines (mostly AC) have no capacity listed in Wikipedia. Length data available for 53 of 54."
+      },
+      "total_uhv_km_from_cec": {
+        "2012": { "ac_1000kV": 639, "dc_800kV": 5314, "dc_1100kV": 0, "total": 5953 },
+        "2014": { "ac_1000kV": 3111, "dc_800kV": 10132, "dc_1100kV": 0, "total": 13243 },
+        "2015": { "ac_1000kV": 3114, "dc_800kV": 10580, "dc_1100kV": 0, "total": 13694 },
+        "2016": { "ac_1000kV": 7366, "dc_800kV": 12300, "dc_1100kV": 0, "total": 19666 },
+        "2017": { "ac_1000kV": 10073, "dc_800kV": 20874, "dc_1100kV": 0, "total": 30947 },
+        "2018": { "ac_1000kV": 11005, "dc_800kV": 21723, "dc_1100kV": 608, "total": 33336 },
+        "2019": { "ac_1000kV": 10872, "dc_800kV": 21907, "dc_1100kV": 3295, "total": 36074 },
+        "source": "CEC (电力统计年快报) via chinaenergyportal.org — official voltage-class data",
+        "note": "1000kV AC count decreases slightly 2018→2019 (11,005→10,872 km) — possibly a reclassification or measurement revision in CEC data."
+      },
+      "total_uhv_km_from_cctv": {
+        "2025_nov": 50000,
+        "note": "CCTV (Nov 22, 2025): 'total UHV transmission line length exceeds 50,000 km, enough to circle the equator once.' 44 lines operational.",
+        "source": "https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml"
+      },
+      "total_uhv_km_from_nanpudian": {
+        "2024_nov": 54000,
+        "sgcc_share_km": 48000,
+        "csg_share_km": 6235,
+        "note": "Nanpudian (Feb 8, 2025): 40 lines operational as of Nov 2024 (20 AC + 20 DC). SGCC: 36 projects / ~48,000 km. CSG: 4 projects / ~6,235 km.",
+        "source": "https://www.nanpudian.com/media_coverage/497.html"
+      },
+      "total_uhv_capacity_GW": {
+        "2019_from_cec_where_listed": 195.6,
+        "2024_estimated": 250,
+        "note": "CEC data provides capacity for HVDC lines but many AC lines lack listed capacity. CCTV (Nov 2025) does not give a total GW figure. 250 GW for 2024 is an estimate based on 44 lines averaging ~5-8 GW."
+      },
+      "investment_uhv": {
+        "14th_fyp_total_billion_cny": 380,
+        "14th_fyp_total_billion_usd": 53,
+        "note": "CCTV (Nov 22, 2025): 'Over 380 billion yuan invested in UHV' during the 14th FYP (2021-2025). SGCC total grid investment for 2025 alone: 650B CNY (~$89B).",
+        "source": "https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml"
+      },
+      "uhv_clean_energy": {
+        "clean_energy_transmitted_2024_billion_kwh": 420,
+        "clean_energy_share_percent": 60,
+        "west_to_east_annual_billion_kwh": 920,
+        "uhv_build_rate_km_per_day": 9.8,
+        "note": "CCTV (Nov 22, 2025): ~420B kWh of clean energy transmitted via UHV in 2024 (70% increase from 13th FYP). Clean energy ~60% of total UHV transmission. West-to-East: 920+ billion kWh/year. Build rate: 9.8 km UHV per day over the 14th FYP.",
+        "source": "https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml"
+      },
+      "key_uhv_projects": [
+        {
+          "name": "Jinping-Sunan",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 7200,
+          "length_km": 2090,
+          "commissioned": 2012,
+          "route": "Sichuan to Jiangsu",
+          "note": "World's first 2000+km UHVDC line"
+        },
+        {
+          "name": "Xiluodu-Zhejiang West",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 1680,
+          "commissioned": 2014,
+          "route": "Sichuan to Zhejiang"
+        },
+        {
+          "name": "Changji-Guquan (Zhundong-Wannan)",
+          "type": "UHVDC",
+          "voltage_kV": 1100,
+          "capacity_MW": 12000,
+          "length_km": 3293,
+          "commissioned": 2019,
+          "route": "Xinjiang to Anhui",
+          "note": "World's highest voltage (1100kV) and longest HVDC line"
+        },
+        {
+          "name": "Qinghai-Henan",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 1587,
+          "commissioned": 2020,
+          "route": "Qinghai (Tibetan Plateau) to Henan",
+          "note": "World's first 100% clean energy UHV corridor"
+        },
+        {
+          "name": "Baihetan-Jiangsu",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 2087,
+          "commissioned": 2022,
+          "route": "Sichuan to Jiangsu"
+        },
+        {
+          "name": "Baihetan-Zhejiang",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 2121,
+          "commissioned": 2022,
+          "route": "Sichuan to Zhejiang"
+        },
+        {
+          "name": "Shanxi-Jiangsu (North Shanxi-Nanjing)",
+          "type": "UHVAC",
+          "voltage_kV": 1000,
+          "capacity_MW": 6000,
+          "length_km": 1200,
+          "commissioned": 2017,
+          "route": "Shanxi to Jiangsu"
+        },
+        {
+          "name": "Southeastern Shanxi-Nanyang-Jingmen",
+          "type": "UHVAC",
+          "voltage_kV": 1000,
+          "capacity_MW": 5000,
+          "length_km": 640,
+          "commissioned": 2009,
+          "route": "Shanxi to Hubei",
+          "note": "China's first 1000kV AC line"
+        },
+        {
+          "name": "Hami-Zhengzhou (Xinjiang-Henan)",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 2192,
+          "commissioned": 2014,
+          "route": "Xinjiang to Henan"
+        },
+        {
+          "name": "Jiuquan-Hunan (Gansu-Hunan)",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 2383,
+          "commissioned": 2017,
+          "route": "Gansu to Hunan"
+        },
+        {
+          "name": "Shanghaimiao-Shandong",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 10000,
+          "length_km": 1238,
+          "commissioned": 2023,
+          "route": "Inner Mongolia to Shandong"
+        },
+        {
+          "name": "Jinsha River-Hubei (Baihetan)",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 1901,
+          "commissioned": 2025,
+          "route": "Sichuan to Hubei",
+          "note": "Highest altitude UHVDC project in the world"
+        },
+        {
+          "name": "Gansu-Zhejiang",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 2370,
+          "commissioned": 2025,
+          "route": "Gansu to Zhejiang",
+          "note": "Under construction as of 2024, through 6 provinces"
+        },
+        {
+          "name": "Yan'an-Hefei (Shaanxi-Anhui)",
+          "type": "UHVDC",
+          "voltage_kV": 800,
+          "capacity_MW": 8000,
+          "length_km": 1069,
+          "commissioned": 2025,
+          "route": "Shaanxi to Anhui",
+          "note": "Under construction as of March 2024"
+        }
+      ]
+    },
+    "united_states": {
+      "definition": "UHV equivalent = 765kV AC (highest operational US voltage). No 800kV DC or 1000kV AC lines exist in the US.",
+      "total_765kV_miles": {
+        "value": 2600,
+        "km_equivalent": 4184,
+        "year": 2024,
+        "note": "Mostly built in 1960s-1980s by AEP in the Midwest/PJM region. Very few additions since."
+      },
+      "total_765kV_lines": {
+        "count": "~30 line segments",
+        "primary_operator": "American Electric Power (AEP)",
+        "regions": ["PJM (Ohio, Indiana, West Virginia)", "TVA (Tennessee)", "AEP Service Territory"]
+      },
+      "us_has_no_uhv_equivalent": true,
+      "note": "The US has zero operational lines at 800kV DC or 1000kV AC. The highest US HVDC line is +/-500kV (Pacific DC Intertie, TransBay Cable). No new 765kV lines have been built in the US since approximately 2013-2014."
+    }
+  },
+
+  "ehv_breakdown": {
+    "china": {
+      "definition": "EHV = 330kV, 500kV, 750kV AC and +/-500kV DC",
+      "estimated_500kV_km": {
+        "2024": 280000,
+        "note": "Approximate. 500kV is the backbone of provincial transmission in eastern China."
+      },
+      "estimated_330kV_750kV_km": {
+        "2024": 120000,
+        "note": "330kV used in NW China (Shaanxi, Gansu); 750kV backbone in western grid."
+      },
+      "ehv_total_km_estimate": {
+        "2024": 400000,
+        "note": "Combined 330-750kV AC and +/-500kV DC. Rough estimate."
+      }
+    },
+    "united_states": {
+      "definition": "EHV = 345kV and 500kV AC, +/-500kV DC",
+      "estimated_500kV_miles": {
+        "value": 30000,
+        "km_equivalent": 48270,
+        "year": 2024,
+        "note": "Predominantly in western US (BPA system), Southeast (Southern Company, Duke), and PJM"
+      },
+      "estimated_345kV_miles": {
+        "value": 58000,
+        "km_equivalent": 93322,
+        "year": 2024,
+        "note": "Most common HV transmission class in the US. Backbone of PJM, MISO, SPP, NYISO, ISO-NE."
+      },
+      "hvdc_500kV_miles": {
+        "value": 1800,
+        "km_equivalent": 2896,
+        "note": "Pacific DC Intertie (846 mi), Quebec-New England (930 mi), and a few smaller lines."
+      },
+      "ehv_total_miles_estimate": {
+        "value": 90000,
+        "km_equivalent": 144810
+      }
+    }
+  },
+
+  "hv_breakdown": {
+    "note": "HV = 220/230kV and above (includes EHV and UHV)",
+    "china": {
+      "total_220kV_and_above_km": {
+        "2010": 443000,
+        "2015": 610000,
+        "2020": 790000,
+        "2024": 950000,
+        "note": "This is the standard Chinese metric for 'transmission network'. Includes 220kV, 330kV, 500kV, 750kV, 800kV DC, 1000kV AC."
+      }
+    },
+    "united_states": {
+      "total_230kV_and_above_miles": {
+        "2010": 170000,
+        "2015": 178000,
+        "2020": 183000,
+        "2024": 185000,
+        "note": "Includes 230kV, 345kV, 500kV, 765kV AC and HVDC lines."
+      },
+      "total_230kV_and_above_km": {
+        "2010": 273500,
+        "2015": 286400,
+        "2020": 294500,
+        "2024": 297700
+      }
+    }
+  },
+
+  "investment_comparison": {
+    "note": "Grid investment per IEA definition = all T&D capital expenditure (new construction, reliability upgrades, distribution modernization, smart grid). Source: IEA WEI 2024, p.78 chart and p.80 text.",
+    "china_grid_investment_billion_usd": {
+      "2015": 65,
+      "2016": 68,
+      "2017": 73,
+      "2018": 75,
+      "2019": 72,
+      "2020": 70,
+      "2021": 73,
+      "2022": 78,
+      "2023": 80,
+      "2024": 85,
+      "2025_target": 95,
+      "note": "IEA WEI 2024 p.80: 'China held its level of investment at USD 80 billion.' SGCC plans record investment in 2025.",
+      "source": "IEA World Energy Investment 2024, p.80"
+    },
+    "us_grid_investment_billion_usd": {
+      "2015": 42,
+      "2016": 47,
+      "2017": 50,
+      "2018": 55,
+      "2019": 58,
+      "2020": 60,
+      "2021": 65,
+      "2022": 75,
+      "2023": 100,
+      "2024": 105,
+      "note": "IEA WEI 2024 p.80: 'led by the United States, which spent USD 100 billion — mostly on enhancing grid reliability and upgrading old infrastructure.' Most US spending goes to maintenance/upgrades, not new HV construction.",
+      "source": "IEA World Energy Investment 2024, p.80"
+    },
+    "ratio_china_to_us": {
+      "2023": 0.8,
+      "note": "Per IEA, the US actually OUTSPENDS China on grid infrastructure ($100B vs $80B in 2023). The gap is in OUTPUT, not spending. China builds vastly more new transmission per dollar because US spending goes to maintaining/upgrading an aging system."
+    }
+  },
+
+  "key_us_transmission_projects": [
+    {
+      "name": "SunZia Southwest Transmission",
+      "voltage_kV": 525,
+      "type": "HVDC",
+      "capacity_MW": 3000,
+      "length_miles": 550,
+      "length_km": 885,
+      "status": "Under construction",
+      "expected_completion": 2025,
+      "developer": "Pattern Energy",
+      "route": "Central New Mexico to south-central Arizona",
+      "note": "Largest clean energy infrastructure project in US history. Broke ground Sept 2023."
+    },
+    {
+      "name": "Grain Belt Express",
+      "voltage_kV": 600,
+      "type": "HVDC",
+      "capacity_MW": 5000,
+      "length_miles": 542,
+      "length_km": 872,
+      "status": "Permitted, pre-construction",
+      "expected_completion": 2028,
+      "developer": "Invenergy",
+      "route": "Ford County KS to Monroe County MO, connecting SPP/MISO/AECI"
+    },
+    {
+      "name": "TransWest Express",
+      "voltage_kV": 500,
+      "type": "HVDC + HVAC segments",
+      "capacity_MW": 3000,
+      "length_miles": 728,
+      "length_km": 1171,
+      "status": "Permitted, pre-construction",
+      "expected_completion": 2028,
+      "developer": "TransWest Express LLC",
+      "route": "South-central Wyoming through Colorado and Utah to Las Vegas area"
+    },
+    {
+      "name": "Champlain Hudson Power Express (CHPE)",
+      "voltage_kV": 320,
+      "type": "HVDC (submarine/underground)",
+      "capacity_MW": 1250,
+      "length_miles": 339,
+      "length_km": 546,
+      "status": "Under construction",
+      "expected_completion": 2026,
+      "developer": "Transmission Developers Inc / Hydro-Quebec",
+      "route": "Quebec border to New York City"
+    },
+    {
+      "name": "New England Clean Energy Connect (NECEC)",
+      "voltage_kV": 320,
+      "type": "HVDC",
+      "capacity_MW": 1200,
+      "length_miles": 145,
+      "length_km": 233,
+      "status": "Under construction (resumed after legal challenges)",
+      "expected_completion": 2026,
+      "developer": "Avangrid / Hydro-Quebec",
+      "route": "Quebec border through Maine"
+    },
+    {
+      "name": "CREZ Lines (Competitive Renewable Energy Zones)",
+      "voltage_kV": 345,
+      "type": "AC",
+      "capacity_MW": 18500,
+      "length_miles": 3600,
+      "length_km": 5794,
+      "status": "Completed",
+      "completed": 2014,
+      "developer": "Various Texas utilities",
+      "route": "West Texas wind regions to Dallas/Houston/Austin load centers",
+      "note": "Largest US transmission buildout in decades. Completed 2010-2014. Benchmark for what US can do with political will."
+    },
+    {
+      "name": "Plains & Eastern Clean Line",
+      "voltage_kV": 600,
+      "type": "HVDC",
+      "capacity_MW": 4000,
+      "length_miles": 720,
+      "length_km": 1159,
+      "status": "Cancelled (2019)",
+      "note": "Would have connected Oklahoma wind to Southeast US. Failed due to permitting/siting opposition."
+    },
+    {
+      "name": "Gateway West",
+      "voltage_kV": 500,
+      "type": "AC",
+      "capacity_MW": 3000,
+      "length_miles": 1000,
+      "length_km": 1609,
+      "status": "Partially built, segments under construction",
+      "expected_completion": "2027-2030",
+      "developer": "PacifiCorp / Idaho Power",
+      "route": "Wyoming to Idaho/Oregon"
+    },
+    {
+      "name": "SOO Green HVDC Link",
+      "voltage_kV": 525,
+      "type": "HVDC (underground)",
+      "capacity_MW": 2100,
+      "length_miles": 350,
+      "length_km": 563,
+      "status": "Proposed, seeking financing",
+      "developer": "SOO Green HVDC Link",
+      "route": "Mason City IA to Plano IL (MISO to PJM)"
+    }
+  ],
+
+  "china_14th_five_year_plan_targets": {
+    "period": "2021-2025",
+    "uhv_targets": {
+      "new_uhv_lines_planned": "24 additional UHV lines (14 DC + 10 AC)",
+      "target_total_uhv_km_by_2025": 40000,
+      "actual_achieved_by_oct_2025": 42000,
+      "note": "Target met and exceeded. NEA reported UHV DC lines grew from 28,000km to 40,000+km during the 14th FYP."
+    },
+    "total_grid_investment_target": {
+      "value_trillion_cny": 3.0,
+      "value_billion_usd": 420,
+      "note": "Total grid investment over the 5-year period. On track to exceed."
+    },
+    "inter_provincial_transfer_capacity_target_GW": {
+      "2025_target": 300,
+      "2020_baseline": 230,
+      "note": "Cross-provincial power transfer capacity target."
+    },
+    "renewable_integration_targets": {
+      "note": "Grid must accommodate 1200 GW of wind + solar by 2025 (target achieved ahead of schedule in 2024)."
+    },
+    "15th_five_year_plan_preview": {
+      "period": "2026-2030",
+      "uhv_expansion": "Plans to roughly double UHV network to 80,000+ km",
+      "focus": "Western renewable energy corridor expansion, offshore wind grid connections",
+      "note": "SGCC signaling record investment levels through 2030."
+    }
+  },
+
+  "construction_rate_comparison_km_per_year": {
+    "note": "Direct comparison of annual construction at 220kV/230kV and above",
+    "data": [
+      { "year": 2010, "china_km": 38000, "us_km": 2897, "ratio": 13.1 },
+      { "year": 2011, "china_km": 40000, "us_km": 3057, "ratio": 13.1 },
+      { "year": 2012, "china_km": 38000, "us_km": 2735, "ratio": 13.9 },
+      { "year": 2013, "china_km": 35000, "us_km": 2414, "ratio": 14.5 },
+      { "year": 2014, "china_km": 37000, "us_km": 2253, "ratio": 16.4 },
+      { "year": 2015, "china_km": 40000, "us_km": 1770, "ratio": 22.6 },
+      { "year": 2016, "china_km": 42000, "us_km": 1609, "ratio": 26.1 },
+      { "year": 2017, "china_km": 40000, "us_km": 1448, "ratio": 27.6 },
+      { "year": 2018, "china_km": 38000, "us_km": 1287, "ratio": 29.5 },
+      { "year": 2019, "china_km": 35000, "us_km": 1126, "ratio": 31.1 },
+      { "year": 2020, "china_km": 32000, "us_km": 805, "ratio": 39.8 },
+      { "year": 2021, "china_km": 38000, "us_km": 644, "ratio": 59.0 },
+      { "year": 2022, "china_km": 42000, "us_km": 483, "ratio": 86.9 },
+      { "year": 2023, "china_km": 45000, "us_km": 724, "ratio": 62.2 },
+      { "year": 2024, "china_km": 48000, "us_km": 1429, "ratio": 33.6 }
+    ],
+    "summary": {
+      "china_total_2010_2024": 588000,
+      "us_total_2010_2024_km": 24681,
+      "ratio_cumulative": 23.8,
+      "note": "China built ~23.8x as much high-voltage transmission as the US from 2010-2024 in this comparison series. The annual ratio is volatile, with 2023 revised to ~62:1 and 2024 at ~33.6:1."
+    }
+  },
+
+  "gw_miles_tw_km_capacity_estimates": {
+    "note": "GW-miles/TW-km are rarely officially published. These are rough estimates based on line voltage, length, and typical capacity ratings.",
+    "china": {
+      "uhv_tw_km_estimate": {
+        "2024": 8.5,
+        "calculation": "~40,000 km of UHV lines averaging ~8-12 GW capacity each. Weighted average ~210 GW total capacity.",
+        "note": "210 GW * 40,000 km / 1,000,000 = 8.4 TW-km (but lines have different lengths, so this is approximate)"
+      },
+      "total_transmission_tw_km_estimate": {
+        "2024": 95,
+        "note": "Very rough. 950,000 km of 220kV+ lines with weighted average capacity. Dominant 220kV lines carry ~1-2 GW, 500kV lines carry ~2-4 GW, UHV lines carry 6-12 GW."
+      }
+    },
+    "united_states": {
+      "total_transmission_tw_miles_estimate": {
+        "2024": 25,
+        "note": "Rough estimate. ~185,000 miles of 230kV+ lines. 345kV lines typically 1-2 GW, 500kV lines 2-3 GW, 765kV lines 4-5 GW."
+      },
+      "total_transmission_tw_km_estimate": {
+        "2024": 40,
+        "note": "Converted from TW-miles (x1.609). Approximate."
+      },
+      "nrel_national_transmission_planning_study": {
+        "existing_system_tw_miles": 25,
+        "scenario_additions_tw_miles": {
+          "limited_expansion": 6,
+          "moderate_expansion": 14,
+          "high_expansion": 22
+        },
+        "note": "NREL 2024 study modeled scenarios for US transmission buildout needed by 2035."
+      }
+    }
+  },
+
+  "structural_differences": {
+    "governance": {
+      "china": "Centralized: State Grid Corp (88% of territory) + China Southern Power Grid (12%). National planning with provincial execution. 5-year plans set binding targets.",
+      "united_states": "Fragmented: ~3,000 utilities, 7 RTOs/ISOs, 50 state regulatory commissions, FERC at federal level. No single national transmission plan."
+    },
+    "permitting_timeline": {
+      "china": "2-3 years from approval to operation for a major UHV line.",
+      "united_states": "10-15+ years average for a major interstate transmission line. Some projects (e.g., Plains & Eastern) never completed due to siting opposition."
+    },
+    "right_of_way": {
+      "china": "Eminent domain exercised efficiently by state entities. Minimal legal challenges.",
+      "united_states": "Requires negotiation with thousands of private landowners. Federal backstop siting authority limited and controversial. State-by-state permitting creates bottlenecks."
+    },
+    "technology_leadership": {
+      "china": "Global leader in UHV AC and DC technology. Developed and deployed 1100kV DC (world record). Exports UHV technology to Brazil, Pakistan, and other countries.",
+      "united_states": "No domestic UHV manufacturing capability. Highest operational voltage is 765kV AC (1960s-era technology). HVDC deployment limited to a handful of lines."
+    },
+    "grid_topology": {
+      "china": "Long-distance point-to-point UHV corridors connecting western generation to eastern load centers (West-to-East power transfer). Radial UHV overlay on meshed provincial grids.",
+      "united_states": "Meshed AC network evolved organically. Three weakly-connected interconnections. Limited long-distance transfer capacity. Congestion at seams between RTOs."
+    }
+  },
+
+  "chart_ready_data": {
+    "cumulative_hv_transmission_km": {
+      "labels": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+      "china_220kv_plus": [578000, 608000, 646000, 686000, 725000, 759000, 812000, 843000, 882000, 920500, 960970],
+      "china_source": "China Energy Big Data Report 2024 Chart 5-14 (CEC aggregates); 2024 from CEC Report 2025",
+      "us_230kv_plus": [283600, 285000, 288000, 289600, 291200, 292400, 294500, 296000, 297000, 297700, 298000],
+      "unit": "km",
+      "note": "China values from Ditan_source.pdf (CEC published 220kV+ aggregates in 万千米). US values from EIA/NERC. China grew 578k to 961k km (66%) in 10 years; US grew 284k to 298k km (5%)."
+    },
+    "annual_construction_km": {
+      "labels": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+      "china": [36000, 33000, 35000, 41000, 36000, 35000, 32000, 39000, 39000, 38000, 41000],
+      "china_source": "2014-2023: Ditan report Chart 5-14 增量 (new additions, 万千米). 2024: derived from cumulative difference (960,970 - 920,500 = 40,470, rounded to 41,000).",
+      "us_miles": [800, 700, 600, 1100, 700, 500, 650, 550, 200, 450, 888],
+      "us_km": [1287, 1126, 965, 1770, 1126, 805, 1046, 885, 322, 724, 1429],
+      "us_source": ["GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "FERC-revised", "FERC-confirmed"],
+      "unit": "km",
+      "note": "China 2014-2023 from Ditan_source.pdf Chart 5-14 (CEC new additions = 新增输电线路). Note: additions ≠ cumulative change due to statistical revisions/reclassifications. US from Grid Strategies Figure 1 (345kV+, visual estimates except 2023/2024). 2023 revised by FERC (Jul 2025) from 55 to ~450 mi. 2024 confirmed by FERC at 888 mi."
+    },
+    "voltage_breakdown_miles": {
+      "labels": ["220/230 kV", "330/345 kV", "500 kV", "750/765 kV", "±800kV DC", "1000kV AC", "±1100kV DC", "HVDC ≤500kV"],
+      "china": [346000, 31100, 173900, 12400, 18600, 6200, 2050, 0],
+      "us": [88650, 65508, 28534, 2410, 0, 0, 0, 1521],
+      "unit": "miles",
+      "note": "2024-style snapshot used by dashboard stacked voltage chart. China values from CEC-derived extrapolation; US values from HIFLD geospatial processing and supporting estimates."
+    },
+    "voltage_breakdown_thermal_gw_miles": {
+      "labels": ["220/230 kV", "330/345 kV", "500 kV", "750/765 kV", "±800kV DC", "1000kV AC", "±1100kV DC", "HVDC ≤500kV"],
+      "china": [207600, 31100, 469500, 55800, 148800, 37200, 24600, 0],
+      "us": [53190, 98262, 77042, 10845, 0, 0, 0, 3802],
+      "unit": "GW·miles",
+      "note": "Thermal GW·mi = voltage-class miles × thermal/design capacity assumptions used in dashboard methodology."
+    },
+    "uhv_cumulative_km": {
+      "labels": [2012, 2014, 2015, 2016, 2017, 2018, 2019, 2025],
+      "china_uhv": [5953, 13243, 13694, 19666, 30947, 33336, 36074, 50000],
+      "china_source": ["CEC", "CEC", "CEC", "CEC", "CEC", "CEC", "CEC", "CCTV"],
+      "us_765kv": [4184, 4184, 4184, 4184, 4184, 4184, 4184, 4184],
+      "unit": "km",
+      "note": "China UHV 2012-2019 from CEC official data (1000kV AC + ±800kV DC + ±1100kV DC). 2025 from CCTV state media (Nov 22, 2025): '50,000+ km'. US 765kV flat since 1980s."
+    },
+    "grid_investment_billion_usd": {
+      "labels": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+      "china": [65, 68, 73, 75, 72, 70, 73, 78, 80, 85],
+      "us": [42, 47, 50, 55, 58, 60, 65, 75, 100, 105],
+      "unit": "billion USD",
+      "source": "IEA World Energy Investment 2024 (p.78 chart, p.80 text). 2023 values from IEA text: China $80B, US $100B. Other years estimated from chart trend.",
+      "note": "IEA definition = all T&D capital expenditure. US $100B in 2023 mostly goes to reliability upgrades, not new HV construction."
+    },
+    "grid_investment_billion_cny": {
+      "labels": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+      "china": [411.9, 464.0, 543.1, 533.9, 537.3, 485.6, 489.6, 495.1, 501.2, 527.5, 608.4],
+      "generation": [368.6, 393.6, 340.8, 290.0, 272.1, 313.9, 529.2, 553.0, 720.8, 967.5, 1209.4],
+      "unit": "billion CNY",
+      "source": "2014-2023 from China Energy Big Data Report 2024 (Ditan_source.pdf) Table 1-4, sourcing NBS. 2024 from CEC Report 2025.",
+      "note": "Grid investment peaked at 543.1B CNY in 2016 then declined through 2019. Generation exceeded grid for first time in 2020. By 2024, generation was 2x grid (1,209B vs 608B). SGCC 2025 plan: 650B CNY."
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Include only the transmission dashboard files
+*
+!.gitignore
+!china-us-transmission.html
+!transmission-infrastructure-comparison.json
+!transmission-sources/
+!transmission-sources/**

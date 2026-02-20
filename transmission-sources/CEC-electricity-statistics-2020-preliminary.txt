@@ -1,0 +1,50 @@
+Source: China Electricity Council (CEC) - 2020 Electric Power Industry Statistics Quick Report (Preliminary)
+Original title: 2020年电力统计年快报基本数据一览表
+English translation via: https://chinaenergyportal.org/en/2020-electricity-other-energy-statistics-preliminary/
+Published: January 22, 2021
+
+NOTE: This is the preliminary version with less voltage-class detail than the final/detailed version.
+
+=== Transmission Line Length (>220 kV, cumulative, circuit-km) ===
+
+                                2019 (km)    2020 (km)    YoY (%)
+Total >220 kV                    759,465      794,118      4.6
+
+=== Transmission Line Additions (>220 kV, annual, circuit-km) ===
+
+                                2019 (km)    2020 (km)    YoY (%)
+Additions >220 kV                 35,912       35,029     -2.5
+
+=== Newly Installed Converter Capacity (DC) ===
+
+                                2019 (MW)    2020 (MW)    YoY (%)
+Converter capacity                22,000       52,000    136.4
+
+=== Substation Capacity Additions (>220 kV) ===
+
+                                2019 (MVA)   2020 (MVA)   YoY (%)
+Additions                        238,140      222,880     -6.4
+
+=== Completed Investment (Million RMB) ===
+
+                                2019         2020         YoY (%)
+Total electric power             907,200      994,400      9.6
+  Power generation               406,000      524,400     29.2
+  Power grid                     501,200      469,900     -6.2
+
+=== Key Comparison with 2019 Detailed Statistics ===
+
+2019 detailed stats show total 35kV+ = 1,975,312 km
+  of which 220kV+ (AC): 716,663 km
+  plus all DC: 42,364 km
+  = 759,027 km
+2020 preliminary shows 2019 220kV+ = 759,465 km (slightly different due to classification/rounding)
+2020 preliminary shows 2020 220kV+ = 794,118 km
+
+=== Notes from CEC ===
+
+1. Power production, total electricity consumption and generation capacity data are industry statistics totals from the China Electricity Council.
+2. Wind and solar power generation and generation capacity statistics are for grid-connected capacity.
+3. Due to differences in statistical standards, confirmation of moment of grid connection, and other reasons, there are certain discrepancies in data on total and newly installed generation capacity.
+4. Data for "Completed investment in electric power projects" is from completed investment by large power companies as included in the CEC Power Industry Statistics.
+5. Where there are whitespaces in the table, it indicates that the statistical data was either below the minimum unit of reporting used, or unknown, or not available.

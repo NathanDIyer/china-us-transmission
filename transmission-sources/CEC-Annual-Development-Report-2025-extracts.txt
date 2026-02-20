@@ -1,0 +1,97 @@
+CEC Annual Development Report 2025 - Key Transmission/Grid Extracts
+=====================================================================
+Source: 中国电力行业年度发展报告2025 (China Power Industry Annual Development Report 2025)
+Published: July 10, 2025 by China Electricity Council (中电联)
+Full text accessed via: https://finance.sina.com.cn/stock/relnews/hk/2025-07-10/doc-infeytki3691600.shtml
+Data covers: 2024 full year
+
+=== SECTION 6: GRID TRANSMISSION & DISTRIBUTION (电网输配电) ===
+
+Original Chinese text:
+截至2024年底，全国电网35千伏及以上输电线路回路长度247.7万千米，同比增长1.7%；
+其中220千伏及以上输电线路长度960970千米，同比增长3.5%。全国电网35千伏及以上变
+电设备容量82.1亿千伏安，同比增长6.7%，其中220千伏及以上公用变电设备容量578067
+万千伏安，同比增长4.9%。2024年，全国完成跨区输送电量9242亿千瓦时，同比增长
+8.8%；全国完成跨省输送电量19951亿千瓦时，同比增长7.0%。
+
+Translation of key figures (end of 2024):
+- 35kV+ transmission line circuit length: 2,477,000 km (+1.7% YoY)
+- 220kV+ transmission line length: 960,970 km (+3.5% YoY)
+- 35kV+ transformer capacity: 82.1 billion kVA (+6.7%)
+- 220kV+ public transformer capacity: 5,780,670 MVA (+4.9%)
+- Cross-region power transmission: 924.2 TWh (+8.8%)
+- Cross-province power transmission: 1,995.1 TWh (+7.0%)
+
+=== SECTION 8: INVESTMENT (电源电网投资) ===
+
+2024 investment figures:
+- Total power sector investment: 1,817.8 billion CNY (+13.9%)
+- Power source (generation) investment: 1,209.4 billion CNY (+13.2%)
+  - Hydro: 115.4B CNY (+12.2%)
+  - Thermal: 187.9B CNY (+38.0%)
+  - Nuclear: 141.9B CNY (+41.6%)
+  - Wind: 316.3B CNY (+10.9%)
+  - Solar: 447.8B CNY (+1.9%)
+  - Non-fossil share: 84.6% of source total
+- Grid investment: 608.4 billion CNY (+15.3%)
+
+=== SECTION 9: DC PROJECTS & TRANSMISSION CORRIDORS ===
+
+Original Chinese text:
+直流工程投资呈现高速增长，投资达到476亿元，同比增长227.5%；交流工程5406亿元，
+同比增长8.4%。全国完成配电网投资3216亿元，同比增长10.1%。其中，110千伏（含66
+千伏）电网投资同比下降5.4%；35千伏及以下电网投资同比增长16.1%，占全国电网投资
+比重为40.2%，同比提高0.3个百分点。川渝、武汉—南昌、张北—胜利等一批1000千伏
+特高压交流工程顺利投产。
+
+Translation of key figures (2024):
+- DC project investment: 47.6 billion CNY (+227.5% YoY!!)
+- AC project investment: 540.6 billion CNY (+8.4%)
+- Distribution network investment: 321.6 billion CNY (+10.1%)
+- 110kV (incl 66kV) investment: -5.4%
+- 35kV and below: +16.1%, 40.2% of total grid investment
+- Key UHV AC projects completed in 2024:
+  - Sichuan-Chongqing (川渝) 1000kV UHV AC
+  - Wuhan-Nanchang (武汉—南昌) 1000kV UHV AC
+  - Zhangbei-Shengli (张北—胜利) 1000kV UHV AC
+
+=== SECTION 10: EMISSIONS ===
+
+- Grid line loss rate: 4.36% (-0.18pp YoY)
+
+=== SECTION 12: RELIABILITY ===
+
+- 51 DC transmission systems in reliability statistics
+- DC system energy availability rate: 95.802% (-0.994pp)
+- DC system energy utilization rate: 48.75% (+6.67pp)
+- 220kV+ equipment availability: >99.1%
+- National power supply reliability: 99.924% (+0.013pp)
+- Average outage time: 6.71 hours/customer (-1.12 hours)
+
+=== DERIVED CALCULATIONS ===
+
+Back-computing 2023 cumulative from 2024 growth rates:
+- 220kV+: 960,970 / 1.035 = 928,474 km (vs independently confirmed 919,667)
+  Note: small discrepancy suggests rounding or different base in YoY calc
+- 35kV+: 2,477,000 / 1.017 = 2,435,594 km (vs SASAC figure of 2,425,000)
+
+Back-computing 2023 grid investment from 2024 growth:
+- 608.4B / 1.153 = 527.6B CNY (matches NEA's published 527.5B CNY for 2023)
+
+Annual 220kV+ additions (computed from cumulative):
+- 2024: 960,970 - 919,667 = 41,303 km
+- 2023: 919,667 - 880,000 = ~39,667 km
+- This is consistent with the credit report figure of 38,100 km AC + DC additions
+
+=== NOTES ===
+
+1. This is the SUMMARY version of the CEC report, not the full statistical tables.
+   The full report (available for purchase from CEC) contains detailed voltage-class
+   breakdowns, regional data, and additional statistical tables.
+
+2. The report does NOT contain individual voltage-class cumulative figures
+   (1000kV, 750kV, 500kV, 330kV, 220kV separately). Only aggregates
+   (220kV+ and 35kV+) are published in this annual development report.
+
+3. The full voltage-class data is in CEC's 电力统计年详报 (Detailed Power
+   Statistics Annual Report), which is a separate, paywalled publication.

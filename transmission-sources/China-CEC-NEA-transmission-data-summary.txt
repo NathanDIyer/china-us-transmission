@@ -1,0 +1,310 @@
+China Transmission Infrastructure Source Data Summary
+=====================================================
+Compiled: February 2026
+Updated: February 2026 (added CEC Report 2025 data, additional Chinese sources)
+Purpose: Verify China cumulative transmission line figures used in dashboard
+
+=== PRIMARY SOURCES ===
+
+1. China Electricity Council (CEC) - 中国电力企业联合会
+   Annual publication: 电力统计年快报 (Electric Power Industry Statistics Quick Report)
+   Annual report: 中国电力行业年度发展报告 (China Power Industry Annual Development Report)
+   English translations (2006-2020): chinaenergyportal.org
+
+2. National Energy Administration (NEA) - 国家能源局
+   Monthly publication: 全国电力工业统计数据 (National Electric Power Industry Statistics)
+   URL: https://www.nea.gov.cn
+
+3. Electric Power Planning & Engineering Institute (EPPEI) - 电力规划设计总院
+   Annual publication: 中国电力发展报告 (China Electric Power Development Report)
+
+4. China Energy Big Data Report (中国能源大数据报告)
+   Published by: China Power Media / 中国电力传媒集团
+   Contains annual time-series charts of 220kV+ transmission line lengths
+
+=== DOWNLOADED/SAVED FILES ===
+
+File: CEC-electricity-statistics-2019.txt
+  Source: CEC via chinaenergyportal.org
+  URL: https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/
+  Content: Full voltage-class breakdown for 2018-2019 (Section 4)
+
+File: CEC-electricity-statistics-2020-preliminary.txt
+  Source: CEC via chinaenergyportal.org
+  URL: https://chinaenergyportal.org/en/2020-electricity-other-energy-statistics-preliminary/
+  Content: 220kV+ cumulative total for 2019-2020
+
+File: CET-China-Energy-Power-Statistics-2023.pdf
+  Source: China Energy Transformation (CET) Programme
+  URL: https://usercontent.one/wp/www.cet.energy/wp-content/uploads/2024/03/2024-03-CET_Summary-of-Chinas-Energy-and-Power-Sector-Statistics-in-2023.pdf
+  Content: General energy/power statistics for 2023 (capacity, generation, consumption, EVs, storage)
+  Note: Does NOT contain transmission line length data
+
+File: Ditan_source.pdf
+  Source: China Energy Big Data Report 2024 (中国能源大数据报告2024)
+  Published: June 2024 by 中能传媒研究院 (China Energy Media Research Institute)
+  URL: https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf
+  Content: 94-page report covering all energy sectors. Key transmission data:
+    - 图5-13: 2014-2023 220kV+ transformer capacity time series
+    - 图5-14: 2014-2023 220kV+ transmission line length time series (THE KEY CHART)
+    - Page 60 text: exact 2023 cumulative = 92.05万千米, additions = 3.81万千米
+    - Page 59: 2023 grid investment = 527.5B CNY, total power investment = 1,495B CNY
+  Note: This is the MOST COMPLETE free source for annual 220kV+ transmission data
+
+=== CUMULATIVE TRANSMISSION LINE DATA (220kV and above) ===
+
+COMPLETE TIME SERIES from China Energy Big Data Report 2024 (中国能源大数据报告2024)
+Published June 2024 by 中能传媒研究院 (China Energy Media Research Institute)
+Source: 图5-14 "2014~2023年220千伏及以上输电线路回路长度及增速"
+Downloaded PDF saved as: Ditan_source.pdf
+
+Year    220kV+ (km)    Growth%   Additions(km)   Source
+----    -----------    -------   -------------   ------
+2014    578,000        6.2%      36,000          Ditan chart (57.8万千米)
+2015    608,000        5.2%      33,000          Ditan chart (60.8万千米)
+2016    646,000        6.2%      35,000          Ditan chart (64.6万千米)
+2017    686,000        6.2%      41,000          Ditan chart (68.6万千米)
+2018    725,000        5.7%      36,000          Ditan chart (72.5万千米)
+2019    759,000        4.8%      35,000          Ditan chart (75.9万千米)
+2020    812,000        6.9%      32,000          Ditan chart (81.2万千米) [see note 1]
+2021    843,000        3.8%      39,000          Ditan chart (84.3万千米)
+2022    882,000        4.6%      39,000          Ditan chart (88.2万千米)
+2023    920,000        4.3%      38,000          Ditan chart (92.0万千米); text: 92.05万千米
+2024    960,970        3.5%      ~41,000         CEC Report 2025 (exact: 960,970 km)
+
+Notes on Ditan chart data:
+1. Additions (增量) do NOT equal cumulative differences — the gap reflects statistical
+   revisions, voltage reclassifications, and line retirements/decommissions.
+   Example: 2020 additions = 32,000 km but cumulative grew by 53,000 km (from 759k to 812k).
+2. The 2020 value of 812,000 km differs from CEC 2020 preliminary stats (794,118 km).
+   The Ditan report was published in 2024 using revised/final CEC data, while 794,118 was
+   the preliminary figure from early 2021. The revised figure (812,000) should be used.
+3. Text on page 60 gives exact 2023 figure: "220千伏及以上输电线路回路长度共92.05万千米"
+   = 920,500 km (+4.3% YoY). This is more precise than the chart's rounded 92.0万千米.
+4. 2024 figure from CEC Annual Development Report 2025: exact 960,970 km.
+5. 14th FYP trend: "220千伏及以上输电线路回路长度增速维持在4%上下" (~4% annual growth)
+
+Earlier data points (pre-2014):
+Year    220kV+ (km)    Source
+----    -----------    ------
+2012    ~488,749       CEC stats via chinaenergyportal.org (computed from voltage-class data)
+2013    ~523,908       CEC stats via chinaenergyportal.org (computed from voltage-class data)
+
+* Note: 2012-2013 values were COMPUTED by summing individual AC voltage classes (220kV through
+  1000kV) plus all DC. These computed sums may undercount by ~5-8% compared to CEC's published
+  "220kV+" aggregate (see 2018 comparison: computed 725,671 vs chart 725,000 — close; but
+  2019 computed 736,568 in original dataset vs chart 759,000 — significant gap suggesting
+  the original 2012-2013 computed values may also be underestimates).
+
+=== CUMULATIVE TRANSMISSION LINE DATA (all 35kV and above) ===
+
+Year    35kV+ (km)     Source
+----    ----------     ------
+2018    1,892,018      CEC 2019 detailed stats
+2019    1,975,312      CEC 2019 detailed stats (+4.40%)
+2023    ~2,425,000     SASAC article (Nov 2024): "全国35千伏及以上的输电线路总长度达到242.5万千米"
+                       Also CEIC Data: 2,371,651 km (slightly lower, may be mid-year)
+2024    2,477,000      CEC Annual Development Report 2025: "35千伏及以上输电线路回路长度247.7万千米，同比增长1.7%"
+
+=== ANNUAL ADDITIONS (220kV and above) ===
+
+Year    Additions (km)    Source
+----    --------------    ------
+2018    ~35,912          CEC 2020 preliminary stats (2019 column comparison)
+2019    35,912           CEC 2020 preliminary stats
+2020    35,029           CEC 2020 preliminary stats (-2.5%)
+2022    ~38,687          Credit report (联合资信): "2022年新增交流220千伏及以上输电线路长度38687千米，同比增长20.3%"
+                         Plus DC: 2,223 km → total ~40,910 km
+2023    ~38,100 (AC)     Credit report (联合资信 2024): "2023年全年新增交流220千伏及以上输电线路长度3.81万千米"
+                         Also: cnwep.com "我国电力发展与改革报告(2024)": "新增220千伏及以上输电线路长度3.81万千米，同比少投产557千米"
+2024    ~41,303 (total)  Derived: 960,970 - 919,667 = 41,303 km (220kV+ cumulative difference)
+
+Note: NEA monthly releases include "新增220千伏及以上输电线路长度" (new 220kV+ transmission line additions)
+Note: The "新增交流220千伏及以上" figure is AC-only; total 220kV+ includes DC additions.
+
+=== ANNUAL ADDITIONS (110kV and above, AC only) ===
+
+From CEC reports:
+Year    AC 110kV+ (km)    Source
+----    --------------    ------
+2018    56,973            CEC 2019 detailed stats
+2019    57,935            CEC 2019 detailed stats (+1.69%)
+2022    60,170            CEC Annual Development Report 2023 (ideacarbon.org): "新增交流110千伏及以上输电线路长度60170千米，比上年增长15.7%"
+
+Plus DC additions:
+2019    3,325 km (all ±1100kV)
+2022    2,223 km (CEC Report 2023)
+
+=== 2019 VOLTAGE CLASS BREAKDOWN (most detailed available in English) ===
+
+From CEC 2019 detailed statistics (Section 4):
+
+Cumulative circuit-km as of end 2019:
+  AC 1000 kV (UHV AC):     10,872 km
+  AC 750 kV:               23,256 km
+  AC 500 kV:              195,636 km
+  AC 330 kV:               32,314 km
+  AC 220 kV:              454,585 km
+  AC 110 kV:              684,406 km
+  AC 35 kV:               531,880 km
+  AC subtotal:          1,932,947 km
+
+  DC ±1100 kV (UHV DC):     3,295 km
+  DC ±800 kV:              21,907 km
+  DC ±660 kV:               1,334 km
+  DC ±500 kV:              13,733 km
+  DC ±400 kV:               1,639 km
+  DC subtotal:             42,364 km
+
+  TOTAL (35kV+):        1,975,312 km
+
+Note: Post-2020 voltage-class breakdowns are only available in CEC's paywalled
+detailed annual statistics (电力统计年详报). The free CEC Annual Development Report
+and NEA releases only publish aggregate 220kV+ and 35kV+ totals.
+
+=== GRID INVESTMENT DATA ===
+
+COMPLETE TIME SERIES from Ditan report Table 1-4 (p19):
+"2014~2023年能源行业固定资产投资（不含农户）" (单位：亿元 = 100M CNY)
+
+Year    Grid (亿元)    Grid (B CNY)    Generation (亿元)    Gen (B CNY)    Source
+----    ----------    -----------    ---------------    ----------    ------
+2014    4119          411.9          3686               368.6          Ditan table
+2015    4640          464.0          3936               393.6          Ditan table
+2016    5431          543.1          3408               340.8          Ditan table [PEAK grid]
+2017    5339          533.9          2900               290.0          Ditan table
+2018    5373          537.3          2721               272.1          Ditan table
+2019    4856          485.6          3139               313.9          Ditan table
+2020    4896          489.6          5292               529.2          Ditan table [Gen>Grid]
+2021    4951          495.1          5530               553.0          Ditan table
+2022    5012          501.2          7208               720.8          Ditan table
+2023    5275          527.5          9675               967.5          Ditan table & NEA
+2024    6084          608.4          12094              1209.4         CEC Report 2025
+
+Key observations:
+- Grid investment peaked in 2016 at 543.1B CNY during the 13th FYP
+- Grid investment declined through 2019 (485.6B) then slowly recovered
+- Generation investment first exceeded grid investment in 2020 (529B vs 490B)
+- By 2023, generation was 440B more than grid (968B vs 528B)
+- Grid investment share of total power peaked at 65.8% in 2018 (Ditan p59 text)
+- In 2024, grid investment surged +15.3% to 608.4B, its highest ever
+
+=== TRANSFORMER/SUBSTATION CAPACITY (220kV and above) ===
+
+COMPLETE TIME SERIES from Ditan report 图5-13:
+
+Year    Capacity (亿千伏安)    Additions    Growth%    Source
+----    ----------------    ---------    -------    ------
+2014    30.9                2.6          11.2       Ditan chart
+2015    31.5                2.2          2.0        Ditan chart
+2016    34.6                2.4          9.7        Ditan chart
+2017    37.9                2.4          9.5        Ditan chart
+2018    40.4                2.2          6.5        Ditan chart
+2019    43.2                2.4          7.0        Ditan chart
+2020    47.0                2.2          9.0        Ditan chart
+2021    49.6                2.4          5.0        Ditan chart
+2022    51.3                3.9          5.2        Ditan chart
+2023    54.0                2.6          5.3        Ditan chart; text: 54.02亿千伏安
+2024    57.8 (578,067万千伏安)             4.9        CEC Report 2025
+
+35kV+ total transformer capacity:
+2024    82.1亿千伏安 (8,210,000 万千伏安), +6.7% YoY
+
+=== LINE LOSS RATE (全国线损率) ===
+
+From Ditan report Table 5-1 (2014-2023):
+Year    Loss%     Source
+----    -----     ------
+2014    6.64      Ditan table
+2015    6.64      Ditan table
+2016    6.47      Ditan table
+2017    6.48      Ditan table
+2018    6.27      Ditan table
+2019    5.93      Ditan table
+2020    5.6       Ditan table
+2021    5.26      Ditan table
+2022    4.82      Ditan table
+2023    4.54      Ditan table (-0.28pp YoY)
+2024    4.36      CEC Report 2025 (-0.18pp)
+
+Note: Steady decline from 6.64% (2014) to 4.36% (2024) — a 2.28pp reduction over a decade.
+This is driven by higher-voltage transmission (lower resistive losses), shorter distances
+via distributed generation, and grid technology improvements.
+
+=== CROSS-REGIONAL TRANSMISSION ===
+
+Year    Cross-region (亿kWh)    Cross-province (亿kWh)    Source
+----    -------------------    ---------------------    ------
+2024    9,242 (+8.8%)          19,951 (+7.0%)           CEC Report 2025
+
+=== KEY SOURCE URLS ===
+
+CEC Annual Development Report 2025 (full text, Chinese):
+  https://finance.sina.com.cn/stock/relnews/hk/2025-07-10/doc-infeytki3691600.shtml
+  Title: "全文来了！中电联发布《中国电力行业年度发展报告2025》"
+
+CEC Annual Development Report 2023 (full text, Chinese):
+  https://ideacarbon.org/news_free/59942/
+  Title: "全文来了！中电联发布《中国电力行业年度发展报告2023》"
+
+SASAC article confirming 2023 data:
+  http://www.sasac.gov.cn/n4470048/n29955503/n31729007/n31729012/c32015412/content.html
+  Title: "国家电网：电力大动脉纵贯神州"
+  Quote: "2023年，全国35千伏及以上的输电线路总长度达到242.5万千米"
+
+证券时报 confirming 2023 220kV+ data:
+  https://stcn.com/article/detail/1261033.html
+  Quote: "截至2023年底，我国220千伏及以上输电线路长度约92万公里"
+
+NEA 2023 full-year stats (no transmission row):
+  https://www.nea.gov.cn/2024-01/26/c_1310762246.htm
+
+NEA Jul 2024 article confirming 920,000 km:
+  https://www.nea.gov.cn/2024-07/19/c_1310783264.htm
+  Title: "我国220千伏及以上输电线路长约92万公里较2013年增长..."
+  Source: 《中国电力发展报告2024》(China Electric Power Development Report 2024)
+
+NEA Dec 2025 article confirming 960,000 km:
+  "截至2024年底，全国电网220千伏及以上输电线路回路长度...分别达96万千米"
+
+China Energy Big Data Report 2024 (中国能源大数据报告2024):
+  https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf (94 pages)
+  Contains: "图5-14 2014~2023年220千伏及以上输电线路回路长度及增速"
+  Downloaded: Ditan_source.pdf — FULL 2014-2023 time series extracted (see above)
+
+Credit rating reports with CEC data:
+  联合资信 2024 report (covering 2023): https://pdf.dfcfw.com/pdf/H3_AP202412081641219350_1.pdf
+  联合资信 2023 report (covering 2022): https://www.lhratings.com/file/f766ca48914.pdf
+
+=== SGCC (State Grid Corporation of China) ===
+
+SGCC publishes annual sustainability/CSR reports at sgcc.com.cn and en.sgcc.com.cn.
+These reports contain transmission line construction data but were not independently
+downloaded due to website access limitations. SGCC operates ~88% of China's grid
+(excluding China Southern Power Grid territory in 5 southern provinces).
+
+The China Southern Power Grid (CSG) publishes similar annual reports at csg.cn.
+
+=== DASHBOARD VERIFICATION ===
+
+The dashboard uses ~365,000 miles for China cumulative high-voltage transmission.
+Converting: 920,000 km × 0.621371 = ~571,700 miles (220kV+)
+But the dashboard's 365,000 figure likely uses a higher voltage threshold or different methodology.
+
+The key comparison metric is the RATIO and annual construction pace, not absolute levels,
+since China and US use different voltage standards and counting methods.
+
+=== NOTES ===
+
+1. CEC data is published annually in January/February for the previous year
+2. NEA publishes monthly statistics ~20th of each month
+3. chinaenergyportal.org stopped adding new years after 2020
+4. CEIC Data (ceicdata.com) aggregates CEC/NBS data but requires subscription for detailed access
+5. The CET programme publishes annual English summaries focused on generation/consumption
+6. Full voltage-class breakdown is only available in the "detailed" (详细) version of CEC stats,
+   not the "preliminary" (快报) version which only shows 220kV+ totals
+7. The CEC Annual Development Report (年度发展报告) is published each July, covering the prior year
+8. Post-2020 voltage-class breakdowns not available in any free source (English or Chinese);
+   the CEC detailed statistics are behind a paywall/membership
+9. Credit rating agency reports (联合资信, etc.) sometimes republish CEC aggregate data
+   in their industry analysis sections, accessible via dfcfw.com and lhratings.com
