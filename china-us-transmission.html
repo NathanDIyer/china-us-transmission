@@ -10,31 +10,31 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #080F1A;
-      --bg-elevated: #0F172A;
-      --bg-card: #131C2E;
-      --bg-card-hover: #1A2540;
-      --china: #DC2626;
-      --china-light: #FCA5A5;
-      --china-glow: rgba(220, 38, 38, 0.25);
-      --us: #3B82F6;
-      --us-light: #93C5FD;
-      --us-glow: rgba(59, 130, 246, 0.25);
-      --accent: #F59E0B;
-      --accent-light: #FCD34D;
-      --text: #E2E8F0;
-      --text-muted: #94A3B8;
-      --text-dim: #475569;
-      --border: rgba(148, 163, 184, 0.08);
-      --border-strong: rgba(148, 163, 184, 0.15);
+      --bg: #FFFFFF;
+      --bg-elevated: #F8FAFC;
+      --bg-card: #F1F5F9;
+      --bg-card-hover: #E2E8F0;
+      --china: #B91C1C;
+      --china-light: #991B1B;
+      --china-glow: rgba(185, 28, 28, 0.08);
+      --us: #1D4ED8;
+      --us-light: #1E40AF;
+      --us-glow: rgba(29, 78, 216, 0.08);
+      --accent: #B45309;
+      --accent-light: #92400E;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-dim: #94A3B8;
+      --border: rgba(15, 23, 42, 0.06);
+      --border-strong: rgba(15, 23, 42, 0.12);
       --v-220: #64748B;
-      --v-330: #0EA5E9;
-      --v-500: #3B82F6;
-      --v-750: #8B5CF6;
-      --v-800dc: #EC4899;
-      --v-1000ac: #F97316;
-      --v-1100dc: #EAB308;
-      --v-hvdc: #14B8A6;
+      --v-330: #0284C7;
+      --v-500: #1D4ED8;
+      --v-750: #7C3AED;
+      --v-800dc: #DB2777;
+      --v-1000ac: #EA580C;
+      --v-1100dc: #CA8A04;
+      --v-hvdc: #0D9488;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans: 'Outfit', system-ui, sans-serif;
       --mono: 'JetBrains Mono', 'Menlo', monospace;
@@ -51,14 +51,7 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
+    /* noise overlay removed for clean light theme */
 
     .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
 
@@ -115,24 +108,11 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -20%;
-      width: 60%;
-      height: 200%;
-      background: radial-gradient(ellipse, var(--china-glow) 0%, transparent 70%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 60%;
-      height: 200%;
-      background: radial-gradient(ellipse, var(--us-glow) 0%, transparent 70%);
-      opacity: 0.4;
-      pointer-events: none;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border-strong);
     }
     .hero-content { position: relative; z-index: 1; }
     .hero-kicker {
@@ -180,8 +160,8 @@
       font-size: clamp(2.5rem, 5vw, 4rem);
       line-height: 1;
     }
-    .hero-stat .big-num.china { color: var(--china); text-shadow: 0 0 40px var(--china-glow); }
-    .hero-stat .big-num.us { color: var(--us); text-shadow: 0 0 40px var(--us-glow); }
+    .hero-stat .big-num.china { color: var(--china); }
+    .hero-stat .big-num.us { color: var(--us); }
     .hero-stat .unit {
       font-size: 0.85rem;
       color: var(--text-dim);
@@ -290,7 +270,7 @@
       border-bottom: 1px solid var(--border-strong);
       transition: border-color 0.2s, color 0.2s;
     }
-    .chart-source a:hover { color: var(--us-light); border-color: var(--us-light); }
+    .chart-source a:hover { color: var(--us); border-color: var(--us); }
     .chart-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -303,7 +283,7 @@
     /* ── Callout ── */
     .callout {
       border-left: 3px solid var(--accent);
-      background: rgba(245, 158, 11, 0.06);
+      background: #FFFBEB;
       padding: 1.25rem 1.5rem;
       margin: 2rem 0;
       border-radius: 0 6px 6px 0;
@@ -361,7 +341,7 @@
       border-bottom: 1px solid var(--border);
       color: var(--text-muted);
     }
-    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .data-table tr:hover td { background: rgba(0,0,0,0.02); }
     .data-table .mono { font-family: var(--mono); font-size: 0.8rem; }
     .data-table .china-text { color: var(--china-light); }
     .data-table .us-text { color: var(--us-light); }
@@ -372,11 +352,11 @@
       font-size: 0.7rem;
       font-family: var(--mono);
     }
-    .tag-dc { background: rgba(236, 72, 153, 0.15); color: #F9A8D4; }
-    .tag-ac { background: rgba(139, 92, 246, 0.15); color: #C4B5FD; }
-    .tag-active { background: rgba(34, 197, 94, 0.12); color: #86EFAC; }
-    .tag-planned { background: rgba(245, 158, 11, 0.12); color: #FCD34D; }
-    .tag-cancelled { background: rgba(220, 38, 38, 0.12); color: #FCA5A5; }
+    .tag-dc { background: #FDF2F8; color: #BE185D; }
+    .tag-ac { background: #F5F3FF; color: #6D28D9; }
+    .tag-active { background: #F0FDF4; color: #15803D; }
+    .tag-planned { background: #FFFBEB; color: #B45309; }
+    .tag-cancelled { background: #FEF2F2; color: #B91C1C; }
 
     /* ── Comparison Cards ── */
     .compare-grid {
@@ -443,7 +423,7 @@
     }
     .resource-select:hover { border-color: var(--accent); }
     .resource-select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15); }
-    .resource-select option { background: var(--bg-elevated); color: var(--text); }
+    .resource-select option { background: #FFFFFF; color: var(--text); }
     .resource-ratio {
       font-family: var(--mono);
       font-size: 0.85rem;
@@ -469,10 +449,10 @@
     }
     .metric-toggle button:not(:last-child) { border-right: 1px solid var(--border-strong); }
     .metric-toggle button.active {
-      background: rgba(245, 158, 11, 0.15);
+      background: #FEF3C7;
       color: var(--accent);
     }
-    .metric-toggle button:hover:not(.active) { background: rgba(148, 163, 184, 0.06); color: var(--text-muted); }
+    .metric-toggle button:hover:not(.active) { background: rgba(0, 0, 0, 0.03); color: var(--text-muted); }
 
     /* ── Footer / Sources ── */
     footer {
@@ -499,12 +479,12 @@
       color: var(--text-dim);
     }
     .sources-list a {
-      color: var(--us-light);
+      color: var(--us);
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.2s;
     }
-    .sources-list a:hover { border-color: var(--us-light); }
+    .sources-list a:hover { border-color: var(--us); }
 
     .methodology {
       margin-top: 2rem;
@@ -561,12 +541,12 @@
       <span class="label">Net Build 2010–24 (230kV+)</span>
       <span id="metric-cumulative-ratio" class="value">11.2×</span>
       <span id="metric-cumulative-detail" class="detail">China +334,000 mi vs US +29,800 mi (net)</span>
-      <span id="metric-thermal-detail" class="detail" style="margin-top:4px; font-size:0.82em; opacity:0.75;">Thermal GW·mi: ~1,176K vs ~39K (~30×)</span>
+      <span id="metric-thermal-detail" class="detail" style="margin-top:4px; font-size:0.82em; opacity:0.75;">Thermal GW·mi: ~1,176K vs ~33K (~35×)</span>
     </div>
     <div class="metric">
       <span class="label">2023 Contrast</span>
       <span id="metric-peak-ratio" class="value">−534 mi</span>
-      <span id="metric-peak-detail" class="detail">US 230kV+ shrank; China added ~21,750 mi</span>
+      <span id="metric-peak-detail" class="detail">US 230kV+ shrank; China added ~23,600 mi</span>
     </div>
     <div class="metric">
       <span class="label">UHV Lines (China)</span>
@@ -609,10 +589,10 @@
     </div>
     <div class="chart-wrap reveal reveal-delay-1">
       <canvas id="annualChart"></canvas>
-      <div class="chart-source">Source: US bars are net year-over-year change in 230kV+ circuit-miles from <a href="https://www.eia.gov/electricity/data/eia411/" target="_blank">FERC Form 1</a> filings (investor-owned utilities, ~80% of US transmission), voltage classes 230–344 kV + 345–499 kV + 500–764 kV + 765+ kV summed annually (1994–2024). China bars are net change in 220kV+ circuit-km from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC official cumulative totals</a> (2013–2021) and <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" target="_blank">China Energy Big Data Report 2024</a> (Chart 5-14, 2014–2023); 2022–2024 estimated from CEC aggregates. Both series measure net change (new construction minus retirements/reclassifications) — same methodology, matched voltage thresholds (220kV ≈ 230kV). Negative US bars indicate years where retirements exceeded new construction. For reference, <a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank">DOE Needs Study 2023</a> (p.iii): US averaged 3,300 circuit-mi/yr at ≥100kV (2011–2020).</div>
+      <div class="chart-source">Source: US bars are new 345kV+ circuit-miles from <a href="https://cleanenergygrid.org/transmission-projects-ready-to-go/" target="_blank">Grid Strategies Figure 1</a> (visual estimates from FERC data, 2010–2022) and <a href="https://cms.ferc.gov/media/energy-infrastructure-update-april-2025" target="_blank">FERC Energy Infrastructure Update</a> (2023–2024 confirmed: 450 mi and 888 mi respectively). 2012 peak (~3,900 mi) reflects Texas CREZ 345kV completions. China bars are new 220kV+ circuit-km from <a href="https://chinaenergyportal.org/en/2019-detailed-electricity-statistics-update-of-jan-2021/" target="_blank">CEC official cumulative totals</a> (2013–2021) and <a href="https://www.ditan.com/static/upload/file/20240807/1722999594947998.pdf" target="_blank">China Energy Big Data Report 2024</a> (Chart 5-14, 2014–2023); 2022–2024 estimated from CEC aggregates. Voltage thresholds matched (220kV ≈ 230kV); US series is 345kV+ only (higher threshold) making the gap conservative. For reference, <a href="https://www.energy.gov/gdo/national-transmission-needs-study" target="_blank">DOE Needs Study 2023</a> (p.iii): US averaged 3,300 circuit-mi/yr at ≥100kV (2011–2020).</div>
     </div>
     <div class="callout reveal reveal-delay-2">
-      Over 2010–2024, China added <span class="num" id="construction-callout-china-total">~334,000</span> miles of 220kV+ transmission (net) while the US added <span class="num" id="construction-callout-us-total">~29,800</span> miles at 230kV+ — a <span id="construction-callout-ratio" class="num">~11:1</span> gap. In <span class="num">3 of 15 years</span> the US network actually shrank. Permitting averages <span class="num">5–15 years</span> in the US vs <span class="num">2–3 years</span> in China.
+      Over 2010–2024, China added <span class="num" id="construction-callout-china-total">~346,000</span> miles of 220kV+ transmission while the US added <span class="num" id="construction-callout-us-total">~14,500</span> miles at 345kV+ — a <span id="construction-callout-ratio" class="num">~24:1</span> gap. Even using a higher US voltage threshold (making the comparison conservative), the US best year (<span class="num">3,900 mi</span> in 2012, the Texas CREZ buildout) was still <span class="num">6×</span> less than China's worst. Permitting averages <span class="num">5–15 years</span> in the US vs <span class="num">2–3 years</span> in China.
     </div>
   </div>
 </section>
@@ -813,7 +793,7 @@
       <h2>The Investment Paradox</h2>
       <p class="section-intro">
         The United States spent <strong>$100 billion</strong> on grid infrastructure in 2023 — more than China's $80 billion.
-        Yet the US built just 450 miles of new high-voltage transmission (per FERC revised data, Jul 2025). China added ~21,750 miles (CEC official).
+        Yet the US built just 450 miles of new high-voltage transmission (per FERC revised data, Jul 2025). China added ~23,600 miles (CEC official).
         America's spending goes to maintaining and upgrading an aging system. Same money, radically different output.
       </p>
     </div>
@@ -1117,7 +1097,7 @@
       <em>Voltage breakdown chart (total system):</em> US miles computed from <a href="https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1" style="color:var(--text-muted)">HIFLD</a> geospatial data — 52,244 transmission line features, haversine-computed from coordinates, totaling 186,623 miles at 230kV+ (includes both "In Service" and "Not Available" status features). China miles extrapolated from 2019 CEC voltage-class data to 2024 aggregates.<br>
       <em>Hero card (cumulative build 2010–24):</em> New-build GW·mi = cumulative new-build miles × weighted-average thermal GW/mi.
       China avg: 3.52 GW/mi (from CEC 2012–2019 voltage-class additions: 542,408 GW·km / 247,802 km = 2.19 GW/km × 1.609).
-      US avg: 1.30 GW/mi (from HIFLD total system: 243,141 GW·mi / 186,623 mi).
+      US avg: 1.12 GW/mi (from FERC Form 1 Sched 422 via PUDL, 2010–2024 net changes: 230–344kV +6,323mi×0.6 + 345–499kV +10,827mi×1.5 + 500–764kV +1,579mi×2.7 + 765kV+ −988mi×4.5 = 19,852 GW·mi / 17,741 mi).
       The GW·mi ratio exceeds the miles ratio because China's new build skews to higher-capacity voltages (500kV, UHV).<br><br>
       <strong>Investment:</strong> 2023 figures from IEA World Energy Investment 2024 (p.80): China $80B, US $100B.
       IEA definition includes all T&D capital expenditure (new construction, reliability upgrades, distribution modernization, smart grid).
@@ -1148,19 +1128,19 @@
 <!-- ═══════════════════ CHARTS ═══════════════════ -->
 <script>
 // ── Chart.js Defaults ──
-Chart.defaults.color = '#94A3B8';
-Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.08)';
+Chart.defaults.color = '#64748B';
+Chart.defaults.borderColor = 'rgba(15, 23, 42, 0.06)';
 Chart.defaults.font.family = "'Outfit', system-ui, sans-serif";
 Chart.defaults.font.size = 12;
 Chart.defaults.plugins.legend.labels.usePointStyle = true;
 Chart.defaults.plugins.legend.labels.pointStyleWidth = 10;
 Chart.defaults.plugins.legend.labels.padding = 16;
 
-const CHINA = '#DC2626';
-const CHINA_BG = 'rgba(220, 38, 38, 0.15)';
-const US = '#3B82F6';
-const US_BG = 'rgba(59, 130, 246, 0.15)';
-const ACCENT = '#F59E0B';
+const CHINA = '#B91C1C';
+const CHINA_BG = 'rgba(185, 28, 28, 0.12)';
+const US = '#1D4ED8';
+const US_BG = 'rgba(29, 78, 216, 0.12)';
+const ACCENT = '#B45309';
 
 const monoFont = "'JetBrains Mono', monospace";
 const fmtK = v => v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v.toLocaleString();
@@ -1247,8 +1227,8 @@ const cumulativeChart = new Chart(document.getElementById('cumulativeChart'), {
 
 // ── 2. Annual Construction ──
 let annualLabels = [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
-let chinaAnnual = [23600,24900,23600,21850,17840,19300,18920,21150,35570,19370,21770,20020,21750,21750,22990];
-let usAnnual    = [1729,-1241,2300,1142,1694,1340,173,7586,-492,2860,2516,5271,1648,-534,3818];
+let chinaAnnual = [23600,24900,23600,21850,22370,20510,21750,25480,22370,21750,19880,24230,24230,23610,25480];
+let usAnnual    = [1200,1300,3900,1000,800,700,600,1100,700,500,650,550,200,450,888];
 
 const annualChart = new Chart(document.getElementById('annualChart'), {
   type: 'bar',
@@ -1298,7 +1278,6 @@ const annualChart = new Chart(document.getElementById('annualChart'), {
             const us = usAnnual[ctx.dataIndex];
             const cn = chinaAnnual[ctx.dataIndex];
             if (ctx.datasetIndex === 1) {
-              if (us <= 0) return ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' mi (net shrinkage)';
               const ratio = Math.round(cn / us);
               return ctx.dataset.label + ': ' + fmtFull(ctx.parsed.y) + ' mi  (ratio: ' + ratio + ':1)';
             }
@@ -1610,12 +1589,14 @@ function updateTransmissionMetricCards() {
   }
 
   // ── New-build thermal GW·mi for cumulative build card ──
-  // China avg: 2.19 GW/km (3.52 GW/mi) from CEC 2012-2019 voltage-class additions
+  // China avg: 2.19 GW/km (3.52 GW/mi) from CEC 2012-2019 voltage-class net additions
   //   (220kV×0.6 + 330kV×1.0 + 500kV×2.7 + 750kV×4.5 + 1000kV×6.0 + ±800kV×8.0 + ±1100kV×12.0)
   //   weighted by km added each class → 542,408 GW·km / 247,802 km = 2.19 GW/km
-  // US avg: 1.30 GW/mi from HIFLD total system (243,141 GW·mi / 186,623 mi)
+  // US avg: 1.12 GW/mi from FERC Form 1 Sched 422 (PUDL) 2010-2024 net changes by voltage class
+  //   230-344kV: +6,323mi×0.6 + 345-499kV: +10,827mi×1.5 + 500-764kV: +1,579mi×2.7 + 765kV+: -988mi×4.5
+  //   = 19,852 GW·mi / 17,741 mi = 1.119 GW/mi
   const CHINA_NEW_BUILD_GW_PER_MI = 3.52;
-  const US_NEW_BUILD_GW_PER_MI = 1.30;
+  const US_NEW_BUILD_GW_PER_MI = 1.12;
   if (usBuild > 0) {
     const chinaBuildGwMi = chinaBuild * CHINA_NEW_BUILD_GW_PER_MI;
     const usBuildGwMi = usBuild * US_NEW_BUILD_GW_PER_MI;
