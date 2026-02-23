@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GW·Miles Methodology: New-Build 2010–2024</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #FFFFFF;
+      --bg-elevated: #F8FAFC;
+      --bg-card: #F1F5F9;
+      --china: #B91C1C;
+      --china-light: #991B1B;
+      --china-glow: rgba(185, 28, 28, 0.08);
+      --us: #1D4ED8;
+      --us-light: #1E40AF;
+      --us-glow: rgba(29, 78, 216, 0.08);
+      --accent: #B45309;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-dim: #94A3B8;
+      --border: rgba(15, 23, 42, 0.06);
+      --border-strong: rgba(15, 23, 42, 0.12);
+      --serif: 'Newsreader', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'IBM Plex Mono', 'Menlo', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    h3 {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border-strong);
+    }
+    .kicker {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+    }
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--us-light);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+    }
+    .back-link:hover { border-color: var(--us); }
+    .last-verified {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    p { margin-bottom: 1rem; color: var(--text-muted); font-size: 0.95rem; }
+    p strong { color: var(--text); }
+
+    .formula {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      margin: 1.5rem 0;
+      color: var(--text);
+    }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: #FFFBEB;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .callout strong { color: var(--accent); }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin: 1.5rem 0;
+    }
+    .data-table th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.68rem;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-strong);
+    }
+    .data-table td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .data-table tr:hover td { background: rgba(0,0,0,0.015); }
+    .data-table .mono { font-family: var(--mono); font-size: 0.78rem; }
+    .data-table td.right, .data-table th.right { text-align: right; }
+    .data-table .china-text { color: var(--china-light); }
+    .data-table .us-text { color: var(--us-light); }
+    .total-row td { font-weight: 600; color: var(--text); border-top: 2px solid var(--border-strong); }
+
+    .stat-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-strong);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    .stat-card {
+      background: var(--bg-elevated);
+      padding: 1.25rem;
+    }
+    .stat-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 0.25rem;
+    }
+    .stat-card .val {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .stat-card .val.china { color: var(--china); }
+    .stat-card .val.us { color: var(--us); }
+    .stat-card .detail { font-size: 0.78rem; color: var(--text-muted); }
+    @media (max-width: 600px) {
+      .stat-cards { grid-template-columns: 1fr; }
+    }
+
+    .source-chain {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      line-height: 1.8;
+      margin: 1.5rem 0;
+      white-space: pre-wrap;
+      color: var(--text-muted);
+    }
+    .source-chain strong { color: var(--text); }
+
+    .sensitivity .data-table td:last-child {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    .files-table { margin-top: 1rem; }
+    .files-table td:first-child {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      white-space: nowrap;
+      color: var(--accent);
+    }
+
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="container">
+    <div class="kicker">Methodology Document</div>
+    <h1>GW·Miles: New-Build 2010–2024</h1>
+    <p class="subtitle">
+      Miles counts wire. GW·miles counts <em>power</em>.
+      One mile of 765kV carries 7.5× more than one mile of 230kV.
+      This document derives the weighted-average capacity per mile for each country from official voltage-class data.
+    </p>
+    <a href="../china-us-transmission.html" class="back-link">← Back to dashboard</a>
+    <div class="last-verified">Last verified: February 20, 2026 · Dashboard: "Cumulative Build 2010–24" hero card</div>
+  </div>
+</div>
+
+<!-- ═══ HEADLINE ═══ -->
+<section>
+  <div class="container">
+    <h2>The Result</h2>
+
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="label">China — New-Build GW·Miles</div>
+        <div class="val china">~1,216K</div>
+        <div class="detail">345,480 mi × 3.52 GW/mi</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">US — New-Build GW·Miles</div>
+        <div class="val us">~37K</div>
+        <div class="detail">27,890 mi × 1.33 GW/mi</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Ratio</div>
+        <div class="val" style="color:var(--accent);">~33×</div>
+        <div class="detail">1,216K ÷ 37K</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Why It Matters</div>
+        <div class="val" style="color:var(--text); font-size:1rem;">Capacity, not just wire</div>
+        <div class="detail">China builds higher-voltage lines that carry more power per mile</div>
+      </div>
+    </div>
+
+    <div class="formula">
+      New-build GW·mi = new-build miles × weighted-average thermal GW per mile
+    </div>
+    <p>Each country's average GW/mi is derived from the actual voltage distribution of what was built — not assumed.</p>
+  </div>
+</section>
+
+<!-- ═══ CHINA ═══ -->
+<section>
+  <div class="container">
+    <h2>China: 3.52 GW/mi → ~1,216K GW·miles</h2>
+
+    <h3>Source: CEC Voltage-Class Data (2012–2019)</h3>
+    <p>
+      The <strong>China Electricity Council</strong> (中国电力企业联合会) publishes annual power statistics (电力统计年快报)
+      with cumulative circuit-km by voltage class. English translations at
+      <a href="https://chinaenergyportal.org" style="color:var(--us-light)">chinaenergyportal.org</a> for 2012–2019.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Voltage</th>
+            <th class="right">2012 (km)</th>
+            <th class="right">2019 (km)</th>
+            <th class="right">Added (km)</th>
+            <th class="right">Thermal GW</th>
+            <th class="right">GW·km</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="china-text">220kV AC</td>
+            <td class="mono right">318,217</td>
+            <td class="mono right">454,585</td>
+            <td class="mono right">136,368</td>
+            <td class="mono right">0.6</td>
+            <td class="mono right">81,821</td>
+          </tr>
+          <tr>
+            <td class="china-text">330kV AC</td>
+            <td class="mono right">22,701</td>
+            <td class="mono right">32,314</td>
+            <td class="mono right">9,613</td>
+            <td class="mono right">1.0</td>
+            <td class="mono right">9,613</td>
+          </tr>
+          <tr>
+            <td class="china-text">500kV AC</td>
+            <td class="mono right">137,104</td>
+            <td class="mono right">195,636</td>
+            <td class="mono right">58,532</td>
+            <td class="mono right">2.7</td>
+            <td class="mono right">158,036</td>
+          </tr>
+          <tr>
+            <td class="china-text">750kV AC</td>
+            <td class="mono right">10,088</td>
+            <td class="mono right">23,256</td>
+            <td class="mono right">13,168</td>
+            <td class="mono right">4.5</td>
+            <td class="mono right">59,256</td>
+          </tr>
+          <tr>
+            <td class="china-text">1000kV AC (UHV)</td>
+            <td class="mono right">639</td>
+            <td class="mono right">10,872</td>
+            <td class="mono right">10,233</td>
+            <td class="mono right">6.0</td>
+            <td class="mono right">61,398</td>
+          </tr>
+          <tr>
+            <td class="china-text">±800kV DC (UHV)</td>
+            <td class="mono right">5,314</td>
+            <td class="mono right">21,907</td>
+            <td class="mono right">16,593</td>
+            <td class="mono right">8.0</td>
+            <td class="mono right">132,744</td>
+          </tr>
+          <tr>
+            <td class="china-text">±1100kV DC (UHV)</td>
+            <td class="mono right">0</td>
+            <td class="mono right">3,295</td>
+            <td class="mono right">3,295</td>
+            <td class="mono right">12.0</td>
+            <td class="mono right">39,540</td>
+          </tr>
+          <tr class="total-row">
+            <td>Total</td>
+            <td></td>
+            <td></td>
+            <td class="mono right">247,802</td>
+            <td></td>
+            <td class="mono right">542,408</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula">Weighted average: 542,408 ÷ 247,802 = 2.189 GW/km × 1.609 = <strong>3.52 GW/mi</strong></div>
+
+    <h3>What Drives the Average</h3>
+    <p>Even though 55% of new km is at 220kV (0.6 GW), the higher voltages dominate the GW·km:</p>
+
+    <table class="data-table" style="max-width:500px;">
+      <thead>
+        <tr><th>Category</th><th class="right">% of km</th><th class="right">% of GW·km</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>220kV (0.6 GW)</td><td class="mono right">55.0%</td><td class="mono right">15.1%</td></tr>
+        <tr><td>330–750kV (1.0–4.5 GW)</td><td class="mono right">32.8%</td><td class="mono right">41.8%</td></tr>
+        <tr><td style="color:var(--china);">UHV (6.0–12.0 GW)</td><td class="mono right">12.2%</td><td class="mono right" style="font-weight:600; color:var(--china);">43.1%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      UHV is 12% of the distance but <strong>43% of the capacity</strong>. A single ±800kV DC corridor carries as much power as 13 parallel 220kV lines.
+    </div>
+
+    <h3>Gap: CEC Data Stops at 2019</h3>
+    <p>
+      Detailed voltage-class breakdowns are only available through 2019. After that, CEC publishes only aggregate 220kV+ totals.
+      UHV construction continued — so how much does this matter?
+    </p>
+
+    <table class="data-table" style="max-width:600px;">
+      <thead>
+        <tr><th>Source</th><th>Data</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CEC end-2019 UHV total</td><td class="mono">36,074 circuit-km</td></tr>
+        <tr><td>CCTV Nov 22, 2025</td><td class="mono">"total UHV exceeds 50,000 km"</td></tr>
+        <tr><td>Implied 2020–2025 UHV additions</td><td class="mono">~13,926 km</td></tr>
+        <tr><td>Wikipedia 2020–2024 UHV route-km</td><td class="mono">~14,408 km (line-by-line)</td></tr>
+        <tr><td>Total 220kV+ additions 2020–2024</td><td class="mono">~189,000 km (Ditan/CEC)</td></tr>
+        <tr><td>UHV share 2020–2024</td><td class="mono">~7.4%</td></tr>
+        <tr><td>UHV share 2013–2019 (comparison)</td><td class="mono">12.2%</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <strong>Impact:</strong> UHV share dropped from 12.2% to ~7.4%, and per-km capacity dropped ~13% (more AC, fewer mega-DC lines like the 12 GW Changji–Guquan).
+      Combined effect on overall average: <strong>&lt;2%</strong> (7% share × 13% reduction ≈ 1% drag).
+      Adjusting gives 3.47 GW/mi instead of 3.52. We use 3.52 as stated.
+    </p>
+
+    <h3>Post-2019 UHV Lines (from Wikipedia)</h3>
+
+    <p><strong>2020</strong> (7 lines, ~4,710 route-km): Qinghai–Henan ±800kV DC (1,587 km, 8 GW), Wudongde–Guangxi–Guangdong ±800kV DC (1,489 km, 8 GW), plus 5 AC lines (~1,634 route-km).</p>
+    <p><strong>2021</strong> (3 lines, ~3,179 route-km): Yazhong–Jiangxi ±800kV DC (1,711 km, 8 GW), Shaanbei–Hubei ±800kV DC (1,127 km, 8 GW), Nanchang–Changsha 1000kV AC (341 route-km).</p>
+    <p><strong>2022</strong> (4 lines, ~4,513 route-km): Baihetan–Jiangsu ±800kV DC (2,087 km, 8 GW), Baihetan–Zhejiang ±800kV DC (2,193 km, 8 GW), plus 2 AC lines (~233 route-km).</p>
+    <p><strong>2023</strong> (2 lines, 525 route-km): Two short AC interconnectors (Wuhan–Zhumadian, Fuzhou–Xiamen).</p>
+    <p><strong>2024</strong> (3 lines, ~1,481 route-km): Sichuan–Chongqing 1000kV AC (658 route-km, 24 GW — highest-rated AC), Zhangbei–Shengli 1000kV AC (366 route-km), Wuhan–Nanchang 1000kV AC (457 route-km).</p>
+
+    <h3>China Miles: 345,480</h3>
+    <p>
+      Dashboard sums <code>chinaAnnual</code> (15 values, 2010–2024). The canonical source chain:
+      (1) <code>chart_ready_data.annual_construction_km.china</code>,
+      (2) <code>construction_rate_comparison_km_per_year</code> (bridge for pre-2014),
+      (3) <code>annual_construction_rates.china</code> (legacy fallback).
+      2014–2023 from Ditan Chart 5-14 additions (新增220千伏及以上输电线路长度). 2024 derived from CEC cumulative delta (960,970 − 920,500 = 40,470 km).
+    </p>
+    <p>Sum: <strong>345,480 miles</strong> (~556,000 km). This is ~3% higher than the CEC-implied ~538,000 km (960,970 end-2024 minus ~423,000 start-2010), primarily from pre-2014 bridge estimates.</p>
+
+    <div class="formula">345,480 mi × 3.52 GW/mi = 1,216,090 GW·mi ≈ <strong>1,216K</strong></div>
+  </div>
+</section>
+
+<!-- ═══ US ═══ -->
+<section>
+  <div class="container">
+    <h2>US: 1.33 GW/mi → ~37K GW·miles</h2>
+
+    <h3>Source: td-voltage-aging.json (FERC Form 1 via PUDL)</h3>
+    <p>
+      <strong>FERC Form 1 Schedule 422</strong> requires investor-owned utilities to report every transmission line segment with operating voltage and length.
+      The <a href="https://catalyst.coop/pudl/" style="color:var(--us-light)">PUDL project</a> (Public Utility Data Liberation) extracts this into machine-readable form.
+    </p>
+
+    <h3>Computation: 2009 → 2024 endpoint comparison</h3>
+    <p>Rather than summing noisy year-over-year changes (which suffer from utility reclassifications), we compare total system miles at start and end:</p>
+
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Voltage Class</th>
+            <th class="right">2009 (mi)</th>
+            <th class="right">2024 (mi)</th>
+            <th class="right">Net Change</th>
+            <th class="right">Thermal GW</th>
+            <th class="right">GW·mi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="us-text">230–344 kV</td>
+            <td class="mono right">38,344</td>
+            <td class="mono right">51,708</td>
+            <td class="mono right">+13,364</td>
+            <td class="mono right">0.6</td>
+            <td class="mono right">+8,019</td>
+          </tr>
+          <tr>
+            <td class="us-text">345–499 kV</td>
+            <td class="mono right">35,828</td>
+            <td class="mono right">47,396</td>
+            <td class="mono right">+11,568</td>
+            <td class="mono right">1.5</td>
+            <td class="mono right">+17,353</td>
+          </tr>
+          <tr>
+            <td class="us-text">500–764 kV</td>
+            <td class="mono right">15,518</td>
+            <td class="mono right">19,789</td>
+            <td class="mono right">+4,272</td>
+            <td class="mono right">2.7</td>
+            <td class="mono right">+11,533</td>
+          </tr>
+          <tr>
+            <td class="us-text">765+ kV</td>
+            <td class="mono right">2,370</td>
+            <td class="mono right">2,975</td>
+            <td class="mono right">+605</td>
+            <td class="mono right">4.5</td>
+            <td class="mono right">+2,723</td>
+          </tr>
+          <tr class="total-row">
+            <td>Total</td>
+            <td></td>
+            <td></td>
+            <td class="mono right">+29,809</td>
+            <td></td>
+            <td class="mono right">+39,628</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula">Weighted average: 39,628 ÷ 29,809 = 1.329 GW/mi → rounded to <strong>1.33</strong></div>
+
+    <p>
+      <strong>Note on mile totals:</strong> The td-voltage-aging endpoint gives 29,809 mi at 230kV+. The dashboard's <code>usAnnual</code> array sums to 27,890 mi (345kV+ from Grid Strategies + flat 891 mi/yr for 230–344kV). The ~1,920 mi gap (6.4%) reflects a known approximation; the 1.33 GW/mi average is robust regardless of which mile total is applied.
+    </p>
+
+    <div class="formula">27,890 mi × 1.33 GW/mi = 37,094 GW·mi ≈ <strong>37K</strong></div>
+
+    <h3>What Drives the Average</h3>
+
+    <table class="data-table" style="max-width:500px;">
+      <thead>
+        <tr><th>Category</th><th class="right">% of miles</th><th class="right">% of GW·mi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>230–344kV (0.6 GW) — lowest</td><td class="mono right">44.8%</td><td class="mono right">20.2%</td></tr>
+        <tr><td>345–499kV (1.5 GW) — workhorse</td><td class="mono right">38.8%</td><td class="mono right" style="font-weight:600;">43.8%</td></tr>
+        <tr><td>500–764kV (2.7 GW)</td><td class="mono right">14.3%</td><td class="mono right">29.1%</td></tr>
+        <tr><td>765+ kV (4.5 GW) — highest</td><td class="mono right">2.0%</td><td class="mono right">6.9%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      Nearly half the US net additions are at 230–344kV (0.6 GW). Only <strong>605 miles</strong> of 765kV were added in 15 years.
+      There is no US equivalent of China's UHV program.
+    </div>
+
+    <h3>Why 2009 Baseline (Not 2010)?</h3>
+    <p>The dashboard covers construction <em>during</em> 2010–2024. The 2009 stock = what existed <em>before</em> 2010. Using 2010 would exclude 2010's construction.</p>
+
+    <h3>Coverage Note</h3>
+    <p>FERC Form 1 covers investor-owned utilities (~80% of US transmission). The voltage <em>distribution</em> of non-FERC utilities is likely similar, so 1.33 GW/mi is representative.</p>
+
+    <h3>US HVDC Note</h3>
+    <p>The US has no UHV lines. Existing HVDC: Pacific DC Intertie (±500kV, 3.1 GW, 846 mi, 1970) and Quebec–New England (±450kV, 2.0 GW, 930 mi, 1990). Both pre-2010. SunZia (±525kV, 3.0 GW, under construction) will be the first significant US HVDC in decades.</p>
+  </div>
+</section>
+
+<!-- ═══ THERMAL RATINGS ═══ -->
+<section>
+  <div class="container">
+    <h2>Thermal Capacity Ratings</h2>
+    <p>Both countries use the same per-voltage thermal ratings:</p>
+
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr><th>Voltage</th><th class="right">Thermal Rating</th><th>Basis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>220/230 kV AC</td><td class="mono right">0.6 GW</td><td>Standard two-bundle ACSR, ~600 MW thermal limit</td></tr>
+          <tr><td>330 kV AC</td><td class="mono right">1.0 GW</td><td></td></tr>
+          <tr><td>345 kV AC</td><td class="mono right">1.5 GW</td><td>Standard US EHV rating</td></tr>
+          <tr><td>500 kV AC</td><td class="mono right">2.7 GW</td><td>Four-bundle conductor, ~2,700 MW</td></tr>
+          <tr><td>750/765 kV AC</td><td class="mono right">4.5 GW</td><td>Six-bundle conductor, AEP-class</td></tr>
+          <tr><td style="color:var(--china);">1000 kV AC (UHV)</td><td class="mono right">6.0 GW</td><td>Chinese standard, SIL ~5 GW + compensation</td></tr>
+          <tr><td style="color:var(--china);">±800 kV DC (UHV)</td><td class="mono right">8.0 GW</td><td>Bipolar ±800kV, standard SGCC design</td></tr>
+          <tr><td style="color:var(--china);">±1100 kV DC (UHV)</td><td class="mono right">12.0 GW</td><td>Changji–Guquan design capacity</td></tr>
+          <tr><td>HVDC ≤500 kV</td><td class="mono right">2.5 GW</td><td>Average of existing US HVDC lines</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Why thermal, not SIL?</strong> Thermal rating reflects the physical infrastructure built — conductor size, tower design, right-of-way width. It's what the line <em>can</em> carry. SIL is ~3× lower for AC and can be exceeded with compensation. The DOE Needs Study uses SIL; we use thermal. Both are defensible — the key is using the same method for both countries, which we do.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SOURCE CHAIN ═══ -->
+<section>
+  <div class="container">
+    <h2>Source Chain Summary</h2>
+
+    <div class="source-chain"><strong>CHINA GW·MILES</strong>
+═════════════
+Miles:  JSON chart_ready_data.annual_construction_km.china (canonical)
+        = Ditan Chart 5-14 additions for 2014-2023 + 2024 CEC-derived delta
+        + pre-2014 bridge from construction_rate_comparison_km_per_year
+        → dashboard chinaAnnual array
+        → sum = 345,480 mi (~556,000 km)
+
+GW/mi:  CEC voltage-class cumulative data (2012–2019 detailed breakdown)
+        → JSON cec_voltage_class_data (AC + DC by voltage)
+        → subtract 2012 from 2019 = additions by voltage class
+        → multiply each by thermal rating → weighted avg = 3.52 GW/mi
+
+UHV verification:
+        CEC (through 2019) + Wikipedia UHV table (2020–2024) + CCTV (2025 total)
+        → confirms &lt;2% impact from post-2019 voltage mix changes
+
+
+<strong>US GW·MILES</strong>
+═══════════
+Miles:  345kV+ from Grid Strategies (FERC data) + 891 mi/yr for 230–344kV (FERC Form 1 via PUDL)
+        → hardcoded in dashboard as usAnnual array
+        → sum = 27,890 mi
+        (td-voltage-aging.json endpoint method gives 29,809 mi — ~6% higher, same voltage mix)
+
+GW/mi:  td-voltage-aging.json → miles_by_voltage for 2009 and 2024
+        → subtract: net additions by voltage class (all positive, clean)
+        → multiply each by thermal rating → weighted avg = 1.33 GW/mi
+
+US has no UHV lines. Highest operational voltage: 765kV (2,975 miles, built pre-2010).</div>
+  </div>
+</section>
+
+<!-- ═══ SENSITIVITY ═══ -->
+<section>
+  <div class="container sensitivity">
+    <h2>Sensitivity Analysis</h2>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>What if…</th><th>Effect on Ratio</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>China avg drops to 3.47 (adjusted for post-2019 UHV mix)</td><td>32× instead of 33×</td></tr>
+        <tr><td>US avg rises to 1.50 (if new build skews 345kV+)</td><td>29× instead of 33×</td></tr>
+        <tr><td>Use SIL instead of thermal for both</td><td>Ratio unchanged (~33×) — both scale by ~3×</td></tr>
+        <tr><td>China miles = ~538K km (CEC-implied) instead of 556K km</td><td>31× instead of 33×</td></tr>
+        <tr><td>US miles = 29,809 (td-voltage-aging) instead of 27,890</td><td>31× instead of 33×</td></tr>
+        <tr><td>Exclude 230kV from US (345kV+ only)</td><td>~14,500 mi at ~1.7 GW/mi = ~25K → ratio ~49×</td></tr>
+        <tr><td>Include US HVDC (PDCI + Q-NE)</td><td>Pre-2010, not in new-build period</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">The ~33× ratio is robust across reasonable assumption changes (range: <strong>29–49×</strong>).</div>
+  </div>
+</section>
+
+<!-- ═══ FILES ═══ -->
+<section>
+  <div class="container">
+    <h2>Files Referenced</h2>
+    <table class="data-table files-table">
+      <thead><tr><th>File</th><th>Contents</th></tr></thead>
+      <tbody>
+        <tr><td>transmission-infrastructure-comparison.json</td><td>Master data file: CEC voltage-class data, annual construction, UHV breakdown</td></tr>
+        <tr><td>eia-explorer/public/bulk-data/pudl/td-voltage-aging.json</td><td>FERC Form 1 processed: US miles by voltage class, 1994–2024</td></tr>
+        <tr><td>transmission-sources/Wikipedia-China-UHV.html</td><td>54 UHV circuits with dates, lengths, capacities</td></tr>
+        <tr><td>transmission-sources/China-CEC-NEA-transmission-data-summary.txt</td><td>Compiled CEC/NEA source data with URLs</td></tr>
+        <tr><td>transmission-sources/Ditan_source.pdf</td><td>China Energy Big Data Report 2024 (Chart 5-14: 220kV+ time series)</td></tr>
+        <tr><td>pudl-data/out_ferc1__yearly_…sched422.parquet</td><td>Raw FERC Form 1 line-level data (668K records)</td></tr>
+        <tr><td>transmission-sources/DOE-National-Transmission-Needs-Study-2023.pdf</td><td>DOE: US system at 85.6 TW-mi (SIL)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Companion to <a href="../china-us-transmission.html" style="color:var(--us-light);">The Transmission Gap: China vs United States</a> · February 2026
+  </div>
+</footer>
+
+</body>
+</html>

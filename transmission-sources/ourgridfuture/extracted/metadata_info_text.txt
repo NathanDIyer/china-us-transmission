@@ -1,0 +1,27 @@
+Planned Transmission Projects National Database
+
+Downloaded from ourgridfuture.org, Horizon Climate Group, 2026. Created by Horizon Climate Group. Suggested citation below.
+
+Abramson, E., Ramsay, E., McFarlane, D., Prorok, M., Gastelum, D., Chilcote, M., Our Grid Future Planned Transmission Projects National Database, Horizon Climate Group, February 2026
+
+
+Summary:
+High voltage (230 kV+) regional transmission lines & related electric transformer substations
+
+Description:
+The Our Grid Future Planned Projects layer was created by Elizabeth Abramson, Esther Ramsay, and Dane McFarlane, Horizon Climate Group, 2026, in coordination with Matthew Prorok, Diana Gastelum, and Maya Chilcote, Great Plains Institute.
+
+The goal of this dataset is to create and share a geographic database of planned high-capacity electric transmission lines in the United States.
+
+The planned projects layer is focused on high-voltage transmission expansion and new system capacity, which are key to enabling regional and national electric decarbonization, economic growth, and grid resilience.
+
+The data layer includes projects that are: 230 kV or higher new lines, line upgrades, line rebuilds, or line reconductoring projects. State and Federal permitting status were provided by ACEG and Grid Strategies in December 2025. 
+
+To view this layer in an interactive online map or learn more about this dataset, please visit ourgridfuture.org
+
+An additional shapefile showcasing the results of theoretical regional transmission modeling studies from Connected West and the Colorado Electric Transmission Authority (CETA) are also included. This shapefile shows study concepts that may inform regional transmission development but that do not constitute actively planned projects.
+
+Use limitations:
+The Our Grid Future team thanks you for providing a reference citation when using this information or the corresponding GIS shapefile.
+
+Data last updated Feb 18, 2026.

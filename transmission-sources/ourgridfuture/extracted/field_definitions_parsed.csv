@@ -1,0 +1,48 @@
+shapefile_field,spreadsheet_field,description
+RecordID,Record ID,Unique ID for each record of the dataset
+ProjectID,Project ID,Unique ID for each project. Multiple records may have the same Project ID if the project has multiple segments.
+Project,Project name,Name of the project
+Segment,Segment,"Name or identifier of the specific segments of a project, if relevant"
+Owner,Owner,Project owner
+Status,Status,"Project status (Planning; Engineering, design, and routing; Permitting; Construction; Complete; On hold; Terminated)"
+InfoDate,Status last updated date,Date that project status was last updated
+Type,Change type,"Type of project (New circuit, greenfield; New circuit, existing ROW; Rebuild; Upgrade; Reconductor) "
+LineType,Line type,Type of line (Aboveground; Underground; Mixed)
+MinVolt,Minimum voltage (kV),"Minimum voltage, in kilovolts (kV)"
+MaxVolt,Maximum voltage (kV),"Maximum voltage, in kilovolts (kV)"
+ACDC,AC or DC,Specification of whether the line carries Alternating Current (AC) or Direct Current (DC)
+CapacityMW,Capacity (MW),"Total project capacity, in megawatts (MW)"
+EstYear,Estimated in service year,Estimated year that the line will be in service
+FedPerm,Federal permitting status,Federal permitting status
+StatePerm,State permitting status,State permitting status
+Perm_Updat,Last permitting update,Date that permitting status was last updated
+FP_Filter,Federal permitting simple status,Federal permitting simple status
+SP_Filter,State permitting simple status,State permitting simple status
+AltName,Alternative name,"Alternative project name, if relevant"
+FromSub,Origin substation,Substation the project originates at
+ToSub,Destination substation,Substation the project terminates at
+AllSub,Related substations,All substations known to be involved in the project
+StatesFull,States intersected,All states intersected by the planned project
+StatesAbbr,States intersected (abbreviated),"All states intersected by the planned project, with states abbreviated"
+ISO_RTO,RTO intersected,All regional transmission organizations (RTOs) intersected by the planned project
+PlanAuth,Planning authority,"Planning authority overseeing the project, if any"
+PlanProc,Planning process,"Transmission planning process that the planned project is part of, if any"
+Portfolio,Planning portfolio,"Transmission planning portfolio that the planned project is part of, if any"
+Length_mi,Length (mi),"Length of the planned route, in miles"
+LengthSrc,Length source,"Source of length data, whether gathered from a project description or calculated by Horizon (Reported; Estimated)"
+Link,Link 1,Link to information on the project
+Link2,Link 2,Link to additional information on the project
+SubID,Substation ID,Unique ID for each substation
+Name,Substation name,Name of substation
+HIFLD_Name,HIFLD name,"Original name of the substation, if the substation was present in the Homeland Infrastructure Foundation Level Database 'Electrical Substations' dataset "
+HIFLD_ID,HIFLD ID,"Original substation ID, if the substation was present in the Homeland Infrastructure Foundation Level Database 'Electrical Substations' dataset "
+StateShort,State (abbrv.),"State the substation is located in, abbreviated"
+StateFull,State,State the substation is located in
+latitude,Latitude,"Latitude, in decimal degrees"
+longitude,Longitude,"Longitude, in decimal degrees"
+CurrentMax,Current maximum voltage (kV),Maximum voltage at the substation currently (before planned project)
+CurrentMin,Current minimum voltage (kV),Minimum voltage at the substation currently (before planned project)
+PlanProj,Planned project,"List of planned project(s) that the substation is involved in. Note, this field is not exhaustive."
+PlanVolt,Planned project voltage,"Voltage of planned project that the substation is involved in, in kilovolts (kV). If the substation is involved in multiple planned projects, this fields reflects the highest voltage project."
+HIFLD,Presence in HIFLD,"Specification of whether the substation was present in the original HIFLD dataset, or whether it was added by Horizon. (Listed in HIFLD; Not listed in HIFLD; New build, not listed in HIFLD)"
+ExistNew,Existing or new substation,Specification of whether the substation is already existing or is a new build.

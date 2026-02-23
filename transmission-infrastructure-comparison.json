@@ -228,7 +228,7 @@
       ],
       "average_annual_2013_2019_official": 32546,
       "average_annual_2020_2021_official": 33625,
-      "note": "2013-2019 computed from CEC voltage-class data (official). 2020-2021 from CEC 220kV+ aggregate (official). 2022-2024 estimated. Pre-2013 CEC data not available in English translations.",
+      "note": "Legacy analytical block: 2013-2019 computed from CEC voltage-class data (official), 2020-2021 from CEC 220kV+ aggregate (official), 2022-2024 estimated. Pre-2013 CEC data not available in English translations. Dashboard rendering should prefer chart_ready_data.annual_construction_km when available.",
       "source": "CEC (电力统计年快报) via chinaenergyportal.org"
     },
     "united_states": {
@@ -922,7 +922,7 @@
       "us_km": [1287, 1126, 965, 1770, 1126, 805, 1046, 885, 322, 724, 1429],
       "us_source": ["GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "GS-fig1", "FERC-revised", "FERC-confirmed"],
       "unit": "km",
-      "note": "China 2014-2023 from Ditan_source.pdf Chart 5-14 (CEC new additions = 新增输电线路). Note: additions ≠ cumulative change due to statistical revisions/reclassifications. US from Grid Strategies Figure 1 (345kV+, visual estimates except 2023/2024). 2023 revised by FERC (Jul 2025) from 55 to ~450 mi. 2024 confirmed by FERC at 888 mi."
+      "note": "China 2014-2023 from Ditan_source.pdf Chart 5-14 (CEC new additions = 新增输电线路). 2024 from cumulative delta (960,970 - 920,500 = 40,470, rounded to 41,000). This is the canonical annual-construction series for dashboard rendering. Note: additions ≠ cumulative change due to statistical revisions/reclassifications. US from Grid Strategies Figure 1 (345kV+, visual estimates except 2023/2024). 2023 revised by FERC (Jul 2025) from 55 to ~450 mi. 2024 confirmed by FERC at 888 mi."
     },
     "voltage_breakdown_miles": {
       "labels": ["220/230 kV", "330/345 kV", "500 kV", "750/765 kV", "±800kV DC", "1000kV AC", "±1100kV DC", "HVDC ≤500kV"],

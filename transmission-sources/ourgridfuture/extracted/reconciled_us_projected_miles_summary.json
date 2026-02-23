@@ -1,0 +1,87 @@
+{
+  "updated_on": "2026-02-23",
+  "method": "lower_bound_no_double_count_max_by_voltage_class",
+  "method_definition": "UnifiedLowerBound(c) = max(NERC(c), OGF(c), ISO(c))",
+  "conservatism_note": "This is a lower bound of the cross-source union. It prevents additive double counting, but may understate the true union where sources contain distinct non-overlapping projects inside the same voltage class.",
+  "totals_miles": {
+    "nerc_table_l_100kv_plus": 18569.0,
+    "nerc_table_l_200kv_plus": 15099.0,
+    "our_grid_future_proposed_100kv_plus": 34640.1,
+    "our_grid_future_proposed_200kv_plus": 34458.1,
+    "iso_rto_disclosed_class_specific_200kv_plus": 9593.0,
+    "unified_lower_bound_100kv_plus": 38836.9,
+    "unified_lower_bound_200kv_plus": 35366.9
+  },
+  "classes": [
+    {
+      "voltage_class_key": "kv100_199",
+      "voltage_class": "100-199 kV",
+      "nerc_table_l_miles": 3470.0,
+      "our_grid_future_proposed_miles": 182.0,
+      "iso_rto_disclosed_miles": 0.0,
+      "unified_lower_bound_miles": 3470.0,
+      "controlling_source": "NERC Table L",
+      "controlling_source_detail": "NERC Table L controls (higher than OGF and ISO class-specific disclosures).",
+      "formula": "max(NERC, OGF, ISO)",
+      "nerc_trace": "transmission-sources/NERC-2024-Supplemental.xlsx (Table L: planned circuit-miles by voltage class)",
+      "our_grid_future_trace": "transmission-sources/ourgridfuture/extracted/planned_transmission_projects.csv (Status normalized excludes Complete/Terminated; grouped by Maximum voltage (kV))",
+      "iso_rto_trace": "No class-specific ISO/RTO disclosure used for this class."
+    },
+    {
+      "voltage_class_key": "kv200_299",
+      "voltage_class": "200-299 kV",
+      "nerc_table_l_miles": 5373.0,
+      "our_grid_future_proposed_miles": 4464.2,
+      "iso_rto_disclosed_miles": 0.0,
+      "unified_lower_bound_miles": 5373.0,
+      "controlling_source": "NERC Table L",
+      "controlling_source_detail": "NERC Table L controls (higher than OGF and ISO class-specific disclosures).",
+      "formula": "max(NERC, OGF, ISO)",
+      "nerc_trace": "transmission-sources/NERC-2024-Supplemental.xlsx (Table L: planned circuit-miles by voltage class)",
+      "our_grid_future_trace": "transmission-sources/ourgridfuture/extracted/planned_transmission_projects.csv (Status normalized excludes Complete/Terminated; grouped by Maximum voltage (kV))",
+      "iso_rto_trace": "No class-specific ISO/RTO disclosure used for this class."
+    },
+    {
+      "voltage_class_key": "kv300_399",
+      "voltage_class": "300-399 kV",
+      "nerc_table_l_miles": 6067.0,
+      "our_grid_future_proposed_miles": 13667.38,
+      "iso_rto_disclosed_miles": 5339.0,
+      "unified_lower_bound_miles": 13667.38,
+      "controlling_source": "Our Grid Future",
+      "controlling_source_detail": "Our Grid Future controls (highest class value after status filtering).",
+      "formula": "max(NERC, OGF, ISO)",
+      "nerc_trace": "transmission-sources/NERC-2024-Supplemental.xlsx (Table L: planned circuit-miles by voltage class)",
+      "our_grid_future_trace": "transmission-sources/ourgridfuture/extracted/planned_transmission_projects.csv (Status normalized excludes Complete/Terminated; grouped by Maximum voltage (kV))",
+      "iso_rto_trace": "MISO ~5,000 mi at 345kV from transmission-sources/NERC-2025-LTRA.pdf p.48 + NYISO CHPE 339 mi at 320kV (public project disclosures)."
+    },
+    {
+      "voltage_class_key": "kv400_599",
+      "voltage_class": "400-599 kV",
+      "nerc_table_l_miles": 3496.0,
+      "our_grid_future_proposed_miles": 11221.32,
+      "iso_rto_disclosed_miles": 0.0,
+      "unified_lower_bound_miles": 11221.32,
+      "controlling_source": "Our Grid Future",
+      "controlling_source_detail": "Our Grid Future controls (highest class value after status filtering).",
+      "formula": "max(NERC, OGF, ISO)",
+      "nerc_trace": "transmission-sources/NERC-2024-Supplemental.xlsx (Table L: planned circuit-miles by voltage class)",
+      "our_grid_future_trace": "transmission-sources/ourgridfuture/extracted/planned_transmission_projects.csv (Status normalized excludes Complete/Terminated; grouped by Maximum voltage (kV))",
+      "iso_rto_trace": "No class-specific ISO/RTO disclosure used for this class."
+    },
+    {
+      "voltage_class_key": "kv600_plus",
+      "voltage_class": "600+ kV",
+      "nerc_table_l_miles": 163.0,
+      "our_grid_future_proposed_miles": 5105.2,
+      "iso_rto_disclosed_miles": 4254.0,
+      "unified_lower_bound_miles": 5105.2,
+      "controlling_source": "Our Grid Future",
+      "controlling_source_detail": "Our Grid Future controls (highest class value after status filtering).",
+      "formula": "max(NERC, OGF, ISO)",
+      "nerc_trace": "transmission-sources/NERC-2024-Supplemental.xlsx (Table L: planned circuit-miles by voltage class)",
+      "our_grid_future_trace": "transmission-sources/ourgridfuture/extracted/planned_transmission_projects.csv (Status normalized excludes Complete/Terminated; grouped by Maximum voltage (kV))",
+      "iso_rto_trace": "MISO ~1,750 mi at 765kV from transmission-sources/NERC-2025-LTRA.pdf p.48 + SPP 2025 ITP 2,087 mi at 765kV (transmission-sources/iso-rto-forward/SPP-2025-ITP-Report-v1.0.pdf) + PJM 2024 RTEP back-out 417 mi at 765kV (transmission-sources/iso-rto-forward/PJM-2024-RTEP-Report.pdf)."
+    }
+  ]
+}

@@ -31,7 +31,7 @@ Sources are ranked by authority. Always prefer higher-tier sources. When citing,
 | **DOE National Transmission Needs Study** | `DOE-National-Transmission-Needs-Study-2023.pdf` (15MB) | US existing transmission by region, 85.6 TW-mi (SIL), 3,300 circuit-mi/yr avg (≥100kV, 2011-2020). | p.iii, p.iv, p.123 (Table VI-3) |
 | **HIFLD Geospatial Data** | [Online](https://hifld-geoplatform.hub.arcgis.com/datasets/transmission-lines-1) | US 230kV+ miles: 186,623 (52,244 line features, haversine-computed). Source for voltage breakdown. | GIS data |
 | **NERC 2024 Supplemental** | `NERC-2024-Supplemental.xlsx` | Planned US circuit-miles by voltage class (2024-2034). 1,196 individual projects. 345kV = 6,435 mi (39%). | Table L, Table N, Form D |
-| **NERC 2025 LTRA** | `NERC-2025-LTRA.pdf` (7.4MB) | 10-year US reliability outlook with planned transmission tables. | Transmission tables |
+| **NERC 2025 LTRA** | `NERC-2025-LTRA.pdf` (7.4MB) | 10-year US reliability outlook with planned transmission tables. MISO $30B/488 projects (p.48), SPP 2024 ITP largest-ever (p.62), NYISO CHPE/public policy (pp.37,79), PJM RTEP $5.9B (p.94). | pp.37,43,48,62,79,94 |
 
 ### Tier 2: International Agency (Same Methodology for Both Countries)
 
@@ -49,6 +49,14 @@ Sources are ranked by authority. Always prefer higher-tier sources. When citing,
 | **Grid Strategies "Fewer New Miles" (Jul 2024)** | `Grid-Strategies-Fewer-New-Miles-2023.pdf` | Original report: 55 mi 2023 (superseded). $25B/yr transmission (Brattle, p.3). 90% reliability (p.7). Figure 1: 345kV+ by year. | p.3, p.4, p.6, p.7 |
 | **NREL ATB 2024** | [Online](https://atb.nrel.gov/electricity/2024/utility-scale_battery_storage) | Battery storage installed cost: ~$1,336/kW (4-hr system). Used to derive US storage investment. | Base year data |
 
+### Tier 3.5: ISO/RTO Planning Documents
+
+| Source | File | What It Contains | Key Data |
+|--------|------|-----------------|----------|
+| **PJM Inside Lines** | [Online](https://insidelines.pjm.com/) | RTEP approval announcements. 2024 Window 1: $5.9B (Feb 2025). 2025 Window 1: $11.8B, 134 proposals, first HVDC underground (Feb 2026). | Board approval articles |
+| **MISO LRTP Board Decision** | [Online](https://www.misoenergy.org/) | Tranche 1: Jul 2022. Tranche 2.1: Dec 2024. Combined with MTEP24 + JTIQ = $30B, 488 projects, ~5,000 mi 345kV + ~1,750 mi 765kV. | Per NERC 2025 LTRA p.48 |
+| **SPP 2024 ITP** | [Online](https://spp.org/) | "Single largest portfolio in SPP's 20-year history." 89 transmission upgrades. Exact $ figure not in NERC LTRA (~$5B estimated). | NERC LTRA p.62 |
+
 ### Tier 4: Chinese Official Sources (Primary, but Translation/Access Issues)
 
 | Source | File | What It Contains | Key Data |
@@ -58,6 +66,8 @@ Sources are ranked by authority. Always prefer higher-tier sources. When citing,
 | **CEC Electricity Statistics 2019** | `CEC-electricity-statistics-2019.txt` | Full voltage-class breakdown 2018-2019: 220kV, 330kV, 500kV, 750kV, 1000kV AC, ±800kV DC. **The** source for China voltage composition. | Section 4 |
 | **CEC Electricity Statistics 2020** | `CEC-electricity-statistics-2020-preliminary.txt` | 220kV+ aggregates for 2019-2020. Less detail than 2019. | Cumulative totals |
 | **CCTV News (Nov 22, 2025)** | [Online](https://news.cctv.com/2025/11/22/ARTIe0KN3cYThjCmWEhCMolO251122.shtml) | 44 UHV lines, 50,000+ km, 19 new in 14th FYP, 380B CNY invested, 9.8 km/day build rate. | State media |
+| **SGCC 15th FYP Announcement (Jan 2025)** | State media / Caixin | SGCC 15th FYP: 4 trillion CNY investment (~$574B), 350 GW new UHV capacity, 420 GW cross-country by 2030, 1,200 GWh storage. | Press reports |
+| **Nanpudian UHV Tracker (Feb 2025)** | [Online](https://www.nanpudian.com/media_coverage/497.html) | 40 UHV lines (Nov 2024): SGCC 36/48,000km, CSG 4/6,235km. 14th FYP target: 150 GW; 15th FYP: 165 GW. | Project tracker |
 | **Wikipedia China UHV** | `Wikipedia-China-UHV.html` | Complete inventory: 54 UHV circuits (25 AC + 29 DC) with voltage, length, capacity, dates. | Sortable table |
 
 ### Tier 5: Derived/Internal
@@ -134,7 +144,7 @@ The dashboard JS (`china-us-transmission.html`) uses hardcoded arrays that get d
 
 | JS Variable | What | Source |
 |-------------|------|--------|
-| `chinaAnnual` | China 220kV+ new miles/year (2010-2024) | CEC via Ditan report + China Energy Portal |
+| `chinaAnnual` | China 220kV+ new miles/year (2010-2024) | Primary: `chart_ready_data.annual_construction_km` (Ditan Chart 5-14 additions + 2024 CEC delta). Bridge: `construction_rate_comparison_km_per_year` (2010-2013). Legacy fallback: `annual_construction_rates.china`. |
 | `usAnnual` | US 345kV+ new miles/year (2010-2024) | Grid Strategies Figure 1 + FERC revision |
 | `cumulativeChinaMiles` | China 220kV+ cumulative total (km→mi) | CEC/Ditan Chart 5-14 |
 | `cumulativeUSMiles` | US 230kV+ cumulative (km→mi) | HIFLD + FERC Form 1 via PUDL |
@@ -144,6 +154,7 @@ The dashboard JS (`china-us-transmission.html`) uses hardcoded arrays that get d
 ### Dynamic Updates
 
 The function `updateTransmissionMetricCards()` recomputes all metric card values from the arrays above whenever data changes. If the external JSON (`transmission-infrastructure-comparison.json`) loads successfully, its values replace the hardcoded arrays.
+For China annual construction specifically, the runtime source priority is explicit: chart-ready annual additions first, pre-2014 bridge second, legacy annual-rates block last. This avoids mixing older computed/estimated values into the primary chart path.
 
 ---
 
@@ -170,6 +181,7 @@ The function `updateTransmissionMetricCards()` recomputes all metric card values
 
 ## Recently Completed Work
 
+- **Feb 22, 2026:** Added "Forward Look: 2026–2030" section. China 15th FYP targets ($700B, 350 GW UHV, ~175K mi est.) vs US NERC pipeline (20,836 circuit-miles, 1,196 projects). ISO/RTO table (MISO $30B, PJM $18B+, SPP ~$5B). Three charts: forward miles comparison, NERC voltage breakdown, NERC driver breakdown. 12 new fact-check claims.
 - **Feb 22, 2026:** Replaced misleading "$100B → 450 mi" with apples-to-apples investment breakdown. Added CSS stacked-bar visual showing US T/D/storage split ($28B + $51B + $21B) vs China $80B total. New sources: EIA/FERC Form 1, NREL ATB 2024.
 - **Feb 21, 2026:** Full fact-check audit (40 claims). Fixed 2023 Contrast ratio from mismatched 506:1 to corrected 52:1. Added 230-344kV line to US annual construction.
 - **Feb 20, 2026:** Light theme redesign. Fixed China annual construction from interpolated estimates to Ditan report actuals (2014-2023). GW·miles methodology documented.
